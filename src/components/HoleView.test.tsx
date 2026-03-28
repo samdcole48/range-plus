@@ -283,4 +283,62 @@ describe('HoleView', () => {
     // Normal HUD items should NOT be rendered
     expect(screen.queryByText('To Pin')).not.toBeInTheDocument();
   });
+
+  it('shows 1 Putt 🎯 in HUD when landing in one-putt zone', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land very close to pin (within one-putt zone)
+    tapToPlace(svg, 200, 60);
+
+    expect(screen.getByTestId('putt-count')).toHaveTextContent('1 Putt 🎯');
+  });
+
+  it('shows 2 Putts in HUD when landing outside one-putt zone', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land on green far from pin
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.getByTestId('putt-count')).toHaveTextContent('2 Putts');
+  });
+
+  it('does not show score-card element on completion', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.queryByTestId('score-card')).not.toBeInTheDocument();
+  });
+
+  it('shows normal HUD items during play', () => {
+    render(<HoleView hole={hole} />);
+
+    expect(screen.getByText('Par')).toBeInTheDocument();
+    expect(screen.getByText('Strokes')).toBeInTheDocument();
+    expect(screen.getByText('To Pin')).toBeInTheDocument();
+    expect(screen.queryByTestId('hud-complete')).not.toBeInTheDocument();
+  });
+
+  it('shows stroke count in HUD on completion', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.getByTestId('final-strokes')).toHaveTextContent(/\d+ Strokes/);
+  });
 });
