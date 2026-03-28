@@ -94,27 +94,42 @@
 
 ## Shot Completion & Scoring
 
-### Requirement: Display score card when hole is complete
+### Requirement: Display score in HUD when hole is complete
 
-#### Scenario: BASE-COMPLETE-001 — Score card shown on green landing
+> **Note:** As of CHG-MVF-010/013, the score-card below the SVG has been replaced by an in-HUD score display.
+
+#### Scenario: BASE-COMPLETE-001 — Score shown in HUD on green landing
 - **GIVEN** the ball lands on the green (hole completes)
 - **WHEN** the game state transitions to complete
-- **THEN** a score card is displayed
+- **THEN** the HUD swaps to show the score (hud-complete state)
+- **SUPERSEDED BY:** CHG-MVF-010
 
-#### Scenario: BASE-COMPLETE-002 — Score label displayed on score card
+#### Scenario: BASE-COMPLETE-002 — Score label displayed in HUD
 - **GIVEN** the hole is complete
-- **WHEN** the score card renders
+- **WHEN** the HUD renders in completion state
 - **THEN** the score label (Birdie, Par, Bogey, etc.) is displayed
 
-#### Scenario: BASE-COMPLETE-003 — Final stroke total on score card
+#### Scenario: BASE-COMPLETE-003 — Final stroke total in HUD
 - **GIVEN** the hole is complete
-- **WHEN** the score card renders
+- **WHEN** the HUD renders in completion state
 - **THEN** the final stroke count is displayed
 
 #### Scenario: BASE-COMPLETE-004 — No further shots after completion
 - **GIVEN** the hole is complete
 - **WHEN** the user taps on the course
 - **THEN** no shot is placed and state remains unchanged
+
+#### Scenario: BASE-COMPLETE-005 — Putt count displayed on completion
+- **GIVEN** the hole is complete
+- **WHEN** the HUD renders in completion state
+- **THEN** "1 Putt 🎯" or "2 Putts" is displayed
+- **ADDED BY:** CHG-MVF-011, CHG-MVF-012
+
+#### Scenario: BASE-COMPLETE-006 — Normal HUD items shown during play
+- **GIVEN** the hole is in progress
+- **WHEN** HoleView renders
+- **THEN** the HUD shows Par, Strokes, and To Pin (not score)
+- **ADDED BY:** CHG-MVF-014
 
 ---
 

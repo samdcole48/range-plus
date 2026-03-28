@@ -48,6 +48,11 @@ describe('createGameState', () => {
     expect(state.shotHistory).toEqual([testHole.teePosition]);
     expect(state.landedInOnePuttZone).toBe(false);
   });
+
+  it('initializes puttCount to 0', () => {
+    const state = createGameState(testHole);
+    expect(state.puttCount).toBe(0);
+  });
 });
 
 describe('placeShot', () => {
@@ -107,11 +112,32 @@ describe('placeShot', () => {
     expect(next.landedInOnePuttZone).toBe(true);
   });
 
+  it('sets puttCount to 1 when landing in the one-putt zone', () => {
+    const state = createGameState(testHole);
+    const nearPin: Point = { x: 50, y: 49 };
+    const next = placeShot(state, nearPin);
+    expect(next.puttCount).toBe(1);
+  });
+
   it('sets landedInOnePuttZone false when landing far from pin on green', () => {
     const state = createGameState(testHole);
     const farOnGreen: Point = { x: 65, y: 65 };
     const next = placeShot(state, farOnGreen);
     expect(next.landedInOnePuttZone).toBe(false);
+  });
+
+  it('sets puttCount to 2 when landing outside the one-putt zone', () => {
+    const state = createGameState(testHole);
+    const farOnGreen: Point = { x: 65, y: 65 };
+    const next = placeShot(state, farOnGreen);
+    expect(next.puttCount).toBe(2);
+  });
+
+  it('keeps puttCount at 0 for fairway shots', () => {
+    const state = createGameState(testHole);
+    const fairway: Point = { x: 50, y: 300 };
+    const next = placeShot(state, fairway);
+    expect(next.puttCount).toBe(0);
   });
 
   it('records drop zone in history when hitting water', () => {
@@ -177,6 +203,20 @@ describe('placeShot', () => {
     // Ball placed at drop zone, not in the water
     expect(next.ballPosition).toEqual({ x: 50, y: 260 });
     expect(next.isComplete).toBe(false);
+  });
+
+  it('keeps puttCount at 0 for water hazard shots', () => {
+    const holeWithWater: HoleDefinition = {
+      ...testHole,
+      waterHazards: [{
+        boundary: { points: [{ x: 20, y: 200 }, { x: 80, y: 200 }, { x: 80, y: 250 }, { x: 20, y: 250 }] },
+        dropZone: { x: 50, y: 260 },
+      }],
+    };
+    const state = createGameState(holeWithWater);
+    const inWater: Point = { x: 50, y: 225 };
+    const next = placeShot(state, inWater);
+    expect(next.puttCount).toBe(0);
   });
 
   it('does not apply penalty when shot misses the water', () => {

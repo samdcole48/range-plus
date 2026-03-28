@@ -18,7 +18,7 @@ function App() {
           New Hole
         </button>
       </header>
-      <HoleView key={hole.id} hole={hole} onNewHole={handleNewHole} />
+      <HoleView key={hole.id} hole={hole} />
     </>
   );
 }
