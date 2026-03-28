@@ -113,6 +113,29 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* HUD completion state */
+.hud-complete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.hud-complete .score-label {
+  font-size: 22px;
+}
+
+.hud-complete-details {
+  text-align: right;
+}
+
+.putt-info {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
 /* Course canvas */
 .course-wrap {
   flex: 1;
@@ -131,17 +154,7 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Score card overlay */
-.score-card {
-  text-align: center;
-  background: var(--surface);
-  border-radius: 14px;
-  padding: 24px 20px;
-  width: 100%;
-  border: 1px solid var(--surface-border);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
+/* Score label (reused in HUD completion state) */
 .score-label {
   font-size: 32px;
   font-weight: 800;
