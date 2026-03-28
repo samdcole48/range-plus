@@ -48,6 +48,11 @@ describe('createGameState', () => {
     expect(state.shotHistory).toEqual([testHole.teePosition]);
     expect(state.landedInOnePuttZone).toBe(false);
   });
+
+  it('initializes puttCount to 0', () => {
+    const state = createGameState(testHole);
+    expect(state.puttCount).toBe(0);
+  });
 });
 
 describe('placeShot', () => {

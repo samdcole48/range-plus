@@ -52,6 +52,7 @@ export function createGameState(hole: HoleDefinition): GameState {
     isComplete: false,
     shotHistory: [{ ...hole.teePosition }],
     landedInOnePuttZone: false,
+    puttCount: 0,
   };
 }
 

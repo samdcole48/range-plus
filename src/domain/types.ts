@@ -42,4 +42,5 @@ export interface GameState {
   isComplete: boolean;
   shotHistory: Point[];
   landedInOnePuttZone: boolean;
+  puttCount: number;
 }
