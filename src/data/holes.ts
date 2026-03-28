@@ -1,12 +1,12 @@
 import type { HoleDefinition } from '../domain/types';
 
 /**
- * Preset hole definitions — 12 unique holes (par 48).
+ * Preset hole definitions — 18 unique holes (par 72).
  * Coordinate system: 0,0 is top-left. Y increases downward.
  * All holes are designed for a 400×600 SVG viewBox.
  * yardsLength represents the tee-to-pin distance in real yards.
  *
- * Par distribution: 3 par-3s, 6 par-4s, 3 par-5s.
+ * Par distribution: 4 par-3s, 10 par-4s, 4 par-5s.
  * Fairways wrap around greens so the green renders on top of contiguous turf.
  */
 export const PRESET_HOLES: HoleDefinition[] = [
@@ -967,6 +967,412 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 330, y: 520 }, radius: 12 },
       { position: { x: 125, y: 30 }, radius: 10 },
       { position: { x: 240, y: 25 }, radius: 13 },
+    ],
+  },
+
+  // ─── Hole 13 — "The Ridge" — Par 4, 405y ────────────────────────────
+  // Elevated tee, fairway narrows at landing zone, bunkers guarding green.
+  {
+    id: 'hole-13-par4',
+    name: 'The Ridge',
+    par: 4,
+    yardsLength: 405,
+    teePosition: { x: 200, y: 560 },
+    pinPosition: { x: 190, y: 65 },
+    greenBoundary: {
+      points: [
+        { x: 175, y: 47 }, { x: 188, y: 43 }, { x: 200, y: 44 },
+        { x: 210, y: 50 }, { x: 213, y: 62 }, { x: 210, y: 75 },
+        { x: 202, y: 83 }, { x: 188, y: 86 }, { x: 176, y: 80 },
+        { x: 170, y: 68 }, { x: 170, y: 55 }, { x: 173, y: 49 },
+      ],
+    },
+    fairwayBoundary: {
+      points: [
+        { x: 162, y: 35 }, { x: 220, y: 35 },
+        { x: 225, y: 65 }, { x: 222, y: 95 },
+        { x: 230, y: 160 }, { x: 240, y: 230 },
+        { x: 245, y: 300 }, { x: 238, y: 370 },
+        { x: 232, y: 440 }, { x: 228, y: 500 },
+        { x: 222, y: 550 }, { x: 218, y: 575 },
+        { x: 182, y: 575 }, { x: 178, y: 550 },
+        { x: 172, y: 500 }, { x: 168, y: 440 },
+        { x: 162, y: 370 }, { x: 155, y: 300 },
+        { x: 160, y: 230 }, { x: 170, y: 160 },
+        { x: 178, y: 95 }, { x: 175, y: 65 },
+      ],
+    },
+    waterHazards: [],
+    bunkers: [
+      { boundary: { points: [
+        { x: 160, y: 42 }, { x: 170, y: 38 }, { x: 174, y: 46 },
+        { x: 171, y: 56 }, { x: 162, y: 56 }, { x: 158, y: 48 },
+      ] } },
+      { boundary: { points: [
+        { x: 214, y: 52 }, { x: 224, y: 48 }, { x: 228, y: 58 },
+        { x: 225, y: 68 }, { x: 216, y: 68 }, { x: 212, y: 58 },
+      ] } },
+      { boundary: { points: [
+        { x: 245, y: 270 }, { x: 258, y: 265 }, { x: 262, y: 278 },
+        { x: 258, y: 295 }, { x: 247, y: 298 }, { x: 242, y: 282 },
+      ] } },
+    ],
+    trees: [
+      { position: { x: 120, y: 100 }, radius: 14 },
+      { position: { x: 110, y: 180 }, radius: 11 },
+      { position: { x: 115, y: 270 }, radius: 13 },
+      { position: { x: 105, y: 360 }, radius: 12 },
+      { position: { x: 118, y: 450 }, radius: 10 },
+      { position: { x: 280, y: 120 }, radius: 13 },
+      { position: { x: 285, y: 210 }, radius: 11 },
+      { position: { x: 290, y: 310 }, radius: 14 },
+      { position: { x: 278, y: 400 }, radius: 12 },
+      { position: { x: 282, y: 490 }, radius: 10 },
+      { position: { x: 150, y: 28 }, radius: 11 },
+      { position: { x: 235, y: 28 }, radius: 12 },
+    ],
+  },
+
+  // ─── Hole 14 — "Cypress Point" — Par 3, 175y ───────────────────────
+  // Coastal-inspired par 3 with water left, bunkers right.
+  {
+    id: 'hole-14-par3',
+    name: 'Cypress Point',
+    par: 3,
+    yardsLength: 175,
+    teePosition: { x: 200, y: 500 },
+    pinPosition: { x: 210, y: 130 },
+    greenBoundary: {
+      points: [
+        { x: 193, y: 112 }, { x: 206, y: 108 }, { x: 218, y: 110 },
+        { x: 228, y: 118 }, { x: 232, y: 130 }, { x: 228, y: 143 },
+        { x: 220, y: 152 }, { x: 207, y: 155 }, { x: 194, y: 150 },
+        { x: 188, y: 140 }, { x: 187, y: 125 }, { x: 190, y: 115 },
+      ],
+    },
+    fairwayBoundary: {
+      points: [
+        { x: 180, y: 100 }, { x: 240, y: 100 },
+        { x: 245, y: 130 }, { x: 242, y: 165 },
+        { x: 238, y: 220 }, { x: 240, y: 290 },
+        { x: 242, y: 360 }, { x: 240, y: 430 },
+        { x: 235, y: 480 }, { x: 228, y: 520 },
+        { x: 172, y: 520 }, { x: 165, y: 480 },
+        { x: 160, y: 430 }, { x: 158, y: 360 },
+        { x: 162, y: 290 }, { x: 165, y: 220 },
+        { x: 160, y: 165 }, { x: 155, y: 130 },
+      ],
+    },
+    waterHazards: [{
+      boundary: {
+        points: [
+          { x: 50, y: 100 }, { x: 148, y: 105 }, { x: 145, y: 150 },
+          { x: 140, y: 200 }, { x: 135, y: 260 }, { x: 132, y: 330 },
+          { x: 50, y: 330 },
+        ],
+      },
+      dropZone: { x: 175, y: 200 },
+    }],
+    bunkers: [
+      { boundary: { points: [
+        { x: 233, y: 115 }, { x: 244, y: 112 }, { x: 248, y: 122 },
+        { x: 245, y: 135 }, { x: 236, y: 138 }, { x: 231, y: 125 },
+      ] } },
+      { boundary: { points: [
+        { x: 235, y: 145 }, { x: 246, y: 142 }, { x: 250, y: 155 },
+        { x: 246, y: 168 }, { x: 237, y: 168 }, { x: 233, y: 156 },
+      ] } },
+    ],
+    trees: [
+      { position: { x: 270, y: 90 }, radius: 14 },
+      { position: { x: 280, y: 160 }, radius: 12 },
+      { position: { x: 275, y: 240 }, radius: 13 },
+      { position: { x: 270, y: 340 }, radius: 11 },
+      { position: { x: 280, y: 420 }, radius: 14 },
+      { position: { x: 268, y: 500 }, radius: 10 },
+      { position: { x: 130, y: 380 }, radius: 12 },
+      { position: { x: 125, y: 450 }, radius: 13 },
+    ],
+  },
+
+  // ─── Hole 15 — "Eagle's Reach" — Par 5, 545y ──────────────────────
+  // Wide fairway with risk/reward second shot over water to reach green in two.
+  {
+    id: 'hole-15-par5',
+    name: "Eagle's Reach",
+    par: 5,
+    yardsLength: 545,
+    teePosition: { x: 200, y: 565 },
+    pinPosition: { x: 185, y: 55 },
+    greenBoundary: {
+      points: [
+        { x: 168, y: 38 }, { x: 182, y: 33 }, { x: 196, y: 35 },
+        { x: 206, y: 42 }, { x: 210, y: 55 }, { x: 206, y: 68 },
+        { x: 198, y: 76 }, { x: 184, y: 79 }, { x: 170, y: 74 },
+        { x: 163, y: 63 }, { x: 162, y: 50 }, { x: 165, y: 40 },
+      ],
+    },
+    fairwayBoundary: {
+      points: [
+        { x: 150, y: 25 }, { x: 218, y: 25 },
+        { x: 225, y: 55 }, { x: 228, y: 90 },
+        { x: 240, y: 150 }, { x: 258, y: 220 },
+        { x: 265, y: 290 }, { x: 260, y: 350 },
+        { x: 250, y: 400 }, { x: 245, y: 450 },
+        { x: 238, y: 510 }, { x: 230, y: 555 },
+        { x: 225, y: 580 }, { x: 175, y: 580 },
+        { x: 170, y: 555 }, { x: 162, y: 510 },
+        { x: 155, y: 450 }, { x: 150, y: 400 },
+        { x: 142, y: 350 }, { x: 135, y: 290 },
+        { x: 140, y: 220 }, { x: 152, y: 150 },
+        { x: 160, y: 90 }, { x: 155, y: 55 },
+      ],
+    },
+    waterHazards: [{
+      boundary: {
+        points: [
+          { x: 268, y: 180 }, { x: 320, y: 175 }, { x: 345, y: 200 },
+          { x: 350, y: 240 }, { x: 340, y: 280 }, { x: 310, y: 300 },
+          { x: 270, y: 295 }, { x: 260, y: 260 }, { x: 265, y: 215 },
+        ],
+      },
+      dropZone: { x: 245, y: 230 },
+    }],
+    bunkers: [
+      { boundary: { points: [
+        { x: 152, y: 34 }, { x: 162, y: 30 }, { x: 166, y: 38 },
+        { x: 163, y: 48 }, { x: 154, y: 48 }, { x: 150, y: 40 },
+      ] } },
+      { boundary: { points: [
+        { x: 208, y: 44 }, { x: 218, y: 40 }, { x: 222, y: 50 },
+        { x: 218, y: 62 }, { x: 210, y: 62 }, { x: 206, y: 52 },
+      ] } },
+      { boundary: { points: [
+        { x: 128, y: 370 }, { x: 142, y: 365 }, { x: 146, y: 378 },
+        { x: 142, y: 392 }, { x: 130, y: 395 }, { x: 125, y: 380 },
+      ] } },
+    ],
+    trees: [
+      { position: { x: 100, y: 80 }, radius: 15 },
+      { position: { x: 95, y: 170 }, radius: 12 },
+      { position: { x: 90, y: 260 }, radius: 14 },
+      { position: { x: 100, y: 350 }, radius: 11 },
+      { position: { x: 110, y: 430 }, radius: 13 },
+      { position: { x: 105, y: 520 }, radius: 10 },
+      { position: { x: 300, y: 100 }, radius: 12 },
+      { position: { x: 310, y: 340 }, radius: 14 },
+      { position: { x: 295, y: 420 }, radius: 11 },
+      { position: { x: 285, y: 500 }, radius: 13 },
+      { position: { x: 355, y: 170 }, radius: 10 },
+      { position: { x: 360, y: 310 }, radius: 12 },
+    ],
+  },
+
+  // ─── Hole 16 — "The Narrows" — Par 4, 385y ─────────────────────────
+  // Tight fairway lined with trees, premium on accuracy.
+  {
+    id: 'hole-16-par4',
+    name: 'The Narrows',
+    par: 4,
+    yardsLength: 385,
+    teePosition: { x: 200, y: 560 },
+    pinPosition: { x: 205, y: 70 },
+    greenBoundary: {
+      points: [
+        { x: 190, y: 52 }, { x: 202, y: 48 }, { x: 214, y: 50 },
+        { x: 222, y: 58 }, { x: 224, y: 70 }, { x: 221, y: 82 },
+        { x: 213, y: 90 }, { x: 200, y: 93 }, { x: 188, y: 89 },
+        { x: 182, y: 78 }, { x: 182, y: 64 }, { x: 186, y: 54 },
+      ],
+    },
+    fairwayBoundary: {
+      points: [
+        { x: 174, y: 40 }, { x: 232, y: 40 },
+        { x: 234, y: 70 }, { x: 232, y: 100 },
+        { x: 230, y: 160 }, { x: 228, y: 230 },
+        { x: 230, y: 300 }, { x: 232, y: 370 },
+        { x: 230, y: 440 }, { x: 228, y: 500 },
+        { x: 224, y: 548 }, { x: 220, y: 575 },
+        { x: 180, y: 575 }, { x: 176, y: 548 },
+        { x: 172, y: 500 }, { x: 170, y: 440 },
+        { x: 168, y: 370 }, { x: 170, y: 300 },
+        { x: 172, y: 230 }, { x: 170, y: 160 },
+        { x: 168, y: 100 }, { x: 166, y: 70 },
+      ],
+    },
+    waterHazards: [],
+    bunkers: [
+      { boundary: { points: [
+        { x: 175, y: 48 }, { x: 185, y: 44 }, { x: 188, y: 52 },
+        { x: 185, y: 60 }, { x: 176, y: 60 }, { x: 173, y: 54 },
+      ] } },
+      { boundary: { points: [
+        { x: 225, y: 60 }, { x: 236, y: 56 }, { x: 240, y: 66 },
+        { x: 236, y: 78 }, { x: 227, y: 78 }, { x: 223, y: 68 },
+      ] } },
+    ],
+    trees: [
+      { position: { x: 135, y: 60 }, radius: 14 },
+      { position: { x: 130, y: 130 }, radius: 12 },
+      { position: { x: 128, y: 200 }, radius: 15 },
+      { position: { x: 132, y: 270 }, radius: 13 },
+      { position: { x: 130, y: 340 }, radius: 14 },
+      { position: { x: 128, y: 410 }, radius: 12 },
+      { position: { x: 135, y: 480 }, radius: 11 },
+      { position: { x: 265, y: 60 }, radius: 14 },
+      { position: { x: 270, y: 130 }, radius: 12 },
+      { position: { x: 272, y: 200 }, radius: 15 },
+      { position: { x: 268, y: 270 }, radius: 13 },
+      { position: { x: 270, y: 340 }, radius: 14 },
+      { position: { x: 272, y: 410 }, radius: 12 },
+      { position: { x: 265, y: 480 }, radius: 11 },
+      { position: { x: 140, y: 30 }, radius: 10 },
+      { position: { x: 260, y: 30 }, radius: 10 },
+    ],
+  },
+
+  // ─── Hole 17 — "Amen Corner" — Par 4, 425y ─────────────────────────
+  // Dogleg left with water hazard along the inside of the turn.
+  {
+    id: 'hole-17-par4',
+    name: 'Amen Corner',
+    par: 4,
+    yardsLength: 425,
+    teePosition: { x: 280, y: 560 },
+    pinPosition: { x: 140, y: 65 },
+    greenBoundary: {
+      points: [
+        { x: 124, y: 48 }, { x: 137, y: 43 }, { x: 150, y: 45 },
+        { x: 160, y: 52 }, { x: 163, y: 65 }, { x: 159, y: 78 },
+        { x: 150, y: 85 }, { x: 137, y: 88 }, { x: 125, y: 83 },
+        { x: 118, y: 72 }, { x: 118, y: 58 }, { x: 121, y: 50 },
+      ],
+    },
+    fairwayBoundary: {
+      points: [
+        { x: 108, y: 36 }, { x: 170, y: 36 },
+        { x: 175, y: 65 }, { x: 178, y: 100 },
+        { x: 185, y: 155 }, { x: 200, y: 210 },
+        { x: 220, y: 270 }, { x: 245, y: 330 },
+        { x: 268, y: 380 }, { x: 285, y: 420 },
+        { x: 300, y: 470 }, { x: 310, y: 520 },
+        { x: 312, y: 555 }, { x: 308, y: 575 },
+        { x: 252, y: 575 }, { x: 248, y: 555 },
+        { x: 242, y: 520 }, { x: 232, y: 470 },
+        { x: 218, y: 420 }, { x: 200, y: 380 },
+        { x: 178, y: 330 }, { x: 158, y: 270 },
+        { x: 142, y: 210 }, { x: 130, y: 155 },
+        { x: 120, y: 100 }, { x: 115, y: 65 },
+      ],
+    },
+    waterHazards: [{
+      boundary: {
+        points: [
+          { x: 80, y: 140 }, { x: 125, y: 145 }, { x: 138, y: 200 },
+          { x: 155, y: 260 }, { x: 175, y: 320 }, { x: 195, y: 380 },
+          { x: 140, y: 395 }, { x: 118, y: 340 }, { x: 100, y: 275 },
+          { x: 85, y: 210 },
+        ],
+      },
+      dropZone: { x: 195, y: 260 },
+    }],
+    bunkers: [
+      { boundary: { points: [
+        { x: 108, y: 45 }, { x: 118, y: 40 }, { x: 122, y: 48 },
+        { x: 119, y: 58 }, { x: 110, y: 58 }, { x: 106, y: 50 },
+      ] } },
+      { boundary: { points: [
+        { x: 162, y: 55 }, { x: 172, y: 50 }, { x: 176, y: 60 },
+        { x: 172, y: 72 }, { x: 164, y: 72 }, { x: 160, y: 62 },
+      ] } },
+    ],
+    trees: [
+      { position: { x: 80, y: 60 }, radius: 14 },
+      { position: { x: 75, y: 110 }, radius: 12 },
+      { position: { x: 340, y: 380 }, radius: 13 },
+      { position: { x: 345, y: 460 }, radius: 11 },
+      { position: { x: 335, y: 540 }, radius: 14 },
+      { position: { x: 90, y: 420 }, radius: 10 },
+      { position: { x: 100, y: 30 }, radius: 11 },
+      { position: { x: 180, y: 28 }, radius: 12 },
+    ],
+  },
+
+  // ─── Hole 18 — "The Finish Line" — Par 4, 450y ─────────────────────
+  // Signature closing hole, long and challenging with bunkers and water.
+  {
+    id: 'hole-18-par4',
+    name: 'The Finish Line',
+    par: 4,
+    yardsLength: 450,
+    teePosition: { x: 200, y: 565 },
+    pinPosition: { x: 195, y: 55 },
+    greenBoundary: {
+      points: [
+        { x: 178, y: 38 }, { x: 192, y: 33 }, { x: 206, y: 35 },
+        { x: 216, y: 42 }, { x: 220, y: 55 }, { x: 216, y: 68 },
+        { x: 208, y: 76 }, { x: 194, y: 80 }, { x: 180, y: 75 },
+        { x: 173, y: 64 }, { x: 172, y: 50 }, { x: 175, y: 40 },
+      ],
+    },
+    fairwayBoundary: {
+      points: [
+        { x: 162, y: 26 }, { x: 228, y: 26 },
+        { x: 235, y: 55 }, { x: 238, y: 90 },
+        { x: 248, y: 160 }, { x: 255, y: 230 },
+        { x: 258, y: 300 }, { x: 252, y: 370 },
+        { x: 245, y: 440 }, { x: 238, y: 500 },
+        { x: 230, y: 548 }, { x: 225, y: 580 },
+        { x: 175, y: 580 }, { x: 170, y: 548 },
+        { x: 162, y: 500 }, { x: 155, y: 440 },
+        { x: 148, y: 370 }, { x: 142, y: 300 },
+        { x: 145, y: 230 }, { x: 152, y: 160 },
+        { x: 162, y: 90 }, { x: 165, y: 55 },
+      ],
+    },
+    waterHazards: [{
+      boundary: {
+        points: [
+          { x: 260, y: 130 }, { x: 310, y: 125 }, { x: 340, y: 150 },
+          { x: 348, y: 190 }, { x: 338, y: 230 }, { x: 310, y: 250 },
+          { x: 268, y: 245 }, { x: 255, y: 210 }, { x: 258, y: 165 },
+        ],
+      },
+      dropZone: { x: 240, y: 180 },
+    }],
+    bunkers: [
+      { boundary: { points: [
+        { x: 164, y: 34 }, { x: 174, y: 30 }, { x: 178, y: 38 },
+        { x: 175, y: 48 }, { x: 166, y: 48 }, { x: 162, y: 40 },
+      ] } },
+      { boundary: { points: [
+        { x: 218, y: 42 }, { x: 228, y: 38 }, { x: 232, y: 48 },
+        { x: 228, y: 60 }, { x: 220, y: 60 }, { x: 216, y: 50 },
+      ] } },
+      { boundary: { points: [
+        { x: 135, y: 340 }, { x: 148, y: 335 }, { x: 152, y: 348 },
+        { x: 148, y: 362 }, { x: 137, y: 365 }, { x: 132, y: 350 },
+      ] } },
+      { boundary: { points: [
+        { x: 255, y: 375 }, { x: 268, y: 370 }, { x: 272, y: 383 },
+        { x: 268, y: 398 }, { x: 257, y: 400 }, { x: 252, y: 385 },
+      ] } },
+    ],
+    trees: [
+      { position: { x: 105, y: 80 }, radius: 14 },
+      { position: { x: 100, y: 170 }, radius: 12 },
+      { position: { x: 95, y: 260 }, radius: 13 },
+      { position: { x: 108, y: 350 }, radius: 11 },
+      { position: { x: 115, y: 440 }, radius: 14 },
+      { position: { x: 110, y: 530 }, radius: 10 },
+      { position: { x: 295, y: 80 }, radius: 12 },
+      { position: { x: 300, y: 300 }, radius: 14 },
+      { position: { x: 290, y: 430 }, radius: 11 },
+      { position: { x: 285, y: 520 }, radius: 13 },
+      { position: { x: 350, y: 120 }, radius: 10 },
+      { position: { x: 355, y: 260 }, radius: 12 },
+      { position: { x: 148, y: 25 }, radius: 10 },
+      { position: { x: 242, y: 22 }, radius: 11 },
     ],
   },
 ];

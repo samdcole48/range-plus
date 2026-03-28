@@ -7,6 +7,15 @@ describe('PRESET_HOLES', () => {
     expect(PRESET_HOLES.length).toBeGreaterThanOrEqual(6);
   });
 
+  it('has exactly 18 holes', () => {
+    expect(PRESET_HOLES.length).toBe(18);
+  });
+
+  it('totals par 72', () => {
+    const total = PRESET_HOLES.reduce((sum, h) => sum + h.par, 0);
+    expect(total).toBe(72);
+  });
+
   it('includes a mix of par 3, 4, and 5', () => {
     const pars = new Set(PRESET_HOLES.map((h) => h.par));
     expect(pars.has(3)).toBe(true);
@@ -14,9 +23,37 @@ describe('PRESET_HOLES', () => {
     expect(pars.has(5)).toBe(true);
   });
 
+  it('has 4 par-3 holes', () => {
+    const par3s = PRESET_HOLES.filter((h) => h.par === 3);
+    expect(par3s.length).toBe(4);
+  });
+
+  it('has 10 par-4 holes', () => {
+    const par4s = PRESET_HOLES.filter((h) => h.par === 4);
+    expect(par4s.length).toBe(10);
+  });
+
+  it('has 4 par-5 holes', () => {
+    const par5s = PRESET_HOLES.filter((h) => h.par === 5);
+    expect(par5s.length).toBe(4);
+  });
+
   it('each hole has a unique id', () => {
     const ids = PRESET_HOLES.map((h) => h.id);
     expect(new Set(ids).size).toBe(ids.length);
+  });
+
+  it('each hole has realistic yardage for its par', () => {
+    const ranges: Record<number, [number, number]> = {
+      3: [100, 250],
+      4: [300, 500],
+      5: [450, 650],
+    };
+    for (const hole of PRESET_HOLES) {
+      const [min, max] = ranges[hole.par];
+      expect(hole.yardsLength).toBeGreaterThanOrEqual(min);
+      expect(hole.yardsLength).toBeLessThanOrEqual(max);
+    }
   });
 });
 
