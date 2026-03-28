@@ -1,0 +1,271 @@
+import { describe, it, expect } from 'vitest';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { HoleView } from './HoleView';
+import { PRESET_HOLES } from '../data/holes';
+
+const hole = PRESET_HOLES[0];
+
+function tapToPlace(svg: Element, clientX: number, clientY: number) {
+  fireEvent.click(svg, { clientX, clientY });
+  fireEvent.click(svg, { clientX, clientY });
+}
+
+describe('HoleView', () => {
+  it('renders the SVG course canvas', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg');
+    expect(svg).toBeInTheDocument();
+  });
+
+  it('displays the par for the hole', () => {
+    render(<HoleView hole={hole} />);
+    expect(screen.getByText('Par')).toBeInTheDocument();
+    expect(screen.getByText(String(hole.par))).toBeInTheDocument();
+  });
+
+  it('displays distance to green from tee on load', () => {
+    render(<HoleView hole={hole} />);
+    expect(screen.getByText(/380\s*yds/i)).toBeInTheDocument();
+  });
+
+  it('shows the ball marker on the tee initially', () => {
+    render(<HoleView hole={hole} />);
+    const ball = document.querySelector('[data-testid="ball"]');
+    expect(ball).toBeInTheDocument();
+    expect(ball?.getAttribute('cx')).toBe(String(hole.teePosition.x));
+    expect(ball?.getAttribute('cy')).toBe(String(hole.teePosition.y));
+  });
+
+  it('moves the ball when the course is tapped', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+
+    const svgRect = { left: 0, top: 0, width: 400, height: 600 };
+    svg.getBoundingClientRect = () => svgRect as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+
+    const ball = document.querySelector('[data-testid="ball"]');
+    expect(ball?.getAttribute('cx')).toBe('200');
+    expect(ball?.getAttribute('cy')).toBe('300');
+  });
+
+  it('updates yardage after a shot is placed', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+
+    // Should no longer show 380 yds (tee distance)
+    expect(screen.queryByText(/380\s*yds/i)).not.toBeInTheDocument();
+    // Should show updated distance
+    expect(screen.getByText(/yds/i)).toBeInTheDocument();
+  });
+
+  it('displays stroke count as 0 on initial load', () => {
+    render(<HoleView hole={hole} />);
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('0');
+  });
+
+  it('displays stroke count as 1 after first shot', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('1');
+  });
+
+  it('increments stroke count on each subsequent shot', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 400);
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 200);
+
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('3');
+  });
+
+  it('displays a stroke label alongside the count', () => {
+    render(<HoleView hole={hole} />);
+    expect(screen.getByText(/Strokes/i)).toBeInTheDocument();
+  });
+
+  it('renders a 1-putt radius circle around the pin', () => {
+    render(<HoleView hole={hole} />);
+    const circle = document.querySelector('[data-testid="one-putt-radius"]');
+    expect(circle).toBeInTheDocument();
+    expect(circle?.getAttribute('cx')).toBe(String(hole.pinPosition.x));
+    expect(circle?.getAttribute('cy')).toBe(String(hole.pinPosition.y));
+  });
+
+  it('shows shot preview with distance on first tap', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+
+    const preview = document.querySelector('[data-testid="shot-preview"]');
+    expect(preview).toBeInTheDocument();
+    expect(preview?.textContent).toMatch(/\d+/);
+    // Ball should NOT have moved yet
+    const ball = document.querySelector('[data-testid="ball"]');
+    expect(ball?.getAttribute('cx')).toBe(String(hole.teePosition.x));
+    expect(ball?.getAttribute('cy')).toBe(String(hole.teePosition.y));
+  });
+
+  it('confirms shot on second tap near preview', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+    expect(document.querySelector('[data-testid="shot-preview"]')).toBeInTheDocument();
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+    expect(document.querySelector('[data-testid="shot-preview"]')).not.toBeInTheDocument();
+    const ball = document.querySelector('[data-testid="ball"]');
+    expect(ball?.getAttribute('cx')).toBe('200');
+    expect(ball?.getAttribute('cy')).toBe('300');
+  });
+
+  it('moves preview when tapping far from current preview', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+    fireEvent.click(svg, { clientX: 100, clientY: 400 });
+    expect(document.querySelector('[data-testid="shot-preview"]')).toBeInTheDocument();
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('0');
+  });
+
+  it('draws shot tracer lines after hole is complete', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Take a shot to fairway, then to green
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    const tracerLines = document.querySelectorAll('[data-testid="shot-tracer-line"]');
+    expect(tracerLines.length).toBeGreaterThan(0);
+  });
+
+  it('highlights the green landing zone after completion', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land on green
+    tapToPlace(svg, 200, 70);
+
+    const highlight = document.querySelector('[data-testid="green-landing-zone"]');
+    expect(highlight).toBeInTheDocument();
+  });
+
+  it('does not show shot tracer before hole is complete', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+
+    const tracerLines = document.querySelectorAll('[data-testid="shot-tracer-line"]');
+    expect(tracerLines.length).toBe(0);
+  });
+
+  it('shows score card when ball lands on the green', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // First shot to fairway
+    tapToPlace(svg, 200, 300);
+    // Second shot lands on the green far from pin (200,70 is inside green boundary)
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.getByTestId('score-card')).toBeInTheDocument();
+  });
+
+  it('displays the score label on the score card', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Shot to fairway, then to green far from pin
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.getByTestId('score-label')).toBeInTheDocument();
+  });
+
+  it('displays final stroke total on the score card', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.getByTestId('final-strokes')).toBeInTheDocument();
+  });
+
+  it('prevents further shots after hole is complete', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land on green right at the pin → complete
+    tapToPlace(svg, 200, 60);
+    const strokesAfterComplete = screen.getByTestId('stroke-count').textContent;
+
+    // Try clicking again (should be ignored even as first tap)
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+    expect(screen.getByTestId('stroke-count').textContent).toBe(strokesAfterComplete);
+  });
+
+  it('renders water hazards on the course', () => {
+    render(<HoleView hole={hole} />);
+    const water = document.querySelectorAll('[data-testid="water-hazard"]');
+    expect(water.length).toBe(hole.waterHazards.length);
+  });
+
+  it('adds penalty and moves ball to drop zone when tapping water', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Tap inside the water hazard (center ≈ 280, 220)
+    tapToPlace(svg, 280, 220);
+
+    // 1 shot + 1 penalty = 2 strokes
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('2');
+
+    // Ball should be at drop zone
+    const ball = document.querySelector('[data-testid="ball"]');
+    expect(ball?.getAttribute('cx')).toBe(String(hole.waterHazards[0].dropZone.x));
+    expect(ball?.getAttribute('cy')).toBe(String(hole.waterHazards[0].dropZone.y));
+  });
+});
