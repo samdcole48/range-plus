@@ -112,6 +112,13 @@ describe('placeShot', () => {
     expect(next.landedInOnePuttZone).toBe(true);
   });
 
+  it('sets puttCount to 1 when landing in the one-putt zone', () => {
+    const state = createGameState(testHole);
+    const nearPin: Point = { x: 50, y: 49 };
+    const next = placeShot(state, nearPin);
+    expect(next.puttCount).toBe(1);
+  });
+
   it('sets landedInOnePuttZone false when landing far from pin on green', () => {
     const state = createGameState(testHole);
     const farOnGreen: Point = { x: 65, y: 65 };

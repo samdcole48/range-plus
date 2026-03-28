@@ -73,6 +73,7 @@ export function placeShot(state: GameState, target: Point): GameState {
       isComplete: true,
       shotHistory: [...state.shotHistory, { ...target }, { ...state.hole.pinPosition }],
       landedInOnePuttZone: inOnePuttZone,
+      puttCount: putts,
     };
   }
 
