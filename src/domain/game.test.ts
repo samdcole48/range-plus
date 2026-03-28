@@ -10,6 +10,7 @@ import type { HoleDefinition, Point } from './types';
 
 const testHole: HoleDefinition = {
   id: 'test-par4',
+  name: 'Test Hole',
   par: 4,
   teePosition: { x: 50, y: 450 },
   pinPosition: { x: 50, y: 50 },
