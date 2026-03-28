@@ -33,6 +33,11 @@ describe('PRESET_HOLES', () => {
     expect(par4s.length).toBe(10);
   });
 
+  it('has 4 par-5 holes', () => {
+    const par5s = PRESET_HOLES.filter((h) => h.par === 5);
+    expect(par5s.length).toBe(4);
+  });
+
   it('each hole has a unique id', () => {
     const ids = PRESET_HOLES.map((h) => h.id);
     expect(new Set(ids).size).toBe(ids.length);
