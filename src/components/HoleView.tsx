@@ -518,7 +518,7 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
           fontSize="10"
           fontFamily="monospace"
         >
-          PAR {hole.par} · {hole.yardsLength}
+          {hole.name} · PAR {hole.par} · {hole.yardsLength}
         </text>
       </svg>
 

@@ -23,6 +23,7 @@ export interface Bunker {
 
 export interface HoleDefinition {
   id: string;
+  name: string;
   par: 3 | 4 | 5;
   teePosition: Point;
   pinPosition: Point;
