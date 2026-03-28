@@ -6,7 +6,6 @@ const FEET_PER_YARD = 3;
 
 interface HoleViewProps {
   hole: HoleDefinition;
-  onNewHole?: () => void;
 }
 
 function polygonToSvgPoints(points: Point[]): string {
@@ -29,7 +28,7 @@ function seededRandom(seed: number): number {
   return x - Math.floor(x);
 }
 
-export function HoleView({ hole, onNewHole }: HoleViewProps) {
+export function HoleView({ hole }: HoleViewProps) {
   const [gameState, setGameState] = useState(() => createGameState(hole));
 
   const distanceToPin = calculateDistanceYards(
@@ -98,18 +97,39 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
     <div className="course-wrap">
       {/* HUD */}
       <div className="hud">
-        <div className="hud-item">
-          <span className="hud-label">Par</span>
-          <span className="hud-value">{hole.par}</span>
-        </div>
-        <div className="hud-item">
-          <span className="hud-label">Strokes</span>
-          <span className="hud-value" data-testid="stroke-count">{gameState.strokeCount}</span>
-        </div>
-        <div className="hud-item">
-          <span className="hud-label">To Pin</span>
-          <span className="hud-value">{distanceToPin} yds</span>
-        </div>
+        {gameState.isComplete ? (
+          <div className="hud-complete" data-testid="hud-complete">
+            <div
+              data-testid="score-label"
+              className={`score-label ${getScoreCssClass(gameState.strokeCount, hole.par)}`}
+            >
+              {getScoreLabel(gameState.strokeCount, hole.par)}
+            </div>
+            <div className="hud-complete-details">
+              <div data-testid="final-strokes" className="score-detail">
+                {gameState.strokeCount} Strokes
+              </div>
+              <div data-testid="putt-count" className="putt-info">
+                {gameState.puttCount === 1 ? '1 Putt 🎯' : '2 Putts'}
+              </div>
+            </div>
+          </div>
+        ) : (
+          <>
+            <div className="hud-item">
+              <span className="hud-label">Par</span>
+              <span className="hud-value">{hole.par}</span>
+            </div>
+            <div className="hud-item">
+              <span className="hud-label">Strokes</span>
+              <span className="hud-value" data-testid="stroke-count">{gameState.strokeCount}</span>
+            </div>
+            <div className="hud-item">
+              <span className="hud-label">To Pin</span>
+              <span className="hud-value">{distanceToPin} yds</span>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Course SVG */}
@@ -521,30 +541,6 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
           {hole.name} · PAR {hole.par} · {hole.yardsLength}
         </text>
       </svg>
-
-      {/* Score card */}
-      {gameState.isComplete && (
-        <div data-testid="score-card" className="score-card">
-          <div
-            data-testid="score-label"
-            className={`score-label ${getScoreCssClass(gameState.strokeCount, hole.par)}`}
-          >
-            {getScoreLabel(gameState.strokeCount, hole.par)}
-          </div>
-          <div data-testid="final-strokes" className="score-detail">
-            {gameState.strokeCount} strokes on a Par {hole.par}
-          </div>
-          {onNewHole && (
-            <button
-              className="btn"
-              onClick={onNewHole}
-              style={{ marginTop: '16px', width: '100%' }}
-            >
-              Next Hole →
-            </button>
-          )}
-        </div>
-      )}
     </div>
   );
 }

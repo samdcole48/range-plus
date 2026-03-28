@@ -191,7 +191,7 @@ describe('HoleView', () => {
     expect(tracerLines.length).toBe(0);
   });
 
-  it('shows score card when ball lands on the green', () => {
+  it('shows score in HUD when ball lands on the green', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
@@ -202,10 +202,10 @@ describe('HoleView', () => {
     // Second shot lands on the green far from pin (200,70 is inside green boundary)
     tapToPlace(svg, 200, 70);
 
-    expect(screen.getByTestId('score-card')).toBeInTheDocument();
+    expect(screen.getByTestId('hud-complete')).toBeInTheDocument();
   });
 
-  it('displays the score label on the score card', () => {
+  it('displays the score label in the HUD on completion', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
@@ -218,7 +218,7 @@ describe('HoleView', () => {
     expect(screen.getByTestId('score-label')).toBeInTheDocument();
   });
 
-  it('displays final stroke total on the score card', () => {
+  it('displays final stroke total in the HUD on completion', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
@@ -238,11 +238,11 @@ describe('HoleView', () => {
 
     // Land on green right at the pin → complete
     tapToPlace(svg, 200, 60);
-    const strokesAfterComplete = screen.getByTestId('stroke-count').textContent;
+    const strokesText = screen.getByTestId('final-strokes').textContent;
 
     // Try clicking again (should be ignored even as first tap)
     fireEvent.click(svg, { clientX: 200, clientY: 300 });
-    expect(screen.getByTestId('stroke-count').textContent).toBe(strokesAfterComplete);
+    expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
   });
 
   it('renders water hazards on the course', () => {
@@ -267,5 +267,20 @@ describe('HoleView', () => {
     const ball = document.querySelector('[data-testid="ball"]');
     expect(ball?.getAttribute('cx')).toBe(String(hole.waterHazards[0].dropZone.x));
     expect(ball?.getAttribute('cy')).toBe(String(hole.waterHazards[0].dropZone.y));
+  });
+
+  it('shows score in HUD when hole is complete', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    tapToPlace(svg, 200, 300);
+    tapToPlace(svg, 200, 70);
+
+    expect(screen.getByTestId('hud-complete')).toBeInTheDocument();
+    expect(screen.getByTestId('score-label')).toBeInTheDocument();
+    // Normal HUD items should NOT be rendered
+    expect(screen.queryByText('To Pin')).not.toBeInTheDocument();
   });
 });
