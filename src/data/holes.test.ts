@@ -42,6 +42,19 @@ describe('PRESET_HOLES', () => {
     const ids = PRESET_HOLES.map((h) => h.id);
     expect(new Set(ids).size).toBe(ids.length);
   });
+
+  it('each hole has realistic yardage for its par', () => {
+    const ranges: Record<number, [number, number]> = {
+      3: [100, 250],
+      4: [300, 500],
+      5: [450, 650],
+    };
+    for (const hole of PRESET_HOLES) {
+      const [min, max] = ranges[hole.par];
+      expect(hole.yardsLength).toBeGreaterThanOrEqual(min);
+      expect(hole.yardsLength).toBeLessThanOrEqual(max);
+    }
+  });
 });
 
 describe('getRandomHole', () => {
