@@ -2,7 +2,7 @@
 
 > **Proposal:** `openspec/changes/add-holes-18/SPEC.md`
 > **Branch:** `feature/add-holes-18`
-> **Progress:** 6 / 7 cycles complete
+> **Progress:** 7 / 7 cycles complete ✅ DONE
 
 ---
 
@@ -16,4 +16,4 @@
 | 4 | [x] | CHG-18H-004 | Test "10× Par-4 holes" | ✓ |
 | 5 | [x] | CHG-18H-005 | Test "4× Par-5 holes" | ✓ |
 | 6 | [x] | CHG-18H-008 | Test "realistic yardages per par" | ✓ |
-| 7 | [ ] | — | Update JSDoc + baseline spec docs | — |
+| 7 | [x] | — | Update JSDoc + baseline spec docs | ✓ |

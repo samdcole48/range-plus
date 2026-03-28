@@ -30,34 +30,34 @@
 
 ## Course Composition
 
-### Requirement: Course is a Par-48 with correct distribution
+### Requirement: Course is a Par-72 with correct distribution
 
-> Current course: 12 holes (3× Par-3, 6× Par-4, 3× Par-5) = Par 48
+> Current course: 18 holes (4× Par-3, 10× Par-4, 4× Par-5) = Par 72
 
-#### Scenario: BASE-DATA-004 — Course has 12 holes
+#### Scenario: BASE-DATA-004 — Course has 18 holes
 - **GIVEN** the `PRESET_HOLES` array
 - **WHEN** its length is checked
-- **THEN** it contains exactly 12 holes
+- **THEN** it contains exactly 18 holes
 
-#### Scenario: BASE-DATA-005 — Course totals Par 48
+#### Scenario: BASE-DATA-005 — Course totals Par 72
 - **GIVEN** the `PRESET_HOLES` array
 - **WHEN** all par values are summed
-- **THEN** the total is 48
+- **THEN** the total is 72
 
-#### Scenario: BASE-DATA-006 — Course has 3 Par-3 holes
+#### Scenario: BASE-DATA-006 — Course has 4 Par-3 holes
 - **GIVEN** the `PRESET_HOLES` array
 - **WHEN** holes with `par === 3` are counted
-- **THEN** the count is 3
+- **THEN** the count is 4
 
-#### Scenario: BASE-DATA-007 — Course has 6 Par-4 holes
+#### Scenario: BASE-DATA-007 — Course has 10 Par-4 holes
 - **GIVEN** the `PRESET_HOLES` array
 - **WHEN** holes with `par === 4` are counted
-- **THEN** the count is 6
+- **THEN** the count is 10
 
-#### Scenario: BASE-DATA-008 — Course has 3 Par-5 holes
+#### Scenario: BASE-DATA-008 — Course has 4 Par-5 holes
 - **GIVEN** the `PRESET_HOLES` array
 - **WHEN** holes with `par === 5` are counted
-- **THEN** the count is 3
+- **THEN** the count is 4
 
 ---
 
@@ -89,7 +89,7 @@
 
 ## Hole Names
 
-### Reference: All 12 Holes
+### Reference: All 18 Holes
 
 | # | ID | Name | Par | Yards |
 |---|-----|------|-----|-------|
@@ -105,6 +105,12 @@
 | 10 | hole-10 | The Long Iron | 3 | 195 |
 | 11 | hole-11 | Creek Valley | 5 | 510 |
 | 12 | hole-12 | The Closer | 4 | 440 |
+| 13 | hole-13 | The Ridge | 4 | 405 |
+| 14 | hole-14 | Cypress Point | 3 | 175 |
+| 15 | hole-15 | Eagle's Reach | 5 | 545 |
+| 16 | hole-16 | The Narrows | 4 | 385 |
+| 17 | hole-17 | Amen Corner | 4 | 425 |
+| 18 | hole-18 | The Finish Line | 4 | 450 |
 
 ---
 

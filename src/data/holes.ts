@@ -1,12 +1,12 @@
 import type { HoleDefinition } from '../domain/types';
 
 /**
- * Preset hole definitions — 12 unique holes (par 48).
+ * Preset hole definitions — 18 unique holes (par 72).
  * Coordinate system: 0,0 is top-left. Y increases downward.
  * All holes are designed for a 400×600 SVG viewBox.
  * yardsLength represents the tee-to-pin distance in real yards.
  *
- * Par distribution: 3 par-3s, 6 par-4s, 3 par-5s.
+ * Par distribution: 4 par-3s, 10 par-4s, 4 par-5s.
  * Fairways wrap around greens so the green renders on top of contiguous turf.
  */
 export const PRESET_HOLES: HoleDefinition[] = [
