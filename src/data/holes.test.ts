@@ -11,6 +11,11 @@ describe('PRESET_HOLES', () => {
     expect(PRESET_HOLES.length).toBe(18);
   });
 
+  it('totals par 72', () => {
+    const total = PRESET_HOLES.reduce((sum, h) => sum + h.par, 0);
+    expect(total).toBe(72);
+  });
+
   it('includes a mix of par 3, 4, and 5', () => {
     const pars = new Set(PRESET_HOLES.map((h) => h.par));
     expect(pars.has(3)).toBe(true);
