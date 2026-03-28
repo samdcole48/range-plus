@@ -12,6 +12,15 @@ export interface WaterHazard {
   dropZone: Point;
 }
 
+export interface TreeCluster {
+  position: Point;
+  radius: number;
+}
+
+export interface Bunker {
+  boundary: Polygon;
+}
+
 export interface HoleDefinition {
   id: string;
   par: 3 | 4 | 5;
@@ -21,6 +30,8 @@ export interface HoleDefinition {
   fairwayBoundary: Polygon;
   waterHazards: WaterHazard[];
   yardsLength: number;
+  bunkers?: Bunker[];
+  trees?: TreeCluster[];
 }
 
 export interface GameState {

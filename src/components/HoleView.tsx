@@ -23,6 +23,12 @@ function getScoreCssClass(strokes: number, par: number): string {
   return 'over';
 }
 
+/** Deterministic pseudo-random based on seed for consistent tree rendering */
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed * 9301 + 49297) * 233280;
+  return x - Math.floor(x);
+}
+
 export function HoleView({ hole, onNewHole }: HoleViewProps) {
   const [gameState, setGameState] = useState(() => createGameState(hole));
 
@@ -112,40 +118,251 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
         className="course-svg"
         onClick={handleClick}
       >
-        {/* Rough background */}
-        <rect width="400" height="600" fill="#2d5a1b" />
+        <defs>
+          {/* Rough background gradient */}
+          <radialGradient id="roughGrad" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stopColor="#3a6b24" />
+            <stop offset="100%" stopColor="#2a5218" />
+          </radialGradient>
 
-        {/* Fairway */}
+          {/* Fairway gradient — lighter striped look */}
+          <linearGradient id="fairwayGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#5a9e35" />
+            <stop offset="25%" stopColor="#62a83d" />
+            <stop offset="50%" stopColor="#5a9e35" />
+            <stop offset="75%" stopColor="#62a83d" />
+            <stop offset="100%" stopColor="#5a9e35" />
+          </linearGradient>
+
+          {/* Fairway mowing stripe pattern */}
+          <pattern id="fairwayStripes" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect width="20" height="20" fill="#5a9e35" />
+            <rect width="10" height="20" fill="#62a83d" />
+          </pattern>
+
+          {/* Green gradient — lush radial */}
+          <radialGradient id="greenGrad" cx="50%" cy="50%" r="55%">
+            <stop offset="0%" stopColor="#7dd87d" />
+            <stop offset="60%" stopColor="#5cc55c" />
+            <stop offset="100%" stopColor="#4aad4a" />
+          </radialGradient>
+
+          {/* Water gradient */}
+          <radialGradient id="waterGrad" cx="40%" cy="40%" r="65%">
+            <stop offset="0%" stopColor="#5bb8e8" />
+            <stop offset="50%" stopColor="#3498db" />
+            <stop offset="100%" stopColor="#1a6fa0" />
+          </radialGradient>
+
+          {/* Sand bunker gradient */}
+          <radialGradient id="sandGrad" cx="45%" cy="40%" r="60%">
+            <stop offset="0%" stopColor="#f5e6b8" />
+            <stop offset="60%" stopColor="#e8d598" />
+            <stop offset="100%" stopColor="#d4be7a" />
+          </radialGradient>
+
+          {/* Tree canopy gradient */}
+          <radialGradient id="treeGrad" cx="40%" cy="35%" r="55%">
+            <stop offset="0%" stopColor="#4a8c3a" />
+            <stop offset="100%" stopColor="#2d5a1e" />
+          </radialGradient>
+
+          {/* Dark tree variant */}
+          <radialGradient id="treeDarkGrad" cx="40%" cy="35%" r="55%">
+            <stop offset="0%" stopColor="#3d7530" />
+            <stop offset="100%" stopColor="#1e4412" />
+          </radialGradient>
+
+          {/* Tree shadow filter */}
+          <filter id="treeShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="2" dy="2" stdDeviation="2" floodColor="rgba(0,0,0,0.3)" />
+          </filter>
+
+          {/* Subtle shadow for green */}
+          <filter id="greenShadow" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="rgba(0,0,0,0.15)" />
+          </filter>
+
+          {/* Water shimmer filter */}
+          <filter id="waterShimmer" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="rgba(52,152,219,0.4)" />
+          </filter>
+        </defs>
+
+        {/* === LAYER 1: Rough background === */}
+        <rect width="400" height="600" fill="url(#roughGrad)" />
+
+        {/* Rough texture — subtle darker patches */}
+        {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
+          <circle
+            key={`rough-${i}`}
+            cx={seededRandom(i * 7 + 1) * 400}
+            cy={seededRandom(i * 7 + 2) * 600}
+            r={30 + seededRandom(i * 7 + 3) * 40}
+            fill="rgba(30,60,15,0.15)"
+          />
+        ))}
+
+        {/* === LAYER 2: Fairway with stripe pattern === */}
         <polygon
           points={polygonToSvgPoints(hole.fairwayBoundary.points)}
-          fill="#4a8c2a"
-          stroke="#3d7a22"
-          strokeWidth="1"
+          fill="url(#fairwayStripes)"
+          stroke="#4a8c2a"
+          strokeWidth="1.5"
         />
-
-        {/* Green */}
+        {/* Fairway fringe (slightly wider, darker border) */}
         <polygon
-          points={polygonToSvgPoints(hole.greenBoundary.points)}
-          fill="#5cb85c"
-          stroke="#4a9a4a"
-          strokeWidth="1"
+          points={polygonToSvgPoints(hole.fairwayBoundary.points)}
+          fill="none"
+          stroke="#4a8c2a"
+          strokeWidth="3"
+          opacity={0.4}
         />
 
-        {/* Water hazards */}
+        {/* === LAYER 3: Sand bunkers === */}
+        {(hole.bunkers ?? []).map((bunker, i) => (
+          <polygon
+            key={`bunker-${i}`}
+            points={polygonToSvgPoints(bunker.boundary.points)}
+            fill="url(#sandGrad)"
+            stroke="#c4a85a"
+            strokeWidth="1"
+          />
+        ))}
+
+        {/* === LAYER 4: Water hazards === */}
         {hole.waterHazards.map((hazard, i) => (
           <g key={`water-${i}`}>
             <polygon
               data-testid="water-hazard"
               points={polygonToSvgPoints(hazard.boundary.points)}
-              fill="#2980b9"
-              stroke="#1a5276"
+              fill="url(#waterGrad)"
+              stroke="#1a6fa0"
               strokeWidth="1.5"
-              opacity={0.8}
+              filter="url(#waterShimmer)"
+            />
+            {/* Water highlight ripple */}
+            <ellipse
+              cx={(hazard.boundary.points.reduce((s, p) => s + p.x, 0) / hazard.boundary.points.length)}
+              cy={(hazard.boundary.points.reduce((s, p) => s + p.y, 0) / hazard.boundary.points.length) - 5}
+              rx={15}
+              ry={6}
+              fill="rgba(255,255,255,0.15)"
             />
           </g>
         ))}
 
-        {/* Shot preview indicator (tap-to-preview) */}
+        {/* === LAYER 5: Green with shadow === */}
+        <polygon
+          points={polygonToSvgPoints(hole.greenBoundary.points)}
+          fill="url(#greenGrad)"
+          stroke="#3d8c3d"
+          strokeWidth="2"
+          filter="url(#greenShadow)"
+        />
+        {/* Green collar (fringe ring) */}
+        <polygon
+          points={polygonToSvgPoints(hole.greenBoundary.points)}
+          fill="none"
+          stroke="rgba(80,160,80,0.5)"
+          strokeWidth="4"
+        />
+
+        {/* === LAYER 6: Trees === */}
+        {(hole.trees ?? []).map((tree, i) => {
+          const isDark = i % 3 === 0;
+          const grad = isDark ? 'url(#treeDarkGrad)' : 'url(#treeGrad)';
+          return (
+            <g key={`tree-${i}`} filter="url(#treeShadow)">
+              <circle
+                cx={tree.position.x}
+                cy={tree.position.y}
+                r={tree.radius}
+                fill={grad}
+              />
+              {/* Canopy highlight */}
+              <circle
+                cx={tree.position.x - tree.radius * 0.2}
+                cy={tree.position.y - tree.radius * 0.2}
+                r={tree.radius * 0.4}
+                fill="rgba(120,200,80,0.2)"
+              />
+            </g>
+          );
+        })}
+
+        {/* === LAYER 7: Tee box === */}
+        <g>
+          {/* Tee box platform */}
+          <rect
+            x={hole.teePosition.x - 18}
+            y={hole.teePosition.y - 8}
+            width={36}
+            height={16}
+            fill="#6a8c4a"
+            stroke="#5a7a3a"
+            strokeWidth="1"
+            rx={3}
+          />
+          {/* Tee markers */}
+          <circle
+            cx={hole.teePosition.x - 10}
+            cy={hole.teePosition.y}
+            r={3}
+            fill="#e8e0d0"
+            stroke="#c0b090"
+            strokeWidth="0.5"
+          />
+          <circle
+            cx={hole.teePosition.x + 10}
+            cy={hole.teePosition.y}
+            r={3}
+            fill="#e8e0d0"
+            stroke="#c0b090"
+            strokeWidth="0.5"
+          />
+        </g>
+
+        {/* === LAYER 8: Pin flag (detailed) === */}
+        <g>
+          {/* Pin hole (cup) */}
+          <circle
+            cx={hole.pinPosition.x}
+            cy={hole.pinPosition.y}
+            r={3}
+            fill="#333"
+          />
+          {/* Flagstick */}
+          <line
+            x1={hole.pinPosition.x}
+            y1={hole.pinPosition.y - 2}
+            x2={hole.pinPosition.x}
+            y2={hole.pinPosition.y - 24}
+            stroke="#ddd"
+            strokeWidth="1.5"
+          />
+          {/* Flag */}
+          <polygon
+            points={`${hole.pinPosition.x},${hole.pinPosition.y - 24} ${hole.pinPosition.x + 14},${hole.pinPosition.y - 18} ${hole.pinPosition.x},${hole.pinPosition.y - 12}`}
+            fill="#e63946"
+            stroke="#c0313e"
+            strokeWidth="0.5"
+          />
+        </g>
+
+        {/* === LAYER 9: 1-putt radius indicator === */}
+        <circle
+          data-testid="one-putt-radius"
+          cx={hole.pinPosition.x}
+          cy={hole.pinPosition.y}
+          r={onePuttRadiusPx}
+          fill="none"
+          stroke="rgba(255, 255, 255, 0.4)"
+          strokeWidth="1"
+          strokeDasharray="3 3"
+        />
+
+        {/* === LAYER 10: Shot preview indicator === */}
         {previewPoint && previewDistanceYards !== null && !gameState.isComplete && (
           <g data-testid="shot-preview">
             <line
@@ -153,84 +370,73 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
               y1={gameState.ballPosition.y}
               x2={previewPoint.x}
               y2={previewPoint.y}
-              stroke="rgba(255,255,255,0.4)"
+              stroke="rgba(255,255,255,0.5)"
               strokeWidth="1.5"
               strokeDasharray="6 4"
             />
+            {/* Target ring */}
             <circle
               cx={previewPoint.x}
               cy={previewPoint.y}
-              r={10}
-              fill="none"
-              stroke="rgba(255,255,255,0.6)"
+              r={12}
+              fill="rgba(255,255,255,0.08)"
+              stroke="rgba(255,255,255,0.7)"
               strokeWidth="1.5"
             />
+            {/* Crosshair */}
             <line
-              x1={previewPoint.x - 14} y1={previewPoint.y}
-              x2={previewPoint.x + 14} y2={previewPoint.y}
-              stroke="rgba(255,255,255,0.6)" strokeWidth="1.5"
+              x1={previewPoint.x - 16} y1={previewPoint.y}
+              x2={previewPoint.x - 5} y2={previewPoint.y}
+              stroke="rgba(255,255,255,0.7)" strokeWidth="1.5"
             />
             <line
-              x1={previewPoint.x} y1={previewPoint.y - 14}
-              x2={previewPoint.x} y2={previewPoint.y + 14}
-              stroke="rgba(255,255,255,0.6)" strokeWidth="1.5"
+              x1={previewPoint.x + 5} y1={previewPoint.y}
+              x2={previewPoint.x + 16} y2={previewPoint.y}
+              stroke="rgba(255,255,255,0.7)" strokeWidth="1.5"
             />
+            <line
+              x1={previewPoint.x} y1={previewPoint.y - 16}
+              x2={previewPoint.x} y2={previewPoint.y - 5}
+              stroke="rgba(255,255,255,0.7)" strokeWidth="1.5"
+            />
+            <line
+              x1={previewPoint.x} y1={previewPoint.y + 5}
+              x2={previewPoint.x} y2={previewPoint.y + 16}
+              stroke="rgba(255,255,255,0.7)" strokeWidth="1.5"
+            />
+            {/* Distance label */}
             <rect
-              x={previewPoint.x + 16}
-              y={previewPoint.y - 24}
-              width={56}
-              height={22}
-              rx={4}
-              fill="rgba(0,0,0,0.75)"
+              x={previewPoint.x + 18}
+              y={previewPoint.y - 26}
+              width={58}
+              height={24}
+              rx={6}
+              fill="rgba(0,0,0,0.8)"
             />
             <text
-              x={previewPoint.x + 20}
-              y={previewPoint.y - 8}
+              x={previewPoint.x + 22}
+              y={previewPoint.y - 9}
               fill="white"
               fontSize="13"
               fontWeight="700"
             >
               {previewDistanceYards}y
             </text>
+            {/* "Tap to hit" hint */}
             <text
               x={previewPoint.x}
-              y={previewPoint.y + 26}
-              fill="rgba(255,255,255,0.5)"
-              fontSize="10"
+              y={previewPoint.y + 28}
+              fill="rgba(255,255,255,0.6)"
+              fontSize="9"
               textAnchor="middle"
+              fontWeight="600"
             >
               Tap to hit
             </text>
           </g>
         )}
 
-        {/* Pin flag */}
-        <line
-          x1={hole.pinPosition.x}
-          y1={hole.pinPosition.y}
-          x2={hole.pinPosition.x}
-          y2={hole.pinPosition.y - 20}
-          stroke="white"
-          strokeWidth="2"
-        />
-        <polygon
-          points={`${hole.pinPosition.x},${hole.pinPosition.y - 20} ${hole.pinPosition.x + 12},${hole.pinPosition.y - 15} ${hole.pinPosition.x},${hole.pinPosition.y - 10}`}
-          fill="red"
-        />
-
-        {/* 1-putt radius indicator */}
-        <circle
-          data-testid="one-putt-radius"
-          cx={hole.pinPosition.x}
-          cy={hole.pinPosition.y}
-          r={onePuttRadiusPx}
-          fill="none"
-          stroke="rgba(255, 255, 255, 0.5)"
-          strokeWidth="1.5"
-          strokeDasharray="4 3"
-        />
-
-        {/* Shot tracer (shown after hole completion) */}
+        {/* === LAYER 11: Shot tracer (after completion) === */}
         {gameState.isComplete && gameState.shotHistory.length > 1 && (
           <g>
             {/* Green landing zone highlight */}
@@ -263,8 +469,8 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
                   data-testid="shot-tracer-line"
                   x1={from.x} y1={from.y}
                   x2={to.x} y2={to.y}
-                  stroke="rgba(255, 255, 255, 0.7)"
-                  strokeWidth="2"
+                  stroke="rgba(255, 255, 255, 0.8)"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                 />
               );
@@ -275,35 +481,45 @@ export function HoleView({ hole, onNewHole }: HoleViewProps) {
               <circle
                 key={`dot-${i}`}
                 cx={pt.x} cy={pt.y}
-                r={i === 0 ? 4 : 3}
+                r={i === 0 ? 5 : 4}
                 fill={i === 0 ? '#8B7355' : i === gameState.shotHistory.length - 1 ? '#e94560' : 'white'}
-                stroke="rgba(0,0,0,0.4)"
+                stroke="rgba(0,0,0,0.5)"
                 strokeWidth="1"
               />
             ))}
           </g>
         )}
 
-        {/* Tee box */}
-        <rect
-          x={hole.teePosition.x - 15}
-          y={hole.teePosition.y - 5}
-          width={30}
-          height={10}
-          fill="#8B7355"
-          rx={2}
-        />
+        {/* === LAYER 12: Ball === */}
+        <g>
+          <circle
+            data-testid="ball"
+            cx={gameState.ballPosition.x}
+            cy={gameState.ballPosition.y}
+            r={5}
+            fill="white"
+            stroke="#555"
+            strokeWidth="1"
+          />
+          {/* Ball shine */}
+          <circle
+            cx={gameState.ballPosition.x - 1.5}
+            cy={gameState.ballPosition.y - 1.5}
+            r={1.5}
+            fill="rgba(255,255,255,0.6)"
+          />
+        </g>
 
-        {/* Ball */}
-        <circle
-          data-testid="ball"
-          cx={gameState.ballPosition.x}
-          cy={gameState.ballPosition.y}
-          r={6}
-          fill="white"
-          stroke="#333"
-          strokeWidth="1.5"
-        />
+        {/* === Hole info label === */}
+        <text
+          x={10}
+          y={592}
+          fill="rgba(255,255,255,0.4)"
+          fontSize="10"
+          fontFamily="monospace"
+        >
+          PAR {hole.par} · {hole.yardsLength}
+        </text>
       </svg>
 
       {/* Score card */}
