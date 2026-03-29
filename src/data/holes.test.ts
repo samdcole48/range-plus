@@ -194,6 +194,110 @@ describe('Green design — CHG-GREEN-011 (pins not at centroid)', () => {
   });
 });
 
+// ─── Visual Enhancement Tests (CHG-VIS-001 through CHG-VIS-008) ─────────────
+
+describe('Decorative visuals — CHG-VIS-001 (dense trees)', () => {
+  it('every hole has at least 25 trees', () => {
+    for (const hole of PRESET_HOLES) {
+      expect(
+        (hole.trees ?? []).length,
+        `${hole.name} must have ≥25 trees`
+      ).toBeGreaterThanOrEqual(25);
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-002 (rocks present)', () => {
+  it('every hole has a rocks array with at least 3 entries', () => {
+    for (const hole of PRESET_HOLES) {
+      expect(hole.rocks, `${hole.name} must have rocks array`).toBeDefined();
+      expect(
+        (hole.rocks ?? []).length,
+        `${hole.name} must have ≥3 rocks`
+      ).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-003 (bushes present)', () => {
+  it('every hole has a bushes array with at least 3 entries', () => {
+    for (const hole of PRESET_HOLES) {
+      expect(hole.bushes, `${hole.name} must have bushes array`).toBeDefined();
+      expect(
+        (hole.bushes ?? []).length,
+        `${hole.name} must have ≥3 bushes`
+      ).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-004 (rock validity)', () => {
+  it('each rock has valid position (0-400, 0-600), positive width/height, numeric rotation', () => {
+    for (const hole of PRESET_HOLES) {
+      for (const rock of (hole.rocks ?? [])) {
+        expect(rock.position.x, `${hole.name} rock.x`).toBeGreaterThanOrEqual(0);
+        expect(rock.position.x, `${hole.name} rock.x`).toBeLessThanOrEqual(400);
+        expect(rock.position.y, `${hole.name} rock.y`).toBeGreaterThanOrEqual(0);
+        expect(rock.position.y, `${hole.name} rock.y`).toBeLessThanOrEqual(600);
+        expect(rock.width, `${hole.name} rock.width`).toBeGreaterThan(0);
+        expect(rock.height, `${hole.name} rock.height`).toBeGreaterThan(0);
+        expect(typeof rock.rotation, `${hole.name} rock.rotation`).toBe('number');
+      }
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-005 (bush validity)', () => {
+  it('each bush has valid position (0-400, 0-600) and positive radius', () => {
+    for (const hole of PRESET_HOLES) {
+      for (const bush of (hole.bushes ?? [])) {
+        expect(bush.position.x, `${hole.name} bush.x`).toBeGreaterThanOrEqual(0);
+        expect(bush.position.x, `${hole.name} bush.x`).toBeLessThanOrEqual(400);
+        expect(bush.position.y, `${hole.name} bush.y`).toBeGreaterThanOrEqual(0);
+        expect(bush.position.y, `${hole.name} bush.y`).toBeLessThanOrEqual(600);
+        expect(bush.radius, `${hole.name} bush.radius`).toBeGreaterThan(0);
+      }
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-006 (flower beds on 3-4 holes only)', () => {
+  it('exactly 3 or 4 holes have non-empty flowerBeds', () => {
+    const holesWithFlowers = PRESET_HOLES.filter(
+      h => h.flowerBeds !== undefined && h.flowerBeds.length > 0
+    );
+    expect(holesWithFlowers.length).toBeGreaterThanOrEqual(3);
+    expect(holesWithFlowers.length).toBeLessThanOrEqual(4);
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-007 (flower bed validity)', () => {
+  it('each flower bed has valid position, positive radius, and non-empty color string', () => {
+    for (const hole of PRESET_HOLES) {
+      for (const flower of (hole.flowerBeds ?? [])) {
+        expect(flower.position.x, `${hole.name} flower.x`).toBeGreaterThanOrEqual(0);
+        expect(flower.position.x, `${hole.name} flower.x`).toBeLessThanOrEqual(400);
+        expect(flower.position.y, `${hole.name} flower.y`).toBeGreaterThanOrEqual(0);
+        expect(flower.position.y, `${hole.name} flower.y`).toBeLessThanOrEqual(600);
+        expect(flower.radius, `${hole.name} flower.radius`).toBeGreaterThan(0);
+        expect(flower.color, `${hole.name} flower.color`).toBeTruthy();
+        expect(typeof flower.color, `${hole.name} flower.color type`).toBe('string');
+      }
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
+  it('all tree radii are between 6 and 18px inclusive', () => {
+    for (const hole of PRESET_HOLES) {
+      for (const tree of (hole.trees ?? [])) {
+        expect(tree.radius, `${hole.name} tree.radius`).toBeGreaterThanOrEqual(6);
+        expect(tree.radius, `${hole.name} tree.radius`).toBeLessThanOrEqual(18);
+      }
+    }
+  });
+});
+
 describe('getRandomHole', () => {
   it('returns a hole from the presets', () => {
     const hole = getRandomHole();
