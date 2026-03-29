@@ -515,12 +515,12 @@ export function HoleView({ hole }: HoleViewProps) {
             }}
             style={{ cursor: 'pointer' }}
           >
-            <rect x={298} y={548} width={92} height={44} rx={8} fill="rgba(20,20,20,0.85)" />
+            <rect x={270} y={536} width={120} height={56} rx={10} fill="rgba(20,20,20,0.85)" />
             <text
-              x={344}
-              y={575}
+              x={330}
+              y={569}
               fill="white"
-              fontSize="16"
+              fontSize="18"
               fontWeight="700"
               textAnchor="middle"
             >
