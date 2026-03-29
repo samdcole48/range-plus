@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { HoleDefinition, Point } from '../domain/types';
-import { createGameState, placeShot, calculateDistanceYards, getScoreLabel, ONE_PUTT_THRESHOLD_FEET } from '../domain/game';
-
-const FEET_PER_YARD = 3;
+import { createGameState, placeShot, calculateDistanceYards, getScoreLabel } from '../domain/game';
 
 interface HoleViewProps {
   hole: HoleDefinition;
@@ -36,13 +34,6 @@ export function HoleView({ hole }: HoleViewProps) {
     hole.pinPosition,
     hole
   );
-
-  const teeToPin = Math.sqrt(
-    (hole.pinPosition.x - hole.teePosition.x) ** 2 +
-    (hole.pinPosition.y - hole.teePosition.y) ** 2
-  );
-  const pixelsPerYard = teeToPin / hole.yardsLength;
-  const onePuttRadiusPx = (ONE_PUTT_THRESHOLD_FEET / FEET_PER_YARD) * pixelsPerYard;
 
   // Shot preview state (tap-to-preview system)
   const [previewPoint, setPreviewPoint] = useState<Point | null>(null);
@@ -95,7 +86,7 @@ export function HoleView({ hole }: HoleViewProps) {
                 {gameState.strokeCount} Strokes
               </div>
               <div data-testid="putt-count" className="putt-info">
-                {gameState.puttCount === 1 ? '1 Putt 🎯' : '2 Putts'}
+                2 Putts
               </div>
             </div>
           </div>
@@ -355,18 +346,6 @@ export function HoleView({ hole }: HoleViewProps) {
           />
         </g>
 
-        {/* === LAYER 9: 1-putt radius indicator === */}
-        <circle
-          data-testid="one-putt-radius"
-          cx={hole.pinPosition.x}
-          cy={hole.pinPosition.y}
-          r={onePuttRadiusPx}
-          fill="none"
-          stroke="rgba(255, 255, 255, 0.4)"
-          strokeWidth="1"
-          strokeDasharray="3 3"
-        />
-
         {/* === LAYER 10: Shot preview indicator === */}
         {previewPoint && previewDistanceYards !== null && !gameState.isComplete && (
           <g data-testid="shot-preview">
@@ -434,25 +413,13 @@ export function HoleView({ hole }: HoleViewProps) {
         {gameState.isComplete && gameState.shotHistory.length > 1 && (
           <g>
             {/* Green landing zone highlight */}
-            {gameState.landedInOnePuttZone ? (
-              <circle
-                data-testid="green-landing-zone"
-                cx={hole.pinPosition.x}
-                cy={hole.pinPosition.y}
-                r={onePuttRadiusPx}
-                fill="rgba(233, 69, 96, 0.3)"
-                stroke="#e94560"
-                strokeWidth="1.5"
-              />
-            ) : (
-              <polygon
-                data-testid="green-landing-zone"
-                points={polygonToSvgPoints(hole.greenBoundary.points)}
-                fill="rgba(241, 196, 15, 0.25)"
-                stroke="rgba(241, 196, 15, 0.6)"
-                strokeWidth="1.5"
-              />
-            )}
+            <polygon
+              data-testid="green-landing-zone"
+              points={polygonToSvgPoints(hole.greenBoundary.points)}
+              fill="rgba(241, 196, 15, 0.25)"
+              stroke="rgba(241, 196, 15, 0.6)"
+              strokeWidth="1.5"
+            />
 
             {/* Tracer lines */}
             {gameState.shotHistory.slice(0, -1).map((from, i) => {

@@ -99,12 +99,10 @@ describe('HoleView', () => {
     expect(screen.getByText(/Strokes/i)).toBeInTheDocument();
   });
 
-  it('renders a 1-putt radius circle around the pin', () => {
+  it('does not render a one-putt radius circle around the pin', () => {
     render(<HoleView hole={hole} />);
-    const circle = document.querySelector('[data-testid="one-putt-radius"]');
-    expect(circle).toBeInTheDocument();
-    expect(circle?.getAttribute('cx')).toBe(String(hole.pinPosition.x));
-    expect(circle?.getAttribute('cy')).toBe(String(hole.pinPosition.y));
+    // Per REMOVE-1PUTT-02: one-putt radius visual is removed
+    expect(document.querySelector('[data-testid="one-putt-radius"]')).not.toBeInTheDocument();
   });
 
   it('shows shot preview with distance on first tap', () => {
@@ -161,6 +159,20 @@ describe('HoleView', () => {
 
     const highlight = document.querySelector('[data-testid="green-landing-zone"]');
     expect(highlight).toBeInTheDocument();
+  });
+
+  it('landing zone highlight is always a polygon (never a circle)', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land on green close to pin — previously showed a circle, now always a polygon
+    tapToPlace(svg, 200, 60);
+
+    const highlight = document.querySelector('[data-testid="green-landing-zone"]');
+    // Per REMOVE-1PUTT-05: always a polygon element, not a circle
+    expect(highlight?.tagName.toLowerCase()).toBe('polygon');
   });
 
   it('does not show shot tracer before hole is complete', () => {
@@ -357,19 +369,19 @@ describe('HoleView', () => {
     expect(screen.queryByText('To Pin')).not.toBeInTheDocument();
   });
 
-  it('shows 1 Putt 🎯 in HUD when landing in one-putt zone', () => {
+  it('always shows 2 Putts in HUD when landing on green', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
       ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
 
-    // Land very close to pin (within one-putt zone)
+    // Land very close to pin — previously showed "1 Putt 🎯", now always "2 Putts"
     tapToPlace(svg, 200, 60);
 
-    expect(screen.getByTestId('putt-count')).toHaveTextContent('1 Putt 🎯');
+    expect(screen.getByTestId('putt-count')).toHaveTextContent('2 Putts');
   });
 
-  it('shows 2 Putts in HUD when landing outside one-putt zone', () => {
+  it('always shows 2 Putts in HUD when landing outside one-putt zone', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
@@ -379,7 +391,10 @@ describe('HoleView', () => {
     tapToPlace(svg, 200, 300);
     tapToPlace(svg, 200, 70);
 
-    expect(screen.getByTestId('putt-count')).toHaveTextContent('2 Putts');
+    const puttEl = screen.getByTestId('putt-count');
+    expect(puttEl).toHaveTextContent('2 Putts');
+    // Per REMOVE-1PUTT-03: the "1 Putt 🎯" text must never appear
+    expect(puttEl).not.toHaveTextContent('1 Putt');
   });
 
   it('does not show score-card element on completion', () => {
