@@ -367,7 +367,7 @@ describe('HoleView', () => {
     expect(screen.getByTestId('putt-count')).toHaveTextContent('2 Putts');
   });
 
-  it('shows 2 Putts in HUD when landing outside one-putt zone', () => {
+  it('always shows 2 Putts in HUD when landing outside one-putt zone', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
@@ -377,7 +377,10 @@ describe('HoleView', () => {
     tapToPlace(svg, 200, 300);
     tapToPlace(svg, 200, 70);
 
-    expect(screen.getByTestId('putt-count')).toHaveTextContent('2 Putts');
+    const puttEl = screen.getByTestId('putt-count');
+    expect(puttEl).toHaveTextContent('2 Putts');
+    // Per REMOVE-1PUTT-03: the "1 Putt 🎯" text must never appear
+    expect(puttEl).not.toHaveTextContent('1 Putt');
   });
 
   it('does not show score-card element on completion', () => {

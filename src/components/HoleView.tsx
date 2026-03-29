@@ -86,7 +86,7 @@ export function HoleView({ hole }: HoleViewProps) {
                 {gameState.strokeCount} Strokes
               </div>
               <div data-testid="putt-count" className="putt-info">
-                {gameState.puttCount === 1 ? '1 Putt 🎯' : '2 Putts'}
+                2 Putts
               </div>
             </div>
           </div>
