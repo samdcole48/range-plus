@@ -229,6 +229,20 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
   });
 
+  // CHG-BTN-007: First tap still shows preview crosshair with distance label (BASE-TAP-001 regression)
+  it('shows preview crosshair and distance label on first tap', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+
+    const preview = document.querySelector('[data-testid="shot-preview"]');
+    expect(preview).toBeInTheDocument();
+    expect(preview?.textContent).toMatch(/\d+y/);
+  });
+
   // CHG-BTN-006: "Tap to hit" hint no longer rendered in SVG
   it('does not show "Tap to hit" hint text when preview is active', () => {
     render(<HoleView hole={hole} />);

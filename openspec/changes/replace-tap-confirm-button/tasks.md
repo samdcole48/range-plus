@@ -5,7 +5,7 @@
 
 ---
 
-## Progress: 6/9 complete
+## Progress: 7/9 complete
 
 ---
 
@@ -17,6 +17,7 @@
 - [x] **Task 4** — Test: Confirm button hidden when no preview (CHG-BTN-004) ✓
 - [x] **Task 5** — Test: Confirm button hidden when hole is complete (CHG-BTN-005) ✓
 - [x] **Task 6** — Test: "Tap to hit" hint removed from preview (CHG-BTN-006) ✓
+- [x] **Task 7** — Test: First tap still shows preview with distance (CHG-BTN-007) ✓
   - File: `src/components/HoleView.test.tsx`
   - Write test: tap course → assert "Confirm" button is rendered
 
