@@ -24,5 +24,5 @@
 - [ ] **Task 4** — Update Par 5 yardage range test (450–550) → `CHG-YARD-004` → `holes.test.ts`
 - [ ] **Task 5** — Add positive integer yardsLength test → `CHG-YARD-005` → `holes.test.ts`
 - [ ] **Task 6** — Update all 18 `yardsLength` values in holes.ts → `CHG-YARD-001` → `holes.ts`
-- [ ] **Task 7** — Update baseline spec hole reference table → `openspec/specs/hole-data/spec.md`
-- [ ] **Task 8** — Update add-holes-18 spec to note yardage superseded → `openspec/changes/add-holes-18/SPEC.md`
+- [x] **Task 7** ✓ — Update baseline spec hole reference table → `openspec/specs/hole-data/spec.md`
+- [x] **Task 8** ✓ — Update add-holes-18 spec yardage guidelines + CHG-18H-008 ranges → `openspec/changes/add-holes-18/SPEC.md`

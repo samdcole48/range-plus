@@ -93,24 +93,24 @@
 
 | # | ID | Name | Par | Yards |
 |---|-----|------|-----|-------|
-| 1 | hole-1 | The Welcome | 4 | 380 |
-| 2 | hole-2 | Island Green | 3 | 155 |
-| 3 | hole-3 | Azalea | 5 | 520 |
-| 4 | hole-4 | The Cape | 4 | 410 |
-| 5 | hole-5 | Postage Stamp | 3 | 140 |
-| 6 | hole-6 | The Fork | 4 | 370 |
-| 7 | hole-7 | Peninsula | 5 | 530 |
-| 8 | hole-8 | The Bend | 4 | 395 |
-| 9 | hole-9 | The Drive | 4 | 420 |
-| 10 | hole-10 | The Long Iron | 3 | 195 |
-| 11 | hole-11 | Creek Valley | 5 | 510 |
-| 12 | hole-12 | The Closer | 4 | 440 |
-| 13 | hole-13 | The Ridge | 4 | 405 |
-| 14 | hole-14 | Cypress Point | 3 | 175 |
-| 15 | hole-15 | Eagle's Reach | 5 | 545 |
-| 16 | hole-16 | The Narrows | 4 | 385 |
-| 17 | hole-17 | Amen Corner | 4 | 425 |
-| 18 | hole-18 | The Finish Line | 4 | 450 |
+| 1 | hole-1 | The Welcome | 4 | 355 |
+| 2 | hole-2 | Island Green | 3 | 145 |
+| 3 | hole-3 | Azalea | 5 | 490 |
+| 4 | hole-4 | The Cape | 4 | 370 |
+| 5 | hole-5 | Postage Stamp | 3 | 125 |
+| 6 | hole-6 | The Fork | 4 | 335 |
+| 7 | hole-7 | Peninsula | 5 | 485 |
+| 8 | hole-8 | The Bend | 4 | 360 |
+| 9 | hole-9 | The Drive | 4 | 315 |
+| 10 | hole-10 | The Long Iron | 3 | 170 |
+| 11 | hole-11 | Creek Valley | 5 | 480 |
+| 12 | hole-12 | The Closer | 4 | 385 |
+| 13 | hole-13 | The Ridge | 4 | 365 |
+| 14 | hole-14 | Cypress Point | 3 | 160 |
+| 15 | hole-15 | Eagle's Reach | 5 | 505 |
+| 16 | hole-16 | The Narrows | 4 | 350 |
+| 17 | hole-17 | Amen Corner | 4 | 375 |
+| 18 | hole-18 | The Finish Line | 4 | 395 |
 
 ---
 

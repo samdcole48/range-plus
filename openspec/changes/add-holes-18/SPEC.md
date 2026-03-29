@@ -83,7 +83,7 @@ Per **ENG-3.5** (Immutability):
 
 Each new hole should:
 1. Have a **unique visual character** — different shape, hazard placement, or strategic challenge
-2. Use **realistic yardages** for its par (Par-3: 130–220y, Par-4: 350–470y, Par-5: 500–600y)
+2. Use **realistic yardages** for its par (Par-3: 100–200y, Par-4: 300–420y, Par-5: 450–550y) — calibrated for casual/public course play, NOT PGA Tour distances
 3. Include **at least one strategic hazard** (water, bunkers, or tree lines) that creates decision-making
 4. Have a green with **organic, non-circular shape** (≥8 boundary points for visual quality)
 5. Follow the established coordinate convention: tee at bottom (~y:550-570), pin at top (~y:40-120)
@@ -141,7 +141,8 @@ Each new hole should:
 #### Scenario: CHG-18H-008 — New hole yardages are realistic for their par
 - **GIVEN** each of the 6 new holes
 - **WHEN** yardage is compared to par
-- **THEN** Par-3 holes are 100–250 yards, Par-4 holes are 300–500 yards, Par-5 holes are 450–650 yards
+- **THEN** Par-3 holes are 100–200 yards, Par-4 holes are 300–420 yards, Par-5 holes are 450–550 yards
+- **NOTE:** Ranges calibrated for casual/public course play per CHG-YARD from openspec/changes/recalibrate-yardages/SPEC.md
 
 ---
 
