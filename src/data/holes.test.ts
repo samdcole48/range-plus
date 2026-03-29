@@ -249,14 +249,14 @@ describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
 describe('Refined visuals — CHG-REF-001 (no rocks)', () => {
   it('CHG-REF-001: no hole has a rocks array', () => {
     for (const hole of PRESET_HOLES) {
-      expect((hole as Record<string, unknown>).rocks, `${hole.name} must have no rocks`).toBeUndefined();
+      expect((hole as unknown as Record<string, unknown>).rocks, `${hole.name} must have no rocks`).toBeUndefined();
     }
   });
 });
 
 it('CHG-REF-002: no hole has flowerBeds', () => {
   PRESET_HOLES.forEach(hole => {
-    expect(hole.flowerBeds).toBeUndefined();
+    expect((hole as unknown as Record<string, unknown>).flowerBeds).toBeUndefined();
   });
 });
 
