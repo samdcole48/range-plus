@@ -60,6 +60,15 @@ describe('createGameState', () => {
     expect(lastShot).toEqual(state.activePinPosition);
   });
 
+  it('activePinPosition remains stable across multiple placeShot calls', () => {
+    let state = createGameState(testHole);
+    const initialPin = state.activePinPosition;
+    state = placeShot(state, { x: 50, y: 350 });
+    expect(state.activePinPosition).toEqual(initialPin);
+    state = placeShot(state, { x: 50, y: 250 });
+    expect(state.activePinPosition).toEqual(initialPin);
+  });
+
   it('creates initial state with ball on tee', () => {
     const state = createGameState(testHole);
     expect(state.ballPosition).toEqual(testHole.teePosition);
