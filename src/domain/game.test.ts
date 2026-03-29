@@ -45,6 +45,12 @@ describe('createGameState', () => {
     expect(testHole.pinPositions).toContainEqual(state.activePinPosition);
   });
 
+  it('distance calc result > 0 using activePinPosition as target from tee', () => {
+    const state = createGameState(testHole);
+    const distance = calculateDistanceYards(testHole.teePosition, state.activePinPosition, testHole);
+    expect(distance).toBeGreaterThan(0);
+  });
+
   it('creates initial state with ball on tee', () => {
     const state = createGameState(testHole);
     expect(state.ballPosition).toEqual(testHole.teePosition);
