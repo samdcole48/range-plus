@@ -22,12 +22,6 @@ export interface Bush {
   radius: number;  // 4–8px
 }
 
-export interface FlowerBed {
-  position: Point;
-  radius: number;  // 3–6px
-  color: string;   // CSS color (e.g., '#e87da0', '#f5e642')
-}
-
 export interface Bunker {
   boundary: Polygon;
 }
@@ -48,7 +42,6 @@ export interface HoleDefinition {
   bunkers?: Bunker[];
   trees?: TreeCluster[];
   bushes?: Bush[];
-  flowerBeds?: FlowerBed[];
 }
 
 export interface GameState {

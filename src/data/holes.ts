@@ -112,17 +112,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 140, y: 22 }, radius: 6 },
       { position: { x: 260, y: 22 }, radius: 7 },
     ],
-    flowerBeds: [
-      { position: { x: 185, y: 540 }, radius: 5, color: '#e87da0' },
-      { position: { x: 215, y: 545 }, radius: 4, color: '#f5f5f5' },
-      { position: { x: 200, y: 550 }, radius: 5, color: '#f5e642' },
-      { position: { x: 175, y: 555 }, radius: 3, color: '#e84040' },
-      { position: { x: 225, y: 555 }, radius: 4, color: '#9b59b6' },
-      { position: { x: 190, y: 530 }, radius: 4, color: '#e87da0' },
-    ],
   },
-
-  // ─── Hole 2 — "Island Green" — Par 3, 155y ─────────────────────────
   // TPC Sawgrass 17th inspired. Green completely surrounded by water.
   {
     id: 'hole-2-par3',
@@ -330,13 +320,6 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 358, y: 490 }, radius: 5 },
       { position: { x: 160, y: 22 }, radius: 6 },
       { position: { x: 240, y: 22 }, radius: 7 },
-    ],
-    flowerBeds: [
-      { position: { x: 185, y: 540 }, radius: 5, color: '#e87da0' },
-      { position: { x: 215, y: 540 }, radius: 4, color: '#9b59b6' },
-      { position: { x: 200, y: 548 }, radius: 5, color: '#f5f5f5' },
-      { position: { x: 175, y: 532 }, radius: 3, color: '#f5e642' },
-      { position: { x: 225, y: 532 }, radius: 4, color: '#e84040' },
     ],
   },
 
@@ -1520,14 +1503,6 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 148, y: 22 }, radius: 6 },
       { position: { x: 255, y: 22 }, radius: 7 },
     ],
-    flowerBeds: [
-      { position: { x: 185, y: 540 }, radius: 5, color: '#e87da0' },
-      { position: { x: 215, y: 540 }, radius: 4, color: '#9b59b6' },
-      { position: { x: 200, y: 548 }, radius: 5, color: '#f5f5f5' },
-      { position: { x: 175, y: 532 }, radius: 3, color: '#e84040' },
-      { position: { x: 225, y: 532 }, radius: 4, color: '#f5e642' },
-      { position: { x: 192, y: 524 }, radius: 3, color: '#e87da0' },
-    ],
   },
 
   // ─── Hole 15 — "Eagle's Reach" — Par 5, 545y ──────────────────────
@@ -1934,14 +1909,6 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 360, y: 510 }, radius: 5 },
       { position: { x: 148, y: 22 }, radius: 6 },
       { position: { x: 254, y: 22 }, radius: 7 },
-    ],
-    flowerBeds: [
-      { position: { x: 185, y: 535 }, radius: 5, color: '#e87da0' },
-      { position: { x: 215, y: 538 }, radius: 4, color: '#f5e642' },
-      { position: { x: 200, y: 545 }, radius: 5, color: '#f5f5f5' },
-      { position: { x: 175, y: 530 }, radius: 3, color: '#e84040' },
-      { position: { x: 225, y: 530 }, radius: 4, color: '#9b59b6' },
-      { position: { x: 190, y: 522 }, radius: 3, color: '#e87da0' },
     ],
   },
 ];

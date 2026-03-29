@@ -268,19 +268,6 @@ export function HoleView({ hole }: HoleViewProps) {
           />
         ))}
 
-        {/* === LAYER 4d: Flower beds — decorative, specialty holes only === */}
-        {(hole.flowerBeds ?? []).map((flower, i) => (
-          <circle
-            key={`flower-${i}`}
-            data-testid="flower-bed"
-            cx={flower.position.x}
-            cy={flower.position.y}
-            r={flower.radius}
-            fill={flower.color}
-            opacity={0.85}
-          />
-        ))}
-
         {/* === LAYER 5: Green with shadow === */}
         <polygon
           points={polygonToSvgPoints(hole.greenBoundary.points)}

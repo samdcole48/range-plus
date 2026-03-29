@@ -233,32 +233,6 @@ describe('Decorative visuals — CHG-VIS-005 (bush validity)', () => {
   });
 });
 
-describe('Decorative visuals — CHG-VIS-006 (flower beds on 3-4 holes only)', () => {
-  it('exactly 3 or 4 holes have non-empty flowerBeds', () => {
-    const holesWithFlowers = PRESET_HOLES.filter(
-      h => h.flowerBeds !== undefined && h.flowerBeds.length > 0
-    );
-    expect(holesWithFlowers.length).toBeGreaterThanOrEqual(3);
-    expect(holesWithFlowers.length).toBeLessThanOrEqual(4);
-  });
-});
-
-describe('Decorative visuals — CHG-VIS-007 (flower bed validity)', () => {
-  it('each flower bed has valid position, positive radius, and non-empty color string', () => {
-    for (const hole of PRESET_HOLES) {
-      for (const flower of (hole.flowerBeds ?? [])) {
-        expect(flower.position.x, `${hole.name} flower.x`).toBeGreaterThanOrEqual(0);
-        expect(flower.position.x, `${hole.name} flower.x`).toBeLessThanOrEqual(400);
-        expect(flower.position.y, `${hole.name} flower.y`).toBeGreaterThanOrEqual(0);
-        expect(flower.position.y, `${hole.name} flower.y`).toBeLessThanOrEqual(600);
-        expect(flower.radius, `${hole.name} flower.radius`).toBeGreaterThan(0);
-        expect(flower.color, `${hole.name} flower.color`).toBeTruthy();
-        expect(typeof flower.color, `${hole.name} flower.color type`).toBe('string');
-      }
-    }
-  });
-});
-
 describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
   it('all tree radii are between 6 and 18px inclusive', () => {
     for (const hole of PRESET_HOLES) {
@@ -277,6 +251,12 @@ describe('Refined visuals — CHG-REF-001 (no rocks)', () => {
     for (const hole of PRESET_HOLES) {
       expect((hole as Record<string, unknown>).rocks, `${hole.name} must have no rocks`).toBeUndefined();
     }
+  });
+});
+
+it('CHG-REF-002: no hole has flowerBeds', () => {
+  PRESET_HOLES.forEach(hole => {
+    expect(hole.flowerBeds).toBeUndefined();
   });
 });
 
