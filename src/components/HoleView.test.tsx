@@ -446,3 +446,52 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes')).toHaveTextContent(/\d+ Strokes/);
   });
 });
+
+// ─── Rendering tests for decorative elements (CHG-VIS-009 through CHG-VIS-012) ──
+
+describe('Decorative rendering — CHG-VIS-009 (rocks)', () => {
+  it('renders rock elements when hole has rocks', () => {
+    // PRESET_HOLES[0] (The Welcome) has rocks
+    const holeWithRocks = PRESET_HOLES[0];
+    expect((holeWithRocks.rocks ?? []).length).toBeGreaterThan(0);
+    render(<HoleView hole={holeWithRocks} />);
+    const rocks = document.querySelectorAll('[data-testid="rock"]');
+    expect(rocks.length).toBeGreaterThan(0);
+    expect(rocks.length).toBe((holeWithRocks.rocks ?? []).length);
+  });
+});
+
+describe('Decorative rendering — CHG-VIS-010 (bushes)', () => {
+  it('renders bush elements when hole has bushes', () => {
+    // PRESET_HOLES[0] (The Welcome) has bushes
+    const holeWithBushes = PRESET_HOLES[0];
+    expect((holeWithBushes.bushes ?? []).length).toBeGreaterThan(0);
+    render(<HoleView hole={holeWithBushes} />);
+    const bushes = document.querySelectorAll('[data-testid="bush"]');
+    expect(bushes.length).toBeGreaterThan(0);
+    expect(bushes.length).toBe((holeWithBushes.bushes ?? []).length);
+  });
+});
+
+describe('Decorative rendering — CHG-VIS-011 (flower beds present)', () => {
+  it('renders flower-bed elements when hole has flowerBeds', () => {
+    // PRESET_HOLES[0] (The Welcome) has flowerBeds
+    const holeWithFlowers = PRESET_HOLES[0];
+    expect((holeWithFlowers.flowerBeds ?? []).length).toBeGreaterThan(0);
+    render(<HoleView hole={holeWithFlowers} />);
+    const flowers = document.querySelectorAll('[data-testid="flower-bed"]');
+    expect(flowers.length).toBeGreaterThan(0);
+    expect(flowers.length).toBe((holeWithFlowers.flowerBeds ?? []).length);
+  });
+});
+
+describe('Decorative rendering — CHG-VIS-012 (flower beds absent)', () => {
+  it('renders zero flower-bed elements when hole has no flowerBeds', () => {
+    // PRESET_HOLES[1] (Island Green) has no flowerBeds
+    const holeWithoutFlowers = PRESET_HOLES[1];
+    expect(holeWithoutFlowers.flowerBeds ?? []).toHaveLength(0);
+    render(<HoleView hole={holeWithoutFlowers} />);
+    const flowers = document.querySelectorAll('[data-testid="flower-bed"]');
+    expect(flowers.length).toBe(0);
+  });
+});

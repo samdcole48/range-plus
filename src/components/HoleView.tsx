@@ -183,6 +183,18 @@ export function HoleView({ hole }: HoleViewProps) {
           <filter id="waterShimmer" x="-5%" y="-5%" width="110%" height="110%">
             <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="rgba(52,152,219,0.4)" />
           </filter>
+
+          {/* Rock gradient */}
+          <radialGradient id="rockGrad" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stopColor="#a0a0a0" />
+            <stop offset="100%" stopColor="#606060" />
+          </radialGradient>
+
+          {/* Bush gradient */}
+          <radialGradient id="bushGrad" cx="40%" cy="30%" r="70%">
+            <stop offset="0%" stopColor="#8bc34a" />
+            <stop offset="100%" stopColor="#558b2f" />
+          </radialGradient>
         </defs>
 
         {/* === LAYER 1: Rough background === */}
@@ -246,6 +258,49 @@ export function HoleView({ hole }: HoleViewProps) {
               fill="rgba(255,255,255,0.15)"
             />
           </g>
+        ))}
+
+        {/* === LAYER 4b: Rocks — decorative, no gameplay impact === */}
+        {(hole.rocks ?? []).map((rock, i) => (
+          <ellipse
+            key={`rock-${i}`}
+            data-testid="rock"
+            cx={rock.position.x}
+            cy={rock.position.y}
+            rx={rock.width / 2}
+            ry={rock.height / 2}
+            fill="url(#rockGrad)"
+            stroke="#505050"
+            strokeWidth="0.5"
+            transform={`rotate(${rock.rotation}, ${rock.position.x}, ${rock.position.y})`}
+          />
+        ))}
+
+        {/* === LAYER 4c: Bushes — decorative, no gameplay impact === */}
+        {(hole.bushes ?? []).map((bush, i) => (
+          <circle
+            key={`bush-${i}`}
+            data-testid="bush"
+            cx={bush.position.x}
+            cy={bush.position.y}
+            r={bush.radius}
+            fill="url(#bushGrad)"
+            stroke="#4a7a2a"
+            strokeWidth="0.5"
+          />
+        ))}
+
+        {/* === LAYER 4d: Flower beds — decorative, specialty holes only === */}
+        {(hole.flowerBeds ?? []).map((flower, i) => (
+          <circle
+            key={`flower-${i}`}
+            data-testid="flower-bed"
+            cx={flower.position.x}
+            cy={flower.position.y}
+            r={flower.radius}
+            fill={flower.color}
+            opacity={0.85}
+          />
         ))}
 
         {/* === LAYER 5: Green with shadow === */}
