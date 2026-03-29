@@ -7,7 +7,7 @@ const hole = PRESET_HOLES[0];
 
 function tapToPlace(svg: Element, clientX: number, clientY: number) {
   fireEvent.click(svg, { clientX, clientY });
-  fireEvent.click(svg, { clientX, clientY });
+  fireEvent.click(screen.getByText('Confirm'));
 }
 
 describe('HoleView', () => {
@@ -124,23 +124,7 @@ describe('HoleView', () => {
     expect(ball?.getAttribute('cy')).toBe(String(hole.teePosition.y));
   });
 
-  it('confirms shot on second tap near preview', () => {
-    render(<HoleView hole={hole} />);
-    const svg = document.querySelector('svg')!;
-    svg.getBoundingClientRect = () =>
-      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
-
-    fireEvent.click(svg, { clientX: 200, clientY: 300 });
-    expect(document.querySelector('[data-testid="shot-preview"]')).toBeInTheDocument();
-
-    fireEvent.click(svg, { clientX: 200, clientY: 300 });
-    expect(document.querySelector('[data-testid="shot-preview"]')).not.toBeInTheDocument();
-    const ball = document.querySelector('[data-testid="ball"]');
-    expect(ball?.getAttribute('cx')).toBe('200');
-    expect(ball?.getAttribute('cy')).toBe('300');
-  });
-
-  it('moves preview when tapping far from current preview', () => {
+  it('moves preview when tapping elsewhere on the course', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
@@ -243,6 +227,21 @@ describe('HoleView', () => {
     // Try clicking again (should be ignored even as first tap)
     fireEvent.click(svg, { clientX: 200, clientY: 300 });
     expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
+  });
+
+  // CHG-BTN-003: Tapping near existing preview repositions (no 30px confirm threshold)
+  it('repositions preview when tapping within 30px of current preview', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+    // Tap within 30px (same point) — under old code this would confirm; under new code it repositions
+    fireEvent.click(svg, { clientX: 205, clientY: 305 });
+
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('0');
+    expect(document.querySelector('[data-testid="shot-preview"]')).toBeInTheDocument();
   });
 
   // CHG-BTN-002: Clicking confirm button places the shot

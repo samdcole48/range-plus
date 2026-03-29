@@ -65,8 +65,6 @@ export function HoleView({ hole }: HoleViewProps) {
     []
   );
 
-  const CONFIRM_THRESHOLD_PX = 30;
-
   const handleClick = useCallback(
     (e: React.MouseEvent<SVGSVGElement>) => {
       if (gameState.isComplete) return;
@@ -74,22 +72,9 @@ export function HoleView({ hole }: HoleViewProps) {
       const target = svgCoordsFromEvent(e);
       if (!target) return;
 
-      if (previewPoint) {
-        const dx = target.x - previewPoint.x;
-        const dy = target.y - previewPoint.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < CONFIRM_THRESHOLD_PX) {
-          setGameState((prev) => placeShot(prev, previewPoint));
-          setPreviewPoint(null);
-        } else {
-          setPreviewPoint(target);
-        }
-      } else {
-        setPreviewPoint(target);
-      }
+      setPreviewPoint(target);
     },
-    [gameState.isComplete, previewPoint, svgCoordsFromEvent]
+    [gameState.isComplete, svgCoordsFromEvent]
   );
 
 
