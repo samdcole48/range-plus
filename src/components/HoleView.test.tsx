@@ -245,6 +245,18 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
   });
 
+  // CHG-BTN-001: Confirm button appears when preview is active
+  it('shows Confirm button when a preview is active', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+
+    expect(screen.getByText('Confirm')).toBeInTheDocument();
+  });
+
   it('renders water hazards on the course', () => {
     render(<HoleView hole={hole} />);
     const water = document.querySelectorAll('[data-testid="water-hazard"]');

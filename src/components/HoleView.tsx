@@ -530,6 +530,31 @@ export function HoleView({ hole }: HoleViewProps) {
           />
         </g>
 
+        {/* === LAYER 13: Confirm button === */}
+        {previewPoint && !gameState.isComplete && (
+          <g
+            data-testid="confirm-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setGameState((prev) => placeShot(prev, previewPoint));
+              setPreviewPoint(null);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <rect x={298} y={548} width={92} height={44} rx={8} fill="rgba(20,20,20,0.85)" />
+            <text
+              x={344}
+              y={575}
+              fill="white"
+              fontSize="16"
+              fontWeight="700"
+              textAnchor="middle"
+            >
+              Confirm
+            </text>
+          </g>
+        )}
+
         {/* === Hole info label === */}
         <text
           x={10}
