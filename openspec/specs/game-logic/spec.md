@@ -118,6 +118,39 @@
 
 ---
 
+## Active Pin Position
+
+### Requirement: Each game round selects and holds a stable active pin position
+
+> Per **CHG-GREEN-012–015** from `openspec/changes/redesign-greens/SPEC.md`.
+>
+> `GameState.activePinPosition: Point` is set once at game creation by randomly selecting
+> from `hole.pinPositions`. It does not change during play. All distance calculations and
+> auto-putt ball placement use `activePinPosition`, NOT `hole.pinPosition`.
+
+#### Scenario: CHG-GREEN-012 — createGameState sets activePinPosition from pinPositions
+- **GIVEN** a `HoleDefinition` with `pinPositions` containing 3+ entries
+- **WHEN** `createGameState` is called
+- **THEN** `activePinPosition` is one of the entries in `hole.pinPositions`
+
+#### Scenario: CHG-GREEN-013 — Distance calculation uses activePinPosition
+- **GIVEN** a `GameState` with `activePinPosition` set
+- **WHEN** `calculateDistanceYards` is called from tee to `activePinPosition`
+- **THEN** the result is > 0 and reflects the distance to the active pin
+
+#### Scenario: CHG-GREEN-014 — Shot to green uses activePinPosition for auto-putt
+- **GIVEN** a `GameState` with `activePinPosition` at a specific location
+- **WHEN** `placeShot` lands on the green
+- **THEN** `ballPosition` moves to `activePinPosition` (not `hole.pinPosition`)
+- **AND** the last entry of `shotHistory` equals `activePinPosition`
+
+#### Scenario: CHG-GREEN-015 — activePinPosition does not change mid-hole
+- **GIVEN** a `GameState` initialized with an `activePinPosition`
+- **WHEN** multiple `placeShot` calls are made
+- **THEN** `activePinPosition` remains the same value throughout (immutability per ENG-3.5)
+
+---
+
 ## Shot Placement
 
 ### Requirement: Process a shot and return updated game state
