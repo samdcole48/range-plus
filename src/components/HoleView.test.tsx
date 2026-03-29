@@ -99,12 +99,10 @@ describe('HoleView', () => {
     expect(screen.getByText(/Strokes/i)).toBeInTheDocument();
   });
 
-  it('renders a 1-putt radius circle around the pin', () => {
+  it('does not render a one-putt radius circle around the pin', () => {
     render(<HoleView hole={hole} />);
-    const circle = document.querySelector('[data-testid="one-putt-radius"]');
-    expect(circle).toBeInTheDocument();
-    expect(circle?.getAttribute('cx')).toBe(String(hole.pinPosition.x));
-    expect(circle?.getAttribute('cy')).toBe(String(hole.pinPosition.y));
+    // Per REMOVE-1PUTT-02: one-putt radius visual is removed
+    expect(document.querySelector('[data-testid="one-putt-radius"]')).not.toBeInTheDocument();
   });
 
   it('shows shot preview with distance on first tap', () => {

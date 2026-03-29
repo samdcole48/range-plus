@@ -1,8 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { HoleDefinition, Point } from '../domain/types';
-import { createGameState, placeShot, calculateDistanceYards, getScoreLabel, ONE_PUTT_THRESHOLD_FEET } from '../domain/game';
-
-const FEET_PER_YARD = 3;
+import { createGameState, placeShot, calculateDistanceYards, getScoreLabel } from '../domain/game';
 
 interface HoleViewProps {
   hole: HoleDefinition;
@@ -36,13 +34,6 @@ export function HoleView({ hole }: HoleViewProps) {
     hole.pinPosition,
     hole
   );
-
-  const teeToPin = Math.sqrt(
-    (hole.pinPosition.x - hole.teePosition.x) ** 2 +
-    (hole.pinPosition.y - hole.teePosition.y) ** 2
-  );
-  const pixelsPerYard = teeToPin / hole.yardsLength;
-  const onePuttRadiusPx = (ONE_PUTT_THRESHOLD_FEET / FEET_PER_YARD) * pixelsPerYard;
 
   // Shot preview state (tap-to-preview system)
   const [previewPoint, setPreviewPoint] = useState<Point | null>(null);
@@ -354,18 +345,6 @@ export function HoleView({ hole }: HoleViewProps) {
             strokeWidth="0.5"
           />
         </g>
-
-        {/* === LAYER 9: 1-putt radius indicator === */}
-        <circle
-          data-testid="one-putt-radius"
-          cx={hole.pinPosition.x}
-          cy={hole.pinPosition.y}
-          r={onePuttRadiusPx}
-          fill="none"
-          stroke="rgba(255, 255, 255, 0.4)"
-          strokeWidth="1"
-          strokeDasharray="3 3"
-        />
 
         {/* === LAYER 10: Shot preview indicator === */}
         {previewPoint && previewDistanceYards !== null && !gameState.isComplete && (
