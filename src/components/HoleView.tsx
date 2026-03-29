@@ -31,7 +31,7 @@ export function HoleView({ hole }: HoleViewProps) {
 
   const distanceToPin = calculateDistanceYards(
     gameState.ballPosition,
-    hole.pinPosition,
+    gameState.activePinPosition,
     hole
   );
 
@@ -323,23 +323,24 @@ export function HoleView({ hole }: HoleViewProps) {
         <g>
           {/* Pin hole (cup) */}
           <circle
-            cx={hole.pinPosition.x}
-            cy={hole.pinPosition.y}
+            data-testid="pin"
+            cx={gameState.activePinPosition.x}
+            cy={gameState.activePinPosition.y}
             r={3}
             fill="#333"
           />
           {/* Flagstick */}
           <line
-            x1={hole.pinPosition.x}
-            y1={hole.pinPosition.y - 2}
-            x2={hole.pinPosition.x}
-            y2={hole.pinPosition.y - 24}
+            x1={gameState.activePinPosition.x}
+            y1={gameState.activePinPosition.y - 2}
+            x2={gameState.activePinPosition.x}
+            y2={gameState.activePinPosition.y - 24}
             stroke="#ddd"
             strokeWidth="1.5"
           />
           {/* Flag */}
           <polygon
-            points={`${hole.pinPosition.x},${hole.pinPosition.y - 24} ${hole.pinPosition.x + 14},${hole.pinPosition.y - 18} ${hole.pinPosition.x},${hole.pinPosition.y - 12}`}
+            points={`${gameState.activePinPosition.x},${gameState.activePinPosition.y - 24} ${gameState.activePinPosition.x + 14},${gameState.activePinPosition.y - 18} ${gameState.activePinPosition.x},${gameState.activePinPosition.y - 12}`}
             fill="#e63946"
             stroke="#c0313e"
             strokeWidth="0.5"
