@@ -245,6 +245,23 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
   });
 
+  // CHG-BTN-002: Clicking confirm button places the shot
+  it('places shot and clears preview when Confirm is clicked', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+    expect(screen.getByText('Confirm')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Confirm'));
+
+    expect(screen.getByTestId('stroke-count')).toHaveTextContent('1');
+    expect(document.querySelector('[data-testid="shot-preview"]')).not.toBeInTheDocument();
+    expect(document.querySelector('[data-testid="confirm-button"]')).not.toBeInTheDocument();
+  });
+
   // CHG-BTN-001: Confirm button appears when preview is active
   it('shows Confirm button when a preview is active', () => {
     render(<HoleView hole={hole} />);

@@ -5,13 +5,14 @@
 
 ---
 
-## Progress: 1/9 complete
+## Progress: 2/9 complete
 
 ---
 
 ## Tasks
 
 - [x] **Task 1** — Test: Confirm button appears when preview is active (CHG-BTN-001) ✓
+- [x] **Task 2** — Test: Clicking confirm button places the shot (CHG-BTN-002) ✓
   - File: `src/components/HoleView.test.tsx`
   - Write test: tap course → assert "Confirm" button is rendered
 
