@@ -16,7 +16,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-1-par4',
     name: 'The Welcome',
     par: 4,
-    yardsLength: 380,
+    yardsLength: 355,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 200, y: 60 },
     greenBoundary: {
@@ -94,7 +94,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-2-par3',
     name: 'Island Green',
     par: 3,
-    yardsLength: 155,
+    yardsLength: 145,
     teePosition: { x: 200, y: 500 },
     pinPosition: { x: 200, y: 120 },
     greenBoundary: {
@@ -160,7 +160,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-3-par5',
     name: 'Azalea',
     par: 5,
-    yardsLength: 530,
+    yardsLength: 490,
     teePosition: { x: 280, y: 560 },
     pinPosition: { x: 130, y: 70 },
     greenBoundary: {
@@ -245,7 +245,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-4-par4',
     name: 'The Cape',
     par: 4,
-    yardsLength: 400,
+    yardsLength: 370,
     teePosition: { x: 140, y: 560 },
     pinPosition: { x: 260, y: 65 },
     greenBoundary: {
@@ -321,7 +321,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-5-par3',
     name: 'Postage Stamp',
     par: 3,
-    yardsLength: 135,
+    yardsLength: 125,
     teePosition: { x: 200, y: 480 },
     pinPosition: { x: 200, y: 130 },
     greenBoundary: {
@@ -401,7 +401,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-6-par4',
     name: 'The Fork',
     par: 4,
-    yardsLength: 350,
+    yardsLength: 335,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 200, y: 70 },
     greenBoundary: {
@@ -489,7 +489,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-7-par5',
     name: 'Peninsula',
     par: 5,
-    yardsLength: 510,
+    yardsLength: 485,
     teePosition: { x: 120, y: 560 },
     pinPosition: { x: 280, y: 80 },
     greenBoundary: {
@@ -565,7 +565,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-8-par4',
     name: 'The Bend',
     par: 4,
-    yardsLength: 390,
+    yardsLength: 360,
     teePosition: { x: 120, y: 560 },
     pinPosition: { x: 280, y: 70 },
     greenBoundary: {
@@ -728,7 +728,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-10-par3',
     name: 'The Long Iron',
     par: 3,
-    yardsLength: 190,
+    yardsLength: 170,
     teePosition: { x: 220, y: 520 },
     pinPosition: { x: 220, y: 100 },
     greenBoundary: {
@@ -802,7 +802,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-11-par5',
     name: 'Creek Valley',
     par: 5,
-    yardsLength: 500,
+    yardsLength: 480,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 200, y: 65 },
     greenBoundary: {
@@ -892,7 +892,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-12-par4',
     name: 'The Closer',
     par: 4,
-    yardsLength: 430,
+    yardsLength: 385,
     teePosition: { x: 220, y: 560 },
     pinPosition: { x: 180, y: 70 },
     greenBoundary: {
@@ -976,7 +976,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-13-par4',
     name: 'The Ridge',
     par: 4,
-    yardsLength: 405,
+    yardsLength: 365,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 190, y: 65 },
     greenBoundary: {
@@ -1039,7 +1039,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-14-par3',
     name: 'Cypress Point',
     par: 3,
-    yardsLength: 175,
+    yardsLength: 160,
     teePosition: { x: 200, y: 500 },
     pinPosition: { x: 210, y: 130 },
     greenBoundary: {
@@ -1101,7 +1101,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-15-par5',
     name: "Eagle's Reach",
     par: 5,
-    yardsLength: 545,
+    yardsLength: 505,
     teePosition: { x: 200, y: 565 },
     pinPosition: { x: 185, y: 55 },
     greenBoundary: {
@@ -1174,7 +1174,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-16-par4',
     name: 'The Narrows',
     par: 4,
-    yardsLength: 385,
+    yardsLength: 350,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 205, y: 70 },
     greenBoundary: {
@@ -1237,7 +1237,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-17-par4',
     name: 'Amen Corner',
     par: 4,
-    yardsLength: 425,
+    yardsLength: 375,
     teePosition: { x: 280, y: 560 },
     pinPosition: { x: 140, y: 65 },
     greenBoundary: {
@@ -1304,7 +1304,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     id: 'hole-18-par4',
     name: 'The Finish Line',
     par: 4,
-    yardsLength: 450,
+    yardsLength: 395,
     teePosition: { x: 200, y: 565 },
     pinPosition: { x: 195, y: 55 },
     greenBoundary: {

@@ -25,7 +25,7 @@ describe('HoleView', () => {
 
   it('displays distance to green from tee on load', () => {
     render(<HoleView hole={hole} />);
-    expect(screen.getByText(/380\s*yds/i)).toBeInTheDocument();
+    expect(screen.getByText(/355\s*yds/i)).toBeInTheDocument();
   });
 
   it('shows the ball marker on the tee initially', () => {
@@ -59,8 +59,8 @@ describe('HoleView', () => {
 
     tapToPlace(svg, 200, 300);
 
-    // Should no longer show 380 yds (tee distance)
-    expect(screen.queryByText(/380\s*yds/i)).not.toBeInTheDocument();
+    // Should no longer show 355 yds (tee distance)
+    expect(screen.queryByText(/355\s*yds/i)).not.toBeInTheDocument();
     // Should show updated distance
     expect(screen.getByText(/yds/i)).toBeInTheDocument();
   });

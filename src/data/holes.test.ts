@@ -43,6 +43,12 @@ describe('PRESET_HOLES', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
+  it('total course yardage is between 6,000 and 6,400 yards', () => {
+    const total = PRESET_HOLES.reduce((sum, h) => sum + h.yardsLength, 0);
+    expect(total).toBeGreaterThanOrEqual(6000);
+    expect(total).toBeLessThanOrEqual(6400);
+  });
+
   it('each hole has realistic yardage for its par', () => {
     const ranges: Record<number, [number, number]> = {
       3: [100, 250],
