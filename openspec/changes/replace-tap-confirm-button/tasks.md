@@ -5,7 +5,7 @@
 
 ---
 
-## Progress: 7/9 complete
+## Progress: 9/9 complete ✓
 
 ---
 
@@ -18,6 +18,8 @@
 - [x] **Task 5** — Test: Confirm button hidden when hole is complete (CHG-BTN-005) ✓
 - [x] **Task 6** — Test: "Tap to hit" hint removed from preview (CHG-BTN-006) ✓
 - [x] **Task 7** — Test: First tap still shows preview with distance (CHG-BTN-007) ✓
+- [x] **Task 8** — Implement: SVG confirm button + remove threshold + remove hint ✓
+- [x] **Task 9** — Update baseline spec to reflect button-based confirmation ✓
   - File: `src/components/HoleView.test.tsx`
   - Write test: tap course → assert "Confirm" button is rendered
 
