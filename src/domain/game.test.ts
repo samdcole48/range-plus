@@ -14,6 +14,7 @@ const testHole: HoleDefinition = {
   par: 4,
   teePosition: { x: 50, y: 450 },
   pinPosition: { x: 50, y: 50 },
+  pinPositions: [{ x: 50, y: 50 }],
   greenBoundary: { points: [{ x: 30, y: 30 }, { x: 70, y: 30 }, { x: 70, y: 70 }, { x: 30, y: 70 }] },
   fairwayBoundary: { points: [{ x: 30, y: 70 }, { x: 70, y: 70 }, { x: 70, y: 450 }, { x: 30, y: 450 }] },
   waterHazards: [],
@@ -39,6 +40,11 @@ describe('calculateDistanceYards', () => {
 });
 
 describe('createGameState', () => {
+  it('sets activePinPosition to one of the entries in pinPositions', () => {
+    const state = createGameState(testHole);
+    expect(testHole.pinPositions).toContainEqual(state.activePinPosition);
+  });
+
   it('creates initial state with ball on tee', () => {
     const state = createGameState(testHole);
     expect(state.ballPosition).toEqual(testHole.teePosition);
