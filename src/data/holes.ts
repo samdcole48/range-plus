@@ -104,17 +104,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 390, y: 550 }, radius: 8 },
       { position: { x: 55, y: 500 }, radius: 9 },
       { position: { x: 55, y: 550 }, radius: 11 },
-    ],
-    rocks: [
-      { position: { x: 95, y: 160 }, width: 10, height: 6, rotation: 30 },
-      { position: { x: 320, y: 200 }, width: 8, height: 5, rotation: 60 },
-      { position: { x: 90, y: 380 }, width: 12, height: 7, rotation: 15 },
-      { position: { x: 350, y: 380 }, width: 9, height: 5, rotation: 90 },
-      { position: { x: 130, y: 50 }, width: 6, height: 4, rotation: 45 },
-      { position: { x: 270, y: 50 }, width: 8, height: 5, rotation: 120 },
-      { position: { x: 375, y: 270 }, width: 10, height: 6, rotation: 0 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 92, y: 250 }, radius: 7 },
       { position: { x: 310, y: 150 }, radius: 6 },
       { position: { x: 88, y: 450 }, radius: 8 },
@@ -219,16 +209,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 330, y: 470 }, radius: 11 },
       { position: { x: 50, y: 550 }, radius: 10 },
       { position: { x: 350, y: 555 }, radius: 12 },
-    ],
-    rocks: [
-      { position: { x: 50, y: 140 }, width: 10, height: 6, rotation: 30 },
-      { position: { x: 350, y: 200 }, width: 8, height: 5, rotation: 75 },
-      { position: { x: 45, y: 360 }, width: 12, height: 7, rotation: 10 },
-      { position: { x: 355, y: 460 }, width: 7, height: 4, rotation: 50 },
-      { position: { x: 200, y: 580 }, width: 9, height: 5, rotation: 0 },
-      { position: { x: 80, y: 580 }, width: 8, height: 5, rotation: 140 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 42, y: 250 }, radius: 7 },
       { position: { x: 358, y: 310 }, radius: 6 },
       { position: { x: 50, y: 480 }, radius: 8 },
@@ -342,17 +323,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 55, y: 555 }, radius: 11 },
       { position: { x: 370, y: 555 }, radius: 8 },
       { position: { x: 90, y: 22 }, radius: 13 },
-    ],
-    rocks: [
-      { position: { x: 88, y: 120 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 340, y: 130 }, width: 9, height: 5, rotation: 60 },
-      { position: { x: 72, y: 390 }, width: 12, height: 7, rotation: 15 },
-      { position: { x: 345, y: 360 }, width: 8, height: 5, rotation: 90 },
-      { position: { x: 70, y: 490 }, width: 10, height: 6, rotation: 45 },
-      { position: { x: 340, y: 470 }, width: 7, height: 4, rotation: 120 },
-      { position: { x: 200, y: 585 }, width: 11, height: 6, rotation: 0 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 82, y: 210 }, radius: 7 },
       { position: { x: 348, y: 250 }, radius: 6 },
       { position: { x: 75, y: 480 }, radius: 8 },
@@ -465,16 +436,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 385, y: 380 }, radius: 8 },
       { position: { x: 50, y: 350 }, radius: 13 },
       { position: { x: 395, y: 150 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 130 }, width: 11, height: 6, rotation: 20 },
-      { position: { x: 350, y: 175 }, width: 9, height: 5, rotation: 65 },
-      { position: { x: 78, y: 420 }, width: 10, height: 6, rotation: 15 },
-      { position: { x: 345, y: 410 }, width: 8, height: 5, rotation: 90 },
-      { position: { x: 180, y: 585 }, width: 12, height: 7, rotation: 0 },
-      { position: { x: 330, y: 565 }, width: 7, height: 4, rotation: 130 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 240 }, radius: 7 },
       { position: { x: 352, y: 270 }, radius: 6 },
       { position: { x: 70, y: 500 }, radius: 8 },
@@ -578,16 +540,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 140, y: 20 }, radius: 12 },
       { position: { x: 260, y: 22 }, radius: 11 },
       { position: { x: 380, y: 555 }, radius: 8 },
-    ],
-    rocks: [
-      { position: { x: 82, y: 150 }, width: 10, height: 6, rotation: 35 },
-      { position: { x: 350, y: 200 }, width: 9, height: 5, rotation: 80 },
-      { position: { x: 75, y: 370 }, width: 11, height: 6, rotation: 10 },
-      { position: { x: 360, y: 440 }, width: 8, height: 4, rotation: 60 },
-      { position: { x: 200, y: 588 }, width: 12, height: 7, rotation: 0 },
-      { position: { x: 80, y: 570 }, width: 7, height: 4, rotation: 150 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 75, y: 260 }, radius: 7 },
       { position: { x: 358, y: 310 }, radius: 6 },
       { position: { x: 68, y: 490 }, radius: 8 },
@@ -706,16 +659,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 385, y: 145 }, radius: 8 },
       { position: { x: 48, y: 340 }, radius: 13 },
       { position: { x: 392, y: 380 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 82, y: 120 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 348, y: 160 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 76, y: 440 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 352, y: 480 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 175, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 320, y: 575 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 235 }, radius: 7 },
       { position: { x: 350, y: 260 }, radius: 6 },
       { position: { x: 72, y: 510 }, radius: 8 },
@@ -821,16 +765,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 385, y: 155 }, radius: 8 },
       { position: { x: 48, y: 310 }, radius: 13 },
       { position: { x: 390, y: 290 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 82, y: 120 }, width: 11, height: 6, rotation: 20 },
-      { position: { x: 350, y: 170 }, width: 9, height: 5, rotation: 65 },
-      { position: { x: 74, y: 410 }, width: 10, height: 6, rotation: 15 },
-      { position: { x: 355, y: 490 }, width: 8, height: 5, rotation: 90 },
-      { position: { x: 180, y: 590 }, width: 12, height: 7, rotation: 0 },
-      { position: { x: 320, y: 578 }, width: 7, height: 4, rotation: 130 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 230 }, radius: 7 },
       { position: { x: 352, y: 280 }, radius: 6 },
       { position: { x: 70, y: 490 }, radius: 8 },
@@ -942,16 +877,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 50, y: 490 }, radius: 13 },
       { position: { x: 390, y: 410 }, radius: 10 },
       { position: { x: 42, y: 250 }, radius: 9 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 140 }, width: 10, height: 6, rotation: 30 },
-      { position: { x: 352, y: 180 }, width: 9, height: 5, rotation: 75 },
-      { position: { x: 72, y: 440 }, width: 11, height: 7, rotation: 10 },
-      { position: { x: 360, y: 430 }, width: 8, height: 4, rotation: 55 },
-      { position: { x: 190, y: 588 }, width: 12, height: 6, rotation: 0 },
-      { position: { x: 310, y: 572 }, width: 7, height: 4, rotation: 145 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 76, y: 250 }, radius: 7 },
       { position: { x: 355, y: 290 }, radius: 6 },
       { position: { x: 68, y: 520 }, radius: 8 },
@@ -1059,16 +985,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 390, y: 145 }, radius: 8 },
       { position: { x: 46, y: 350 }, radius: 13 },
       { position: { x: 395, y: 330 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 130 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 348, y: 175 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 76, y: 450 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 358, y: 500 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 175, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 325, y: 575 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 255 }, radius: 7 },
       { position: { x: 352, y: 300 }, radius: 6 },
       { position: { x: 70, y: 510 }, radius: 8 },
@@ -1171,16 +1088,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 392, y: 390 }, radius: 10 },
       { position: { x: 45, y: 280 }, radius: 9 },
       { position: { x: 395, y: 165 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 78, y: 145 }, width: 10, height: 6, rotation: 30 },
-      { position: { x: 352, y: 185 }, width: 9, height: 5, rotation: 75 },
-      { position: { x: 72, y: 460 }, width: 11, height: 7, rotation: 10 },
-      { position: { x: 360, y: 440 }, width: 8, height: 4, rotation: 55 },
-      { position: { x: 190, y: 590 }, width: 12, height: 6, rotation: 0 },
-      { position: { x: 310, y: 575 }, width: 7, height: 4, rotation: 145 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 76, y: 270 }, radius: 7 },
       { position: { x: 355, y: 310 }, radius: 6 },
       { position: { x: 68, y: 520 }, radius: 8 },
@@ -1299,16 +1207,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 148, y: 22 }, radius: 12 },
       { position: { x: 258, y: 22 }, radius: 11 },
       { position: { x: 390, y: 150 }, radius: 8 },
-    ],
-    rocks: [
-      { position: { x: 82, y: 120 }, width: 11, height: 6, rotation: 20 },
-      { position: { x: 352, y: 165 }, width: 9, height: 5, rotation: 65 },
-      { position: { x: 76, y: 420 }, width: 10, height: 6, rotation: 15 },
-      { position: { x: 356, y: 475 }, width: 8, height: 5, rotation: 90 },
-      { position: { x: 182, y: 590 }, width: 12, height: 7, rotation: 0 },
-      { position: { x: 315, y: 578 }, width: 7, height: 4, rotation: 130 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 80, y: 235 }, radius: 7 },
       { position: { x: 352, y: 275 }, radius: 6 },
       { position: { x: 72, y: 495 }, radius: 8 },
@@ -1420,16 +1319,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 150, y: 22 }, radius: 12 },
       { position: { x: 256, y: 22 }, radius: 11 },
       { position: { x: 392, y: 155 }, radius: 8 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 125 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 350, y: 175 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 74, y: 435 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 357, y: 485 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 177, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 322, y: 576 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 245 }, radius: 7 },
       { position: { x: 352, y: 285 }, radius: 6 },
       { position: { x: 70, y: 505 }, radius: 8 },
@@ -1524,16 +1414,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 395, y: 295 }, radius: 10 },
       { position: { x: 42, y: 130 }, radius: 9 },
       { position: { x: 392, y: 500 }, radius: 11 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 120 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 348, y: 160 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 74, y: 425 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 357, y: 490 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 175, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 322, y: 574 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 76, y: 240 }, radius: 7 },
       { position: { x: 350, y: 280 }, radius: 6 },
       { position: { x: 70, y: 500 }, radius: 8 },
@@ -1631,17 +1512,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 395, y: 250 }, radius: 12 },
       { position: { x: 22, y: 200 }, radius: 8 },
       { position: { x: 380, y: 490 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 52, y: 120 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 350, y: 155 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 48, y: 410 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 355, y: 470 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 176, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 320, y: 576 }, width: 7, height: 4, rotation: 125 },
-      { position: { x: 200, y: 10 }, width: 9, height: 5, rotation: 60 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 48, y: 220 }, radius: 7 },
       { position: { x: 352, y: 260 }, radius: 6 },
       { position: { x: 42, y: 490 }, radius: 8 },
@@ -1754,16 +1625,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 395, y: 300 }, radius: 10 },
       { position: { x: 42, y: 130 }, radius: 9 },
       { position: { x: 392, y: 490 }, radius: 11 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 125 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 350, y: 170 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 74, y: 425 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 357, y: 480 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 177, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 322, y: 578 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 240 }, radius: 7 },
       { position: { x: 352, y: 285 }, radius: 6 },
       { position: { x: 70, y: 500 }, radius: 8 },
@@ -1854,16 +1716,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 150, y: 22 }, radius: 12 },
       { position: { x: 256, y: 22 }, radius: 11 },
       { position: { x: 392, y: 155 }, radius: 8 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 125 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 350, y: 175 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 74, y: 435 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 357, y: 485 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 177, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 322, y: 576 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 245 }, radius: 7 },
       { position: { x: 352, y: 285 }, radius: 6 },
       { position: { x: 70, y: 505 }, radius: 8 },
@@ -1966,17 +1819,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 395, y: 255 }, radius: 12 },
       { position: { x: 24, y: 215 }, radius: 8 },
       { position: { x: 382, y: 490 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 50, y: 120 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 350, y: 160 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 48, y: 415 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 355, y: 472 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 175, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 320, y: 575 }, width: 7, height: 4, rotation: 125 },
-      { position: { x: 200, y: 10 }, width: 9, height: 5, rotation: 60 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 48, y: 225 }, radius: 7 },
       { position: { x: 352, y: 265 }, radius: 6 },
       { position: { x: 42, y: 490 }, radius: 8 },
@@ -2084,16 +1927,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
       { position: { x: 392, y: 155 }, radius: 8 },
       { position: { x: 46, y: 320 }, radius: 13 },
       { position: { x: 395, y: 300 }, radius: 10 },
-    ],
-    rocks: [
-      { position: { x: 80, y: 125 }, width: 10, height: 6, rotation: 25 },
-      { position: { x: 350, y: 170 }, width: 9, height: 5, rotation: 70 },
-      { position: { x: 74, y: 425 }, width: 11, height: 6, rotation: 15 },
-      { position: { x: 357, y: 480 }, width: 8, height: 5, rotation: 95 },
-      { position: { x: 177, y: 590 }, width: 10, height: 6, rotation: 0 },
-      { position: { x: 322, y: 576 }, width: 7, height: 4, rotation: 125 },
-    ],
-    bushes: [
+    ],    bushes: [
       { position: { x: 78, y: 240 }, radius: 7 },
       { position: { x: 352, y: 285 }, radius: 6 },
       { position: { x: 70, y: 500 }, radius: 8 },

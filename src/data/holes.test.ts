@@ -207,18 +207,6 @@ describe('Decorative visuals — CHG-VIS-001 (dense trees)', () => {
   });
 });
 
-describe('Decorative visuals — CHG-VIS-002 (rocks present)', () => {
-  it('every hole has a rocks array with at least 3 entries', () => {
-    for (const hole of PRESET_HOLES) {
-      expect(hole.rocks, `${hole.name} must have rocks array`).toBeDefined();
-      expect(
-        (hole.rocks ?? []).length,
-        `${hole.name} must have ≥3 rocks`
-      ).toBeGreaterThanOrEqual(3);
-    }
-  });
-});
-
 describe('Decorative visuals — CHG-VIS-003 (bushes present)', () => {
   it('every hole has a bushes array with at least 3 entries', () => {
     for (const hole of PRESET_HOLES) {
@@ -227,22 +215,6 @@ describe('Decorative visuals — CHG-VIS-003 (bushes present)', () => {
         (hole.bushes ?? []).length,
         `${hole.name} must have ≥3 bushes`
       ).toBeGreaterThanOrEqual(3);
-    }
-  });
-});
-
-describe('Decorative visuals — CHG-VIS-004 (rock validity)', () => {
-  it('each rock has valid position (0-400, 0-600), positive width/height, numeric rotation', () => {
-    for (const hole of PRESET_HOLES) {
-      for (const rock of (hole.rocks ?? [])) {
-        expect(rock.position.x, `${hole.name} rock.x`).toBeGreaterThanOrEqual(0);
-        expect(rock.position.x, `${hole.name} rock.x`).toBeLessThanOrEqual(400);
-        expect(rock.position.y, `${hole.name} rock.y`).toBeGreaterThanOrEqual(0);
-        expect(rock.position.y, `${hole.name} rock.y`).toBeLessThanOrEqual(600);
-        expect(rock.width, `${hole.name} rock.width`).toBeGreaterThan(0);
-        expect(rock.height, `${hole.name} rock.height`).toBeGreaterThan(0);
-        expect(typeof rock.rotation, `${hole.name} rock.rotation`).toBe('number');
-      }
     }
   });
 });
@@ -294,6 +266,16 @@ describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
         expect(tree.radius, `${hole.name} tree.radius`).toBeGreaterThanOrEqual(6);
         expect(tree.radius, `${hole.name} tree.radius`).toBeLessThanOrEqual(18);
       }
+    }
+  });
+});
+
+// ─── Refine Hole Visuals Tests (CHG-REF-001 through CHG-REF-003) ─────────────
+
+describe('Refined visuals — CHG-REF-001 (no rocks)', () => {
+  it('CHG-REF-001: no hole has a rocks array', () => {
+    for (const hole of PRESET_HOLES) {
+      expect((hole as Record<string, unknown>).rocks, `${hole.name} must have no rocks`).toBeUndefined();
     }
   });
 });

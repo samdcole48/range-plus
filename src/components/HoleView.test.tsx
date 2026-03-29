@@ -449,18 +449,6 @@ describe('HoleView', () => {
 
 // ─── Rendering tests for decorative elements (CHG-VIS-009 through CHG-VIS-012) ──
 
-describe('Decorative rendering — CHG-VIS-009 (rocks)', () => {
-  it('renders rock elements when hole has rocks', () => {
-    // PRESET_HOLES[0] (The Welcome) has rocks
-    const holeWithRocks = PRESET_HOLES[0];
-    expect((holeWithRocks.rocks ?? []).length).toBeGreaterThan(0);
-    render(<HoleView hole={holeWithRocks} />);
-    const rocks = document.querySelectorAll('[data-testid="rock"]');
-    expect(rocks.length).toBeGreaterThan(0);
-    expect(rocks.length).toBe((holeWithRocks.rocks ?? []).length);
-  });
-});
-
 describe('Decorative rendering — CHG-VIS-010 (bushes)', () => {
   it('renders bush elements when hole has bushes', () => {
     // PRESET_HOLES[0] (The Welcome) has bushes

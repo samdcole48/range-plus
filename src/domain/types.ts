@@ -17,13 +17,6 @@ export interface TreeCluster {
   radius: number;
 }
 
-export interface Rock {
-  position: Point;
-  width: number;   // 4–12px
-  height: number;  // 3–8px
-  rotation: number; // degrees, for visual variety
-}
-
 export interface Bush {
   position: Point;
   radius: number;  // 4–8px
@@ -54,7 +47,6 @@ export interface HoleDefinition {
   yardsLength: number;
   bunkers?: Bunker[];
   trees?: TreeCluster[];
-  rocks?: Rock[];
   bushes?: Bush[];
   flowerBeds?: FlowerBed[];
 }
