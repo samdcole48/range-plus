@@ -1,7 +1,5 @@
 import type { GameState, HoleDefinition, Point, Polygon } from './types';
 
-const FEET_PER_YARD = 3;
-export const ONE_PUTT_THRESHOLD_FEET = 15;
 
 export function calculateDistanceYards(
   from: Point,
@@ -62,17 +60,14 @@ export function placeShot(state: GameState, target: Point): GameState {
   const onGreen = isPointInPolygon(target, state.hole.greenBoundary);
 
   if (onGreen) {
-    const distToPin = calculateDistanceYards(target, state.hole.pinPosition, state.hole);
-    const distFeet = distToPin * FEET_PER_YARD;
-    const inOnePuttZone = distFeet <= ONE_PUTT_THRESHOLD_FEET;
-    const putts = inOnePuttZone ? 1 : 2;
+    const putts = 2;
     return {
       ...state,
       ballPosition: { ...state.hole.pinPosition },
       strokeCount: state.strokeCount + 1 + putts,
       isComplete: true,
       shotHistory: [...state.shotHistory, { ...target }, { ...state.hole.pinPosition }],
-      landedInOnePuttZone: inOnePuttZone,
+      landedInOnePuttZone: false,
       puttCount: putts,
     };
   }

@@ -105,28 +105,14 @@ describe('placeShot', () => {
     ]);
   });
 
-  it('sets landedInOnePuttZone true when landing close to pin', () => {
+  it('always sets puttCount to 2 when landing close to pin on green', () => {
     const state = createGameState(testHole);
     const nearPin: Point = { x: 50, y: 49 };
     const next = placeShot(state, nearPin);
-    expect(next.landedInOnePuttZone).toBe(true);
+    expect(next.puttCount).toBe(2);
   });
 
-  it('sets puttCount to 1 when landing in the one-putt zone', () => {
-    const state = createGameState(testHole);
-    const nearPin: Point = { x: 50, y: 49 };
-    const next = placeShot(state, nearPin);
-    expect(next.puttCount).toBe(1);
-  });
-
-  it('sets landedInOnePuttZone false when landing far from pin on green', () => {
-    const state = createGameState(testHole);
-    const farOnGreen: Point = { x: 65, y: 65 };
-    const next = placeShot(state, farOnGreen);
-    expect(next.landedInOnePuttZone).toBe(false);
-  });
-
-  it('sets puttCount to 2 when landing outside the one-putt zone', () => {
+  it('always sets puttCount to 2 when landing far from pin on green', () => {
     const state = createGameState(testHole);
     const farOnGreen: Point = { x: 65, y: 65 };
     const next = placeShot(state, farOnGreen);
@@ -167,14 +153,15 @@ describe('placeShot', () => {
     expect(next.strokeCount).toBe(3);
   });
 
-  it('marks hole complete with 1-putt when landing within 15 feet of pin', () => {
+  it('always adds 2 putts when landing on green regardless of distance to pin', () => {
     const state = createGameState(testHole);
-    // Land very close to pin (50,50). 8 feet ≈ 2.67 yards ≈ 2.67 pixels at this scale
+    // Land very close to pin (50,50) — previously would 1-putt, now always 2-putt
     const nearPin: Point = { x: 50, y: 49 };
     const next = placeShot(state, nearPin);
     expect(next.isComplete).toBe(true);
-    // 1 shot + 1 putt = 2
-    expect(next.strokeCount).toBe(2);
+    // 1 shot + 2 putts = 3 (per REMOVE-1PUTT-01)
+    expect(next.strokeCount).toBe(3);
+    expect(next.puttCount).toBe(2);
   });
 
   it('does not allow shots after hole is complete', () => {

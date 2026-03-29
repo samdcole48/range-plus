@@ -357,16 +357,16 @@ describe('HoleView', () => {
     expect(screen.queryByText('To Pin')).not.toBeInTheDocument();
   });
 
-  it('shows 1 Putt 🎯 in HUD when landing in one-putt zone', () => {
+  it('always shows 2 Putts in HUD when landing on green', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;
     svg.getBoundingClientRect = () =>
       ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
 
-    // Land very close to pin (within one-putt zone)
+    // Land very close to pin — previously showed "1 Putt 🎯", now always "2 Putts"
     tapToPlace(svg, 200, 60);
 
-    expect(screen.getByTestId('putt-count')).toHaveTextContent('1 Putt 🎯');
+    expect(screen.getByTestId('putt-count')).toHaveTextContent('2 Putts');
   });
 
   it('shows 2 Putts in HUD when landing outside one-putt zone', () => {
