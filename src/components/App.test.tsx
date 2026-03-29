@@ -4,7 +4,7 @@ import App from '../App';
 
 function tapToPlace(svg: Element, clientX: number, clientY: number) {
   fireEvent.click(svg, { clientX, clientY });
-  fireEvent.click(svg, { clientX, clientY });
+  fireEvent.click(screen.getByText('Confirm'));
 }
 
 describe('App', () => {

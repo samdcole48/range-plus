@@ -71,24 +71,47 @@
 
 ## Shot Placement Interaction
 
-### Requirement: Tap-to-preview-then-confirm shot placement
+### Requirement: Preview then explicit confirm shot placement
 
 #### Scenario: BASE-TAP-001 — First tap shows shot preview with distance
 - **GIVEN** HoleView with game in progress
 - **WHEN** the user taps on the course
-- **THEN** a preview indicator appears at the tap point
+- **THEN** a preview crosshair appears at the tap point
 - **AND** a distance label shows yards from ball to preview point
 
-#### Scenario: BASE-TAP-002 — Second tap near preview confirms shot
-- **GIVEN** a preview is displayed on the course
-- **WHEN** the user taps within 30px of the preview point
-- **THEN** the shot is confirmed (ball moves, stroke increments)
+#### Scenario: BASE-TAP-002 — Confirm button appears when preview is active
+- **GIVEN** a preview is active on the course
+- **WHEN** HoleView renders
+- **THEN** a "Confirm" button is displayed in the bottom-right of the course
+- **AND** the button is the sole way to confirm a shot
 
-#### Scenario: BASE-TAP-003 — Tap far from preview moves preview
-- **GIVEN** a preview is displayed on the course
-- **WHEN** the user taps more than 30px from the preview point
+#### Scenario: BASE-TAP-003 — Clicking Confirm button places the shot
+- **GIVEN** a preview is active on the course
+- **WHEN** the user clicks the "Confirm" button
+- **THEN** the shot is placed at the preview location
+- **AND** the stroke count increments
+- **AND** the preview and Confirm button both disappear
+
+#### Scenario: BASE-TAP-004 — Any tap repositions the preview
+- **GIVEN** a preview is active at any position
+- **WHEN** the user taps anywhere on the course
 - **THEN** the preview moves to the new tap location
-- **AND** the shot is NOT confirmed
+- **AND** no shot is placed
+
+#### Scenario: BASE-TAP-005 — Confirm button hidden when no preview
+- **GIVEN** HoleView with no active preview
+- **WHEN** HoleView renders
+- **THEN** no "Confirm" button is visible
+
+#### Scenario: BASE-TAP-006 — Confirm button hidden when hole is complete
+- **GIVEN** the hole is complete
+- **WHEN** HoleView renders
+- **THEN** no "Confirm" button is visible
+
+#### Scenario: BASE-TAP-007 — No "Tap to hit" hint in SVG
+- **GIVEN** a preview is active on the course
+- **WHEN** HoleView renders
+- **THEN** no "Tap to hit" text is displayed in the SVG
 
 ---
 
@@ -182,5 +205,4 @@
 | ID | Observation | Potential Issue |
 |----|-------------|-----------------|
 | QUIRK-HV-001 | HoleView.tsx is ~550 lines | Violates ENG-3.4 (≤50 lines per method); needs decomposition |
-| QUIRK-HV-002 | Preview threshold is hardcoded 30px | Magic number; should be extracted to constant |
 | QUIRK-HV-003 | No keyboard accessibility for shot placement | Only mouse/touch interaction supported |

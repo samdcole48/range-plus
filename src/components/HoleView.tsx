@@ -65,8 +65,6 @@ export function HoleView({ hole }: HoleViewProps) {
     []
   );
 
-  const CONFIRM_THRESHOLD_PX = 30;
-
   const handleClick = useCallback(
     (e: React.MouseEvent<SVGSVGElement>) => {
       if (gameState.isComplete) return;
@@ -74,22 +72,9 @@ export function HoleView({ hole }: HoleViewProps) {
       const target = svgCoordsFromEvent(e);
       if (!target) return;
 
-      if (previewPoint) {
-        const dx = target.x - previewPoint.x;
-        const dy = target.y - previewPoint.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < CONFIRM_THRESHOLD_PX) {
-          setGameState((prev) => placeShot(prev, previewPoint));
-          setPreviewPoint(null);
-        } else {
-          setPreviewPoint(target);
-        }
-      } else {
-        setPreviewPoint(target);
-      }
+      setPreviewPoint(target);
     },
-    [gameState.isComplete, previewPoint, svgCoordsFromEvent]
+    [gameState.isComplete, svgCoordsFromEvent]
   );
 
 
@@ -442,17 +427,6 @@ export function HoleView({ hole }: HoleViewProps) {
             >
               {previewDistanceYards}y
             </text>
-            {/* "Tap to hit" hint */}
-            <text
-              x={previewPoint.x}
-              y={previewPoint.y + 28}
-              fill="rgba(255,255,255,0.6)"
-              fontSize="9"
-              textAnchor="middle"
-              fontWeight="600"
-            >
-              Tap to hit
-            </text>
           </g>
         )}
 
@@ -529,6 +503,31 @@ export function HoleView({ hole }: HoleViewProps) {
             fill="rgba(255,255,255,0.6)"
           />
         </g>
+
+        {/* === LAYER 13: Confirm button === */}
+        {previewPoint && !gameState.isComplete && (
+          <g
+            data-testid="confirm-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setGameState((prev) => placeShot(prev, previewPoint));
+              setPreviewPoint(null);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            <rect x={270} y={536} width={120} height={56} rx={10} fill="rgba(20,20,20,0.85)" />
+            <text
+              x={330}
+              y={569}
+              fill="white"
+              fontSize="18"
+              fontWeight="700"
+              textAnchor="middle"
+            >
+              Confirm
+            </text>
+          </g>
+        )}
 
         {/* === Hole info label === */}
         <text
