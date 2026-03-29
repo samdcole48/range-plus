@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { HoleView } from './HoleView';
 import { PRESET_HOLES } from '../data/holes';
+import { calculateDistanceYards } from '../domain/game';
 
 const hole = PRESET_HOLES[0];
 
@@ -11,6 +12,16 @@ function tapToPlace(svg: Element, clientX: number, clientY: number) {
 }
 
 describe('HoleView', () => {
+  it('renders the pin at one of the hole pinPositions coordinates', () => {
+    render(<HoleView hole={hole} />);
+    const pin = document.querySelector('[data-testid="pin"]');
+    expect(pin).toBeInTheDocument();
+    const cx = Number(pin?.getAttribute('cx'));
+    const cy = Number(pin?.getAttribute('cy'));
+    const matchesAPin = hole.pinPositions.some(p => p.x === cx && p.y === cy);
+    expect(matchesAPin).toBe(true);
+  });
+
   it('renders the SVG course canvas', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg');
@@ -25,7 +36,12 @@ describe('HoleView', () => {
 
   it('displays distance to green from tee on load', () => {
     render(<HoleView hole={hole} />);
-    expect(screen.getByText(/355\s*yds/i)).toBeInTheDocument();
+    // Distance shown reflects tee → activePinPosition (randomly selected from pinPositions)
+    const validDistances = hole.pinPositions.map(p =>
+      calculateDistanceYards(hole.teePosition, p, hole)
+    );
+    const pattern = new RegExp(`(${validDistances.join('|')})\\s*yds`, 'i');
+    expect(screen.getByText(pattern)).toBeInTheDocument();
   });
 
   it('shows the ball marker on the tee initially', () => {

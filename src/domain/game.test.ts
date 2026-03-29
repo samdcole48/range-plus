@@ -14,6 +14,7 @@ const testHole: HoleDefinition = {
   par: 4,
   teePosition: { x: 50, y: 450 },
   pinPosition: { x: 50, y: 50 },
+  pinPositions: [{ x: 50, y: 50 }],
   greenBoundary: { points: [{ x: 30, y: 30 }, { x: 70, y: 30 }, { x: 70, y: 70 }, { x: 30, y: 70 }] },
   fairwayBoundary: { points: [{ x: 30, y: 70 }, { x: 70, y: 70 }, { x: 70, y: 450 }, { x: 30, y: 450 }] },
   waterHazards: [],
@@ -39,6 +40,35 @@ describe('calculateDistanceYards', () => {
 });
 
 describe('createGameState', () => {
+  it('sets activePinPosition to one of the entries in pinPositions', () => {
+    const state = createGameState(testHole);
+    expect(testHole.pinPositions).toContainEqual(state.activePinPosition);
+  });
+
+  it('distance calc result > 0 using activePinPosition as target from tee', () => {
+    const state = createGameState(testHole);
+    const distance = calculateDistanceYards(testHole.teePosition, state.activePinPosition, testHole);
+    expect(distance).toBeGreaterThan(0);
+  });
+
+  it('placeShot on green records activePinPosition as final shotHistory entry', () => {
+    const state = createGameState(testHole);
+    // greenSpot is on the green (30-70, 30-70) but not at the pin (50, 50)
+    const greenSpot: Point = { x: 65, y: 65 };
+    const next = placeShot(state, greenSpot);
+    const lastShot = next.shotHistory[next.shotHistory.length - 1];
+    expect(lastShot).toEqual(state.activePinPosition);
+  });
+
+  it('activePinPosition remains stable across multiple placeShot calls', () => {
+    let state = createGameState(testHole);
+    const initialPin = state.activePinPosition;
+    state = placeShot(state, { x: 50, y: 350 });
+    expect(state.activePinPosition).toEqual(initialPin);
+    state = placeShot(state, { x: 50, y: 250 });
+    expect(state.activePinPosition).toEqual(initialPin);
+  });
+
   it('creates initial state with ball on tee', () => {
     const state = createGameState(testHole);
     expect(state.ballPosition).toEqual(testHole.teePosition);

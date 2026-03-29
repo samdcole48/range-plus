@@ -26,7 +26,10 @@ export interface HoleDefinition {
   name: string;
   par: 3 | 4 | 5;
   teePosition: Point;
+  /** Legacy active pin — always equals pinPositions[0] for backward compat */
   pinPosition: Point;
+  /** 3–4 positions per green; one randomly selected per play via activePinPosition */
+  pinPositions: Point[];
   greenBoundary: Polygon;
   fairwayBoundary: Polygon;
   waterHazards: WaterHazard[];
@@ -42,4 +45,6 @@ export interface GameState {
   isComplete: boolean;
   shotHistory: Point[];
   puttCount: number;
+  /** Randomly selected from hole.pinPositions at game init; fixed for the hole's duration */
+  activePinPosition: Point;
 }

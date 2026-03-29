@@ -68,7 +68,7 @@
 #### Scenario: BASE-DATA-009 — Every hole has required fields
 - **GIVEN** each hole in `PRESET_HOLES`
 - **WHEN** its structure is validated
-- **THEN** it has: `id`, `name`, `par`, `teePosition`, `pinPosition`, `greenBoundary`, `fairwayBoundary`, `waterHazards`, `yardsLength`
+- **THEN** it has: `id`, `name`, `par`, `teePosition`, `pinPosition`, `pinPositions`, `greenBoundary`, `fairwayBoundary`, `waterHazards`, `yardsLength`
 
 #### Scenario: BASE-DATA-010 — Par values are 3, 4, or 5 only
 - **GIVEN** each hole in `PRESET_HOLES`
@@ -79,6 +79,105 @@
 - **GIVEN** each hole in `PRESET_HOLES`
 - **WHEN** the `greenBoundary.points` array is checked
 - **THEN** it contains at least 3 points (minimum for a polygon)
+
+> **CHG-GREEN-008 upgrade:** Per the green redesign, green polygons MUST have ≥8 vertices for shape fidelity.
+
+#### Scenario: CHG-GREEN-008 — Green polygons have ≥8 vertices
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** `greenBoundary.points.length` is checked
+- **THEN** it is ≥ 8
+
+---
+
+## Green Size Scaling
+
+### Requirement: Green sizes visually scale with par value
+
+> Per CHG-GREEN-005/006/007 — greens must be par-scaled and meet minimum playable size.
+
+| Par | Width Range (px) | Height Range (px) | Target Area (px²) |
+|-----|-----------------|-------------------|-------------------|
+| 3 | 35–50 | 30–45 | 900–1,800 |
+| 4 | 40–60 | 35–55 | 1,200–2,600 |
+| 5 | 50–75 | 45–70 | 1,800–4,000 |
+
+#### Scenario: CHG-GREEN-005 — Par-3 greens are smaller than par-4 on average
+- **GIVEN** all holes grouped by par
+- **WHEN** average green bounding-box areas are compared
+- **THEN** avg par-3 area < avg par-4 area
+
+#### Scenario: CHG-GREEN-006 — Par-5 greens are larger than par-4 on average
+- **GIVEN** all holes grouped by par
+- **WHEN** average green bounding-box areas are compared
+- **THEN** avg par-5 area > avg par-4 area
+
+#### Scenario: CHG-GREEN-007 — No green below minimum playable size
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** the green bounding box is calculated
+- **THEN** width ≥ 35px AND height ≥ 30px
+
+---
+
+## Green Containment
+
+### Requirement: All green vertices must lie inside the fairway
+
+#### Scenario: CHG-GREEN-009 — All green vertices are inside the fairway
+- **GIVEN** each hole in `PRESET_HOLES`
+- **AND** each point in `greenBoundary.points`
+- **WHEN** `isPointInPolygon(point, fairwayBoundary)` is called
+- **THEN** the result is `true`
+
+---
+
+## Multiple Pin Positions
+
+### Requirement: Each hole provides 3–4 pin positions for variety
+
+> Per **CHG-GREEN-001–004** and **D1** (design decision) from `openspec/changes/redesign-greens/SPEC.md`.
+>
+> - `pinPositions: Point[]` holds 3–4 valid positions inside the green
+> - `pinPosition` equals `pinPositions[0]` for backward compatibility
+> - `activePinPosition` in `GameState` holds the randomly selected pin for the current round (see `game-logic/spec.md`)
+
+#### Scenario: CHG-GREEN-001 — HoleDefinition has pinPositions array
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** its structure is validated
+- **THEN** it has a `pinPositions` field that is an array of `Point` objects
+
+#### Scenario: CHG-GREEN-002 — Each hole has 3 or 4 pin positions
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** `pinPositions.length` is checked
+- **THEN** the count is 3 or 4
+
+#### Scenario: CHG-GREEN-003 — pinPosition equals pinPositions[0]
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** `pinPosition` is compared to `pinPositions[0]`
+- **THEN** they are deeply equal (backward compatibility guarantee)
+
+#### Scenario: CHG-GREEN-004 — All pin positions are inside the green
+- **GIVEN** each hole in `PRESET_HOLES`
+- **AND** each point in `pinPositions`
+- **WHEN** `isPointInPolygon(point, greenBoundary)` is called
+- **THEN** the result is `true`
+
+---
+
+## Pin Spread Validation
+
+### Requirement: Pin positions span the green to provide strategic variety
+
+#### Scenario: CHG-GREEN-010 — Pin positions are spread across the green
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** the maximum distance between any two pin positions is measured
+- **AND** the green's longest axis is measured
+- **THEN** max pin distance ≥ 40% of the longest axis
+
+#### Scenario: CHG-GREEN-011 — Not all pins at the centroid
+- **GIVEN** each hole in `PRESET_HOLES`
+- **AND** the green centroid is calculated
+- **WHEN** pin position distances from the centroid are measured
+- **THEN** at least 2 pin positions are ≥ 5px from the centroid
 
 #### Scenario: BASE-DATA-012 — Fairway boundary is a valid polygon
 - **GIVEN** each hole in `PRESET_HOLES`
