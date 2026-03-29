@@ -427,17 +427,6 @@ export function HoleView({ hole }: HoleViewProps) {
             >
               {previewDistanceYards}y
             </text>
-            {/* "Tap to hit" hint */}
-            <text
-              x={previewPoint.x}
-              y={previewPoint.y + 28}
-              fill="rgba(255,255,255,0.6)"
-              fontSize="9"
-              textAnchor="middle"
-              fontWeight="600"
-            >
-              Tap to hit
-            </text>
           </g>
         )}
 

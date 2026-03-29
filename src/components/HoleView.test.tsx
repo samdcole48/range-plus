@@ -229,6 +229,18 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
   });
 
+  // CHG-BTN-006: "Tap to hit" hint no longer rendered in SVG
+  it('does not show "Tap to hit" hint text when preview is active', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    fireEvent.click(svg, { clientX: 200, clientY: 300 });
+
+    expect(screen.queryByText(/tap to hit/i)).not.toBeInTheDocument();
+  });
+
   // CHG-BTN-004: Confirm button hidden when no preview active
   it('does not show Confirm button before any tap', () => {
     render(<HoleView hole={hole} />);
