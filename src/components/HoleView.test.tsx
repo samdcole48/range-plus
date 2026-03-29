@@ -229,6 +229,25 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes').textContent).toBe(strokesText);
   });
 
+  // CHG-BTN-004: Confirm button hidden when no preview active
+  it('does not show Confirm button before any tap', () => {
+    render(<HoleView hole={hole} />);
+    expect(document.querySelector('[data-testid="confirm-button"]')).not.toBeInTheDocument();
+  });
+
+  // CHG-BTN-005: Confirm button hidden when hole is complete
+  it('does not show Confirm button when hole is complete', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land on green to complete the hole
+    tapToPlace(svg, 200, 70);
+
+    expect(document.querySelector('[data-testid="confirm-button"]')).not.toBeInTheDocument();
+  });
+
   // CHG-BTN-003: Tapping near existing preview repositions (no 30px confirm threshold)
   it('repositions preview when tapping within 30px of current preview', () => {
     render(<HoleView hole={hole} />);

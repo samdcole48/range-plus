@@ -5,7 +5,7 @@
 
 ---
 
-## Progress: 3/9 complete
+## Progress: 5/9 complete
 
 ---
 
@@ -14,6 +14,8 @@
 - [x] **Task 1** — Test: Confirm button appears when preview is active (CHG-BTN-001) ✓
 - [x] **Task 2** — Test: Clicking confirm button places the shot (CHG-BTN-002) ✓
 - [x] **Task 3** — Test: Tapping course always repositions preview (CHG-BTN-003) ✓
+- [x] **Task 4** — Test: Confirm button hidden when no preview (CHG-BTN-004) ✓
+- [x] **Task 5** — Test: Confirm button hidden when hole is complete (CHG-BTN-005) ✓
   - File: `src/components/HoleView.test.tsx`
   - Write test: tap course → assert "Confirm" button is rendered
 
