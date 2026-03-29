@@ -19,12 +19,18 @@ export const PRESET_HOLES: HoleDefinition[] = [
     yardsLength: 355,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 200, y: 60 },
+    pinPositions: [
+      { x: 200, y: 60 },
+      { x: 218, y: 70 },
+      { x: 183, y: 74 },
+    ],
     greenBoundary: {
+      // Oval — 50×42px, wider than tall (par-4 size)
       points: [
-        { x: 185, y: 42 }, { x: 197, y: 38 }, { x: 210, y: 40 },
-        { x: 220, y: 48 }, { x: 223, y: 60 }, { x: 220, y: 72 },
-        { x: 212, y: 80 }, { x: 198, y: 83 }, { x: 185, y: 79 },
-        { x: 178, y: 68 }, { x: 177, y: 54 }, { x: 180, y: 45 },
+        { x: 225, y: 62 }, { x: 222, y: 73 }, { x: 213, y: 80 },
+        { x: 200, y: 83 }, { x: 188, y: 80 }, { x: 178, y: 73 },
+        { x: 175, y: 62 }, { x: 178, y: 52 }, { x: 188, y: 44 },
+        { x: 200, y: 41 }, { x: 213, y: 44 }, { x: 222, y: 52 },
       ],
     },
     fairwayBoundary: {
@@ -96,13 +102,19 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 3,
     yardsLength: 145,
     teePosition: { x: 200, y: 500 },
-    pinPosition: { x: 200, y: 120 },
+    pinPosition: { x: 200, y: 134 },
+    pinPositions: [
+      { x: 200, y: 134 },
+      { x: 185, y: 115 },
+      { x: 200, y: 106 },
+    ],
     greenBoundary: {
+      // Circular — r=20, 40×40px (par-3 size). Island green kept tight.
       points: [
-        { x: 188, y: 98 }, { x: 202, y: 95 }, { x: 214, y: 100 },
-        { x: 220, y: 110 }, { x: 222, y: 122 }, { x: 218, y: 134 },
-        { x: 208, y: 142 }, { x: 195, y: 144 }, { x: 183, y: 138 },
-        { x: 178, y: 126 }, { x: 179, y: 112 }, { x: 184, y: 102 },
+        { x: 220, y: 120 }, { x: 217, y: 130 }, { x: 210, y: 137 },
+        { x: 200, y: 140 }, { x: 190, y: 137 }, { x: 183, y: 130 },
+        { x: 180, y: 120 }, { x: 183, y: 110 }, { x: 190, y: 103 },
+        { x: 200, y: 100 }, { x: 210, y: 103 }, { x: 217, y: 110 },
       ],
     },
     fairwayBoundary: {
@@ -163,12 +175,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     yardsLength: 490,
     teePosition: { x: 280, y: 560 },
     pinPosition: { x: 130, y: 70 },
+    pinPositions: [
+      { x: 130, y: 70 },
+      { x: 110, y: 60 },
+      { x: 148, y: 55 },
+      { x: 122, y: 90 },
+    ],
     greenBoundary: {
+      // Kidney — 64×56px, concavity on right (approach from lower-right). Par-5 large.
       points: [
-        { x: 115, y: 48 }, { x: 128, y: 44 }, { x: 142, y: 47 },
-        { x: 152, y: 56 }, { x: 155, y: 68 }, { x: 150, y: 82 },
-        { x: 140, y: 90 }, { x: 126, y: 93 }, { x: 113, y: 88 },
-        { x: 106, y: 76 }, { x: 107, y: 62 }, { x: 110, y: 52 },
+        { x: 105, y: 47 }, { x: 128, y: 43 }, { x: 150, y: 50 },
+        { x: 160, y: 62 }, { x: 152, y: 68 }, { x: 158, y: 77 },
+        { x: 150, y: 85 }, { x: 161, y: 93 }, { x: 140, y: 99 },
+        { x: 118, y: 98 }, { x: 104, y: 90 }, { x: 101, y: 75 },
+        { x: 102, y: 60 },
       ],
     },
     fairwayBoundary: {
@@ -248,12 +268,19 @@ export const PRESET_HOLES: HoleDefinition[] = [
     yardsLength: 370,
     teePosition: { x: 140, y: 560 },
     pinPosition: { x: 260, y: 65 },
+    pinPositions: [
+      { x: 260, y: 65 },
+      { x: 280, y: 48 },
+      { x: 248, y: 74 },
+      { x: 284, y: 44 },
+    ],
     greenBoundary: {
+      // L-Shaped — horizontal arm + upward-right vertical extension. Par-4, ~54×48px.
       points: [
-        { x: 244, y: 44 }, { x: 258, y: 42 }, { x: 272, y: 48 },
-        { x: 280, y: 58 }, { x: 279, y: 72 }, { x: 272, y: 82 },
-        { x: 258, y: 88 }, { x: 244, y: 86 }, { x: 236, y: 76 },
-        { x: 234, y: 64 }, { x: 238, y: 52 },
+        { x: 272, y: 40 }, { x: 288, y: 40 }, { x: 289, y: 42 },
+        { x: 289, y: 86 }, { x: 288, y: 88 }, { x: 237, y: 88 },
+        { x: 235, y: 86 }, { x: 235, y: 58 }, { x: 237, y: 56 },
+        { x: 268, y: 56 },
       ],
     },
     fairwayBoundary: {
@@ -269,7 +296,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
         { x: 130, y: 540 }, { x: 148, y: 485 },
         { x: 170, y: 420 }, { x: 196, y: 355 },
         { x: 218, y: 290 }, { x: 238, y: 220 },
-        { x: 250, y: 155 }, { x: 245, y: 95 },
+        { x: 250, y: 155 }, { x: 230, y: 95 },
         { x: 230, y: 65 },
       ],
     },
@@ -323,14 +350,19 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 3,
     yardsLength: 125,
     teePosition: { x: 200, y: 480 },
-    pinPosition: { x: 200, y: 130 },
+    pinPosition: { x: 200, y: 143 },
+    pinPositions: [
+      { x: 200, y: 143 },
+      { x: 193, y: 120 },
+      { x: 210, y: 136 },
+    ],
     greenBoundary: {
-      // Very small, tight green — kidney-shaped
+      // Circular — r=18, 36×36px. Postage Stamp: smallest par-3 green.
       points: [
-        { x: 191, y: 118 }, { x: 200, y: 115 }, { x: 210, y: 118 },
-        { x: 215, y: 125 }, { x: 214, y: 134 }, { x: 210, y: 141 },
-        { x: 202, y: 145 }, { x: 193, y: 143 }, { x: 187, y: 137 },
-        { x: 185, y: 128 }, { x: 187, y: 122 },
+        { x: 218, y: 130 }, { x: 215, y: 139 }, { x: 208, y: 146 },
+        { x: 200, y: 148 }, { x: 192, y: 146 }, { x: 185, y: 139 },
+        { x: 182, y: 130 }, { x: 185, y: 121 }, { x: 192, y: 114 },
+        { x: 200, y: 112 }, { x: 208, y: 114 }, { x: 215, y: 121 },
       ],
     },
     fairwayBoundary: {
@@ -403,14 +435,22 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 335,
     teePosition: { x: 200, y: 560 },
-    pinPosition: { x: 200, y: 70 },
+    pinPosition: { x: 183, y: 70 },
+    pinPositions: [
+      { x: 183, y: 70 },
+      { x: 218, y: 70 },
+      { x: 200, y: 81 },
+      { x: 220, y: 64 },
+    ],
     greenBoundary: {
-      // Wide, undulating green
+      // Peanut — two lobes (left cx=183 r=14, right cx=218 r=14), neck at center. Par-4, ~58×32px.
       points: [
-        { x: 183, y: 50 }, { x: 195, y: 46 }, { x: 210, y: 48 },
-        { x: 222, y: 55 }, { x: 225, y: 67 }, { x: 221, y: 80 },
-        { x: 212, y: 88 }, { x: 197, y: 92 }, { x: 184, y: 88 },
-        { x: 176, y: 78 }, { x: 175, y: 65 }, { x: 178, y: 55 },
+        { x: 183, y: 54 }, { x: 191, y: 55 }, { x: 200, y: 57 },
+        { x: 209, y: 55 }, { x: 218, y: 54 }, { x: 228, y: 60 },
+        { x: 232, y: 70 }, { x: 228, y: 80 }, { x: 218, y: 86 },
+        { x: 209, y: 85 }, { x: 200, y: 83 }, { x: 190, y: 85 },
+        { x: 183, y: 86 }, { x: 173, y: 80 }, { x: 169, y: 70 },
+        { x: 173, y: 60 },
       ],
     },
     fairwayBoundary: {
@@ -491,14 +531,21 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 5,
     yardsLength: 485,
     teePosition: { x: 120, y: 560 },
-    pinPosition: { x: 280, y: 80 },
+    pinPosition: { x: 268, y: 100 },
+    pinPositions: [
+      { x: 268, y: 100 },
+      { x: 262, y: 70 },
+      { x: 296, y: 62 },
+      { x: 280, y: 58 },
+    ],
     greenBoundary: {
-      // Peninsula green jutting right into water
+      // Kidney — 66×60px, concavity on right facing approach. Par-5 large.
       points: [
-        { x: 265, y: 60 }, { x: 280, y: 56 }, { x: 294, y: 62 },
-        { x: 302, y: 74 }, { x: 300, y: 88 }, { x: 292, y: 98 },
-        { x: 278, y: 103 }, { x: 264, y: 100 }, { x: 255, y: 90 },
-        { x: 252, y: 78 }, { x: 256, y: 66 },
+        { x: 255, y: 55 }, { x: 278, y: 51 }, { x: 303, y: 58 },
+        { x: 311, y: 72 }, { x: 302, y: 76 }, { x: 307, y: 83 },
+        { x: 298, y: 92 }, { x: 306, y: 98 }, { x: 296, y: 108 },
+        { x: 274, y: 112 }, { x: 253, y: 104 }, { x: 248, y: 91 },
+        { x: 247, y: 72 }, { x: 252, y: 58 },
       ],
     },
     fairwayBoundary: {
@@ -567,14 +614,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 360,
     teePosition: { x: 120, y: 560 },
-    pinPosition: { x: 280, y: 70 },
+    pinPosition: { x: 268, y: 86 },
+    pinPositions: [
+      { x: 268, y: 86 },
+      { x: 296, y: 62 },
+      { x: 256, y: 73 },
+      { x: 280, y: 56 },
+    ],
     greenBoundary: {
-      // Elongated green angled toward the dogleg
+      // Irregular — asymmetric organic shape. Par-4, ~54×46px.
       points: [
-        { x: 266, y: 50 }, { x: 280, y: 46 }, { x: 293, y: 52 },
-        { x: 300, y: 64 }, { x: 298, y: 78 }, { x: 290, y: 88 },
-        { x: 276, y: 93 }, { x: 264, y: 90 }, { x: 256, y: 80 },
-        { x: 254, y: 66 }, { x: 258, y: 55 },
+        { x: 270, y: 52 }, { x: 284, y: 49 }, { x: 298, y: 58 },
+        { x: 304, y: 70 }, { x: 300, y: 83 }, { x: 289, y: 92 },
+        { x: 270, y: 95 }, { x: 256, y: 88 }, { x: 250, y: 75 },
+        { x: 253, y: 62 },
       ],
     },
     fairwayBoundary: {
@@ -651,14 +704,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 315,
     teePosition: { x: 200, y: 530 },
-    pinPosition: { x: 200, y: 90 },
+    pinPosition: { x: 200, y: 110 },
+    pinPositions: [
+      { x: 200, y: 110 },
+      { x: 200, y: 90 },
+      { x: 196, y: 70 },
+      { x: 214, y: 90 },
+    ],
     greenBoundary: {
-      // Narrow, elongated green front-to-back
+      // Oblong — tall-narrow (42×54px), rx=21 ry=27. Par-4. Deep front-to-back.
       points: [
-        { x: 189, y: 68 }, { x: 200, y: 64 }, { x: 211, y: 68 },
-        { x: 218, y: 78 }, { x: 219, y: 90 }, { x: 216, y: 102 },
-        { x: 208, y: 110 }, { x: 196, y: 113 }, { x: 185, y: 108 },
-        { x: 180, y: 96 }, { x: 181, y: 84 }, { x: 184, y: 74 },
+        { x: 221, y: 90 }, { x: 218, y: 103 }, { x: 210, y: 113 },
+        { x: 200, y: 117 }, { x: 190, y: 113 }, { x: 182, y: 103 },
+        { x: 179, y: 90 }, { x: 182, y: 77 }, { x: 190, y: 67 },
+        { x: 200, y: 63 }, { x: 210, y: 67 }, { x: 218, y: 77 },
       ],
     },
     fairwayBoundary: {
@@ -730,14 +789,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 3,
     yardsLength: 170,
     teePosition: { x: 220, y: 520 },
-    pinPosition: { x: 220, y: 100 },
+    pinPosition: { x: 226, y: 113 },
+    pinPositions: [
+      { x: 226, y: 113 },
+      { x: 208, y: 112 },
+      { x: 233, y: 92 },
+      { x: 220, y: 87 },
+    ],
     greenBoundary: {
-      // Large, wide green — shallow but wide
+      // Oval — 44×34px, wider than tall (rx=22, ry=17). Par-3 size.
       points: [
-        { x: 200, y: 80 }, { x: 214, y: 76 }, { x: 230, y: 78 },
-        { x: 242, y: 86 }, { x: 246, y: 98 }, { x: 242, y: 110 },
-        { x: 232, y: 118 }, { x: 218, y: 122 }, { x: 204, y: 120 },
-        { x: 194, y: 112 }, { x: 192, y: 100 }, { x: 195, y: 88 },
+        { x: 242, y: 100 }, { x: 239, y: 109 }, { x: 230, y: 115 },
+        { x: 220, y: 117 }, { x: 210, y: 115 }, { x: 201, y: 109 },
+        { x: 198, y: 100 }, { x: 201, y: 91 }, { x: 210, y: 85 },
+        { x: 220, y: 83 }, { x: 230, y: 85 }, { x: 239, y: 91 },
       ],
     },
     fairwayBoundary: {
@@ -804,14 +869,22 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 5,
     yardsLength: 480,
     teePosition: { x: 200, y: 560 },
-    pinPosition: { x: 200, y: 65 },
+    pinPosition: { x: 186, y: 65 },
+    pinPositions: [
+      { x: 186, y: 65 },
+      { x: 220, y: 65 },
+      { x: 185, y: 78 },
+      { x: 222, y: 50 },
+    ],
     greenBoundary: {
-      // Kidney-shaped green tilted right
+      // Peanut — horizontal, two lobes (left cx=185, right cx=220, ry=20). Par-5, ~69×40px.
       points: [
-        { x: 186, y: 46 }, { x: 200, y: 42 }, { x: 215, y: 46 },
-        { x: 224, y: 55 }, { x: 225, y: 68 }, { x: 219, y: 80 },
-        { x: 208, y: 86 }, { x: 193, y: 85 }, { x: 182, y: 78 },
-        { x: 177, y: 66 }, { x: 178, y: 54 },
+        { x: 185, y: 45 }, { x: 194, y: 47 }, { x: 202, y: 52 },
+        { x: 210, y: 47 }, { x: 220, y: 45 }, { x: 233, y: 52 },
+        { x: 237, y: 65 }, { x: 233, y: 78 }, { x: 220, y: 85 },
+        { x: 210, y: 83 }, { x: 202, y: 78 }, { x: 194, y: 83 },
+        { x: 185, y: 85 }, { x: 172, y: 78 }, { x: 168, y: 65 },
+        { x: 172, y: 52 },
       ],
     },
     fairwayBoundary: {
@@ -894,14 +967,21 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 385,
     teePosition: { x: 220, y: 560 },
-    pinPosition: { x: 180, y: 70 },
+    pinPosition: { x: 178, y: 87 },
+    pinPositions: [
+      { x: 178, y: 87 },
+      { x: 163, y: 63 },
+      { x: 196, y: 56 },
+      { x: 188, y: 75 },
+    ],
     greenBoundary: {
-      // Semi-peninsula green — water wraps left and behind
+      // Kidney — 54×48px, concavity on right. Par-4.
       points: [
-        { x: 165, y: 48 }, { x: 180, y: 44 }, { x: 196, y: 48 },
-        { x: 206, y: 58 }, { x: 208, y: 72 }, { x: 203, y: 84 },
-        { x: 192, y: 92 }, { x: 178, y: 94 }, { x: 164, y: 90 },
-        { x: 156, y: 80 }, { x: 155, y: 66 }, { x: 158, y: 55 },
+        { x: 157, y: 52 }, { x: 175, y: 47 }, { x: 198, y: 53 },
+        { x: 207, y: 65 }, { x: 198, y: 68 }, { x: 203, y: 75 },
+        { x: 197, y: 82 }, { x: 207, y: 88 }, { x: 194, y: 94 },
+        { x: 175, y: 95 }, { x: 157, y: 89 }, { x: 153, y: 75 },
+        { x: 153, y: 60 },
       ],
     },
     fairwayBoundary: {
@@ -978,13 +1058,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 365,
     teePosition: { x: 200, y: 560 },
-    pinPosition: { x: 190, y: 65 },
+    pinPosition: { x: 203, y: 79 },
+    pinPositions: [
+      { x: 203, y: 79 },
+      { x: 175, y: 72 },
+      { x: 192, y: 48 },
+      { x: 207, y: 60 },
+    ],
     greenBoundary: {
+      // Oval — 48×44px (rx=24, ry=22). Par-4.
       points: [
-        { x: 175, y: 47 }, { x: 188, y: 43 }, { x: 200, y: 44 },
-        { x: 210, y: 50 }, { x: 213, y: 62 }, { x: 210, y: 75 },
-        { x: 202, y: 83 }, { x: 188, y: 86 }, { x: 176, y: 80 },
-        { x: 170, y: 68 }, { x: 170, y: 55 }, { x: 173, y: 49 },
+        { x: 214, y: 65 }, { x: 211, y: 76 }, { x: 202, y: 84 },
+        { x: 190, y: 87 }, { x: 178, y: 84 }, { x: 169, y: 76 },
+        { x: 166, y: 65 }, { x: 169, y: 54 }, { x: 178, y: 46 },
+        { x: 190, y: 43 }, { x: 202, y: 46 }, { x: 211, y: 54 },
       ],
     },
     fairwayBoundary: {
@@ -999,7 +1086,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
         { x: 172, y: 500 }, { x: 168, y: 440 },
         { x: 162, y: 370 }, { x: 155, y: 300 },
         { x: 160, y: 230 }, { x: 170, y: 160 },
-        { x: 178, y: 95 }, { x: 175, y: 65 },
+        { x: 178, y: 95 }, { x: 160, y: 65 },
       ],
     },
     waterHazards: [],
@@ -1041,13 +1128,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 3,
     yardsLength: 160,
     teePosition: { x: 200, y: 500 },
-    pinPosition: { x: 210, y: 130 },
+    pinPosition: { x: 208, y: 143 },
+    pinPositions: [
+      { x: 208, y: 143 },
+      { x: 196, y: 128 },
+      { x: 222, y: 122 },
+      { x: 208, y: 120 },
+    ],
     greenBoundary: {
+      // Irregular — asymmetric, organic. Par-3, 44×36px.
       points: [
-        { x: 193, y: 112 }, { x: 206, y: 108 }, { x: 218, y: 110 },
-        { x: 228, y: 118 }, { x: 232, y: 130 }, { x: 228, y: 143 },
-        { x: 220, y: 152 }, { x: 207, y: 155 }, { x: 194, y: 150 },
-        { x: 188, y: 140 }, { x: 187, y: 125 }, { x: 190, y: 115 },
+        { x: 202, y: 115 }, { x: 215, y: 114 }, { x: 227, y: 122 },
+        { x: 230, y: 133 }, { x: 225, y: 144 }, { x: 214, y: 150 },
+        { x: 200, y: 148 }, { x: 190, y: 142 }, { x: 186, y: 132 },
+        { x: 188, y: 121 },
       ],
     },
     fairwayBoundary: {
@@ -1103,13 +1197,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 5,
     yardsLength: 505,
     teePosition: { x: 200, y: 565 },
-    pinPosition: { x: 185, y: 55 },
+    pinPosition: { x: 200, y: 48 },
+    pinPositions: [
+      { x: 200, y: 48 },
+      { x: 168, y: 74 },
+      { x: 206, y: 74 },
+      { x: 202, y: 40 },
+    ],
     greenBoundary: {
+      // L-Shaped — vertical arm top-right + horizontal arm lower-left. Par-5, 59×54px.
       points: [
-        { x: 168, y: 38 }, { x: 182, y: 33 }, { x: 196, y: 35 },
-        { x: 206, y: 42 }, { x: 210, y: 55 }, { x: 206, y: 68 },
-        { x: 198, y: 76 }, { x: 184, y: 79 }, { x: 170, y: 74 },
-        { x: 163, y: 63 }, { x: 162, y: 50 }, { x: 165, y: 40 },
+        { x: 186, y: 34 }, { x: 218, y: 34 }, { x: 220, y: 36 },
+        { x: 220, y: 86 }, { x: 218, y: 88 }, { x: 163, y: 88 },
+        { x: 161, y: 86 }, { x: 161, y: 60 }, { x: 163, y: 58 },
+        { x: 184, y: 58 },
       ],
     },
     fairwayBoundary: {
@@ -1176,13 +1277,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 350,
     teePosition: { x: 200, y: 560 },
-    pinPosition: { x: 205, y: 70 },
+    pinPosition: { x: 205, y: 88 },
+    pinPositions: [
+      { x: 205, y: 88 },
+      { x: 220, y: 68 },
+      { x: 205, y: 52 },
+      { x: 190, y: 72 },
+    ],
     greenBoundary: {
+      // Oblong — tall-narrow (40×54px, rx=20 ry=27). Par-4. Deep front-to-back.
       points: [
-        { x: 190, y: 52 }, { x: 202, y: 48 }, { x: 214, y: 50 },
-        { x: 222, y: 58 }, { x: 224, y: 70 }, { x: 221, y: 82 },
-        { x: 213, y: 90 }, { x: 200, y: 93 }, { x: 188, y: 89 },
-        { x: 182, y: 78 }, { x: 182, y: 64 }, { x: 186, y: 54 },
+        { x: 225, y: 70 }, { x: 222, y: 84 }, { x: 214, y: 94 },
+        { x: 205, y: 97 }, { x: 196, y: 94 }, { x: 188, y: 84 },
+        { x: 185, y: 70 }, { x: 188, y: 56 }, { x: 196, y: 46 },
+        { x: 205, y: 43 }, { x: 214, y: 46 }, { x: 222, y: 56 },
       ],
     },
     fairwayBoundary: {
@@ -1239,13 +1347,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 375,
     teePosition: { x: 280, y: 560 },
-    pinPosition: { x: 140, y: 65 },
+    pinPosition: { x: 150, y: 77 },
+    pinPositions: [
+      { x: 150, y: 77 },
+      { x: 122, y: 75 },
+      { x: 148, y: 52 },
+      { x: 132, y: 86 },
+    ],
     greenBoundary: {
+      // Irregular — asymmetric, organic. Par-4, 52×47px.
       points: [
-        { x: 124, y: 48 }, { x: 137, y: 43 }, { x: 150, y: 45 },
-        { x: 160, y: 52 }, { x: 163, y: 65 }, { x: 159, y: 78 },
-        { x: 150, y: 85 }, { x: 137, y: 88 }, { x: 125, y: 83 },
-        { x: 118, y: 72 }, { x: 118, y: 58 }, { x: 121, y: 50 },
+        { x: 130, y: 44 }, { x: 145, y: 42 }, { x: 158, y: 51 },
+        { x: 164, y: 64 }, { x: 160, y: 78 }, { x: 148, y: 87 },
+        { x: 133, y: 89 }, { x: 118, y: 83 }, { x: 117, y: 70 },
+        { x: 116, y: 57 }, { x: 125, y: 47 },
       ],
     },
     fairwayBoundary: {
@@ -1306,13 +1421,20 @@ export const PRESET_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 395,
     teePosition: { x: 200, y: 565 },
-    pinPosition: { x: 195, y: 55 },
+    pinPosition: { x: 195, y: 72 },
+    pinPositions: [
+      { x: 195, y: 72 },
+      { x: 214, y: 55 },
+      { x: 177, y: 55 },
+      { x: 195, y: 40 },
+    ],
     greenBoundary: {
+      // Oval — 54×48px (rx=27, ry=24). Par-4. Generous oval finisher.
       points: [
-        { x: 178, y: 38 }, { x: 192, y: 33 }, { x: 206, y: 35 },
-        { x: 216, y: 42 }, { x: 220, y: 55 }, { x: 216, y: 68 },
-        { x: 208, y: 76 }, { x: 194, y: 80 }, { x: 180, y: 75 },
-        { x: 173, y: 64 }, { x: 172, y: 50 }, { x: 175, y: 40 },
+        { x: 222, y: 55 }, { x: 218, y: 67 }, { x: 209, y: 76 },
+        { x: 195, y: 79 }, { x: 182, y: 76 }, { x: 172, y: 67 },
+        { x: 168, y: 55 }, { x: 172, y: 43 }, { x: 182, y: 34 },
+        { x: 195, y: 31 }, { x: 209, y: 34 }, { x: 218, y: 43 },
       ],
     },
     fairwayBoundary: {

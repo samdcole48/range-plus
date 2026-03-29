@@ -43,6 +43,8 @@ export function getScoreLabel(strokes: number, par: number): string {
 }
 
 export function createGameState(hole: HoleDefinition): GameState {
+  const idx = Math.floor(Math.random() * hole.pinPositions.length);
+  const activePinPosition = { ...hole.pinPositions[idx] };
   return {
     hole,
     ballPosition: { ...hole.teePosition },
@@ -50,6 +52,7 @@ export function createGameState(hole: HoleDefinition): GameState {
     isComplete: false,
     shotHistory: [{ ...hole.teePosition }],
     puttCount: 0,
+    activePinPosition,
   };
 }
 
@@ -62,10 +65,10 @@ export function placeShot(state: GameState, target: Point): GameState {
     const putts = 2;
     return {
       ...state,
-      ballPosition: { ...state.hole.pinPosition },
+      ballPosition: { ...state.activePinPosition },
       strokeCount: state.strokeCount + 1 + putts,
       isComplete: true,
-      shotHistory: [...state.shotHistory, { ...target }, { ...state.hole.pinPosition }],
+      shotHistory: [...state.shotHistory, { ...target }, { ...state.activePinPosition }],
       puttCount: putts,
     };
   }
