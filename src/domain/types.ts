@@ -17,6 +17,24 @@ export interface TreeCluster {
   radius: number;
 }
 
+export interface Rock {
+  position: Point;
+  width: number;   // 4–12px
+  height: number;  // 3–8px
+  rotation: number; // degrees, for visual variety
+}
+
+export interface Bush {
+  position: Point;
+  radius: number;  // 4–8px
+}
+
+export interface FlowerBed {
+  position: Point;
+  radius: number;  // 3–6px
+  color: string;   // CSS color (e.g., '#e87da0', '#f5e642')
+}
+
 export interface Bunker {
   boundary: Polygon;
 }
@@ -36,6 +54,9 @@ export interface HoleDefinition {
   yardsLength: number;
   bunkers?: Bunker[];
   trees?: TreeCluster[];
+  rocks?: Rock[];
+  bushes?: Bush[];
+  flowerBeds?: FlowerBed[];
 }
 
 export interface GameState {
