@@ -237,3 +237,78 @@
 | QUIRK-DATA-001 | `getRandomHole` uses `Math.random()` — not seeded | Non-deterministic; hard to test exhaustively |
 | QUIRK-DATA-002 | No validation that water hazard drop zones are on dry land | Drop zone could theoretically be inside another hazard |
 | QUIRK-DATA-003 | Hole yardages are declarations, not computed from geometry | Mismatch between declared yards and pixel distance is possible |
+
+---
+
+## Decorative Visual Elements (Added: CHG-VIS-001 through CHG-VIS-008)
+
+> **Added:** 2026-03-29 via `enhance-hole-visuals` change proposal
+
+### Requirement: Each hole has dense tree coverage
+
+#### Scenario: CHG-VIS-001 — Each hole has ≥25 trees
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** `trees.length` is checked
+- **THEN** the count is ≥ 25
+- **AND** all tree radii are ≥ 6 and ≤ 18px
+
+### Requirement: Each hole has rock clusters
+
+#### Scenario: CHG-VIS-002 — Each hole has rocks array with ≥3 entries
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** `rocks.length` is checked
+- **THEN** the count is ≥ 3
+
+#### Scenario: CHG-VIS-004 — Rock data validity
+- **GIVEN** each rock on each hole
+- **WHEN** position, width, height, rotation are inspected
+- **THEN** position.x is 0–400, position.y is 0–600, width > 0, height > 0, rotation is a number
+
+### Requirement: Each hole has bush/shrub clusters
+
+#### Scenario: CHG-VIS-003 — Each hole has bushes array with ≥3 entries
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** `bushes.length` is checked
+- **THEN** the count is ≥ 3
+
+#### Scenario: CHG-VIS-005 — Bush data validity
+- **GIVEN** each bush on each hole
+- **WHEN** position and radius are inspected
+- **THEN** position.x is 0–400, position.y is 0–600, radius > 0
+
+### Requirement: Flower beds appear on 3–4 specialty holes only
+
+#### Scenario: CHG-VIS-006 — FlowerBeds exist on 3–4 holes
+- **GIVEN** all holes in `PRESET_HOLES`
+- **WHEN** holes with non-empty `flowerBeds` are counted
+- **THEN** the count is 3 or 4
+- **AND** the specialty holes are: The Welcome (#1), Azalea (#3), Cypress Point (#14), The Finish Line (#18)
+
+#### Scenario: CHG-VIS-007 — FlowerBed data validity
+- **GIVEN** each flower bed on each hole that has them
+- **WHEN** position, radius, color are inspected
+- **THEN** position is within viewBox, radius > 0, color is a non-empty string
+
+### New Type Definitions
+
+```typescript
+interface Rock {
+  position: Point;
+  width: number;   // 4–12px
+  height: number;  // 3–8px
+  rotation: number; // degrees, for visual variety
+}
+
+interface Bush {
+  position: Point;
+  radius: number;  // 4–8px
+}
+
+interface FlowerBed {
+  position: Point;
+  radius: number;  // 3–6px
+  color: string;   // CSS color (e.g., '#e87da0', '#f5e642')
+}
+```
+
+All fields added as optional to `HoleDefinition`: `rocks?`, `bushes?`, `flowerBeds?`.

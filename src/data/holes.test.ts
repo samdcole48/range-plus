@@ -194,6 +194,111 @@ describe('Green design — CHG-GREEN-011 (pins not at centroid)', () => {
   });
 });
 
+// ─── Visual Enhancement Tests (CHG-VIS-001 through CHG-VIS-008) ─────────────
+
+describe('Decorative visuals — CHG-VIS-001 (dense trees)', () => {
+  it('every hole has at least 25 trees', () => {
+    for (const hole of PRESET_HOLES) {
+      expect(
+        (hole.trees ?? []).length,
+        `${hole.name} must have ≥25 trees`
+      ).toBeGreaterThanOrEqual(25);
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-003 (bushes present)', () => {
+  it('every hole has a bushes array with at least 3 entries', () => {
+    for (const hole of PRESET_HOLES) {
+      expect(hole.bushes, `${hole.name} must have bushes array`).toBeDefined();
+      expect(
+        (hole.bushes ?? []).length,
+        `${hole.name} must have ≥3 bushes`
+      ).toBeGreaterThanOrEqual(3);
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-005 (bush validity)', () => {
+  it('each bush has valid position (0-400, 0-600) and positive radius', () => {
+    for (const hole of PRESET_HOLES) {
+      for (const bush of (hole.bushes ?? [])) {
+        expect(bush.position.x, `${hole.name} bush.x`).toBeGreaterThanOrEqual(0);
+        expect(bush.position.x, `${hole.name} bush.x`).toBeLessThanOrEqual(400);
+        expect(bush.position.y, `${hole.name} bush.y`).toBeGreaterThanOrEqual(0);
+        expect(bush.position.y, `${hole.name} bush.y`).toBeLessThanOrEqual(600);
+        expect(bush.radius, `${hole.name} bush.radius`).toBeGreaterThan(0);
+      }
+    }
+  });
+});
+
+describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
+  it('all tree radii are between 6 and 18px inclusive', () => {
+    for (const hole of PRESET_HOLES) {
+      for (const tree of (hole.trees ?? [])) {
+        expect(tree.radius, `${hole.name} tree.radius`).toBeGreaterThanOrEqual(6);
+        expect(tree.radius, `${hole.name} tree.radius`).toBeLessThanOrEqual(18);
+      }
+    }
+  });
+});
+
+// ─── Refine Hole Visuals Tests (CHG-REF-001 through CHG-REF-003) ─────────────
+
+describe('Refined visuals — CHG-REF-001 (no rocks)', () => {
+  it('CHG-REF-001: no hole has a rocks array', () => {
+    for (const hole of PRESET_HOLES) {
+      expect((hole as unknown as Record<string, unknown>).rocks, `${hole.name} must have no rocks`).toBeUndefined();
+    }
+  });
+});
+
+it('CHG-REF-002: no hole has flowerBeds', () => {
+  PRESET_HOLES.forEach(hole => {
+    expect((hole as unknown as Record<string, unknown>).flowerBeds).toBeUndefined();
+  });
+});
+
+it('CHG-YRD-001: at least 80% of trees are within 50 yards of fairway edges', () => {
+  PRESET_HOLES.forEach(hole => {
+    const pixelDist = Math.hypot(
+      hole.teePosition.x - hole.pinPosition.x,
+      hole.teePosition.y - hole.pinPosition.y
+    );
+    const pxPerYard = pixelDist / hole.yardsLength;
+    const thresholdPx = 50 * pxPerYard;
+
+    const fairwayXs = hole.fairwayBoundary.points.map(p => p.x);
+    const minX = Math.min(...fairwayXs);
+    const maxX = Math.max(...fairwayXs);
+
+    const trees = hole.trees ?? [];
+    const passing = trees.filter(t =>
+      t.position.x >= minX - thresholdPx &&
+      t.position.x <= maxX + thresholdPx
+    );
+    const ratio = passing.length / trees.length;
+    expect(ratio, `${hole.name}: only ${Math.round(ratio * 100)}% of trees within 50 yards of fairway`).toBeGreaterThanOrEqual(0.8);
+  });
+});
+
+it('CHG-REF-003: at least 80% of trees are within 80px of fairway bounding box X edges', () => {
+  PRESET_HOLES.forEach(hole => {
+    const fairwayXs = hole.fairwayBoundary.points.map(p => p.x);
+    const minX = Math.min(...fairwayXs);
+    const maxX = Math.max(...fairwayXs);
+
+    const trees = hole.trees ?? [];
+    const nearFairway = trees.filter(tree =>
+      tree.position.x <= minX + 80 || tree.position.x >= maxX - 80
+    );
+
+    const ratio = nearFairway.length / trees.length;
+    expect(ratio, `${hole.name} tree proximity ratio`).toBeGreaterThanOrEqual(0.8);
+  });
+});
+
 describe('getRandomHole', () => {
   it('returns a hole from the presets', () => {
     const hole = getRandomHole();

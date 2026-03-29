@@ -183,6 +183,12 @@ export function HoleView({ hole }: HoleViewProps) {
           <filter id="waterShimmer" x="-5%" y="-5%" width="110%" height="110%">
             <feDropShadow dx="0" dy="0" stdDeviation="3" floodColor="rgba(52,152,219,0.4)" />
           </filter>
+
+          {/* Bush gradient */}
+          <radialGradient id="bushGrad" cx="40%" cy="30%" r="70%">
+            <stop offset="0%" stopColor="#8bc34a" />
+            <stop offset="100%" stopColor="#558b2f" />
+          </radialGradient>
         </defs>
 
         {/* === LAYER 1: Rough background === */}
@@ -246,6 +252,20 @@ export function HoleView({ hole }: HoleViewProps) {
               fill="rgba(255,255,255,0.15)"
             />
           </g>
+        ))}
+
+        {/* === LAYER 4c: Bushes — decorative, no gameplay impact === */}
+        {(hole.bushes ?? []).map((bush, i) => (
+          <circle
+            key={`bush-${i}`}
+            data-testid="bush"
+            cx={bush.position.x}
+            cy={bush.position.y}
+            r={bush.radius}
+            fill="url(#bushGrad)"
+            stroke="#4a7a2a"
+            strokeWidth="0.5"
+          />
         ))}
 
         {/* === LAYER 5: Green with shadow === */}

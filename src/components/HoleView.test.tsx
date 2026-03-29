@@ -446,3 +446,17 @@ describe('HoleView', () => {
     expect(screen.getByTestId('final-strokes')).toHaveTextContent(/\d+ Strokes/);
   });
 });
+
+// ─── Rendering tests for decorative elements (CHG-VIS-010) ──
+
+describe('Decorative rendering — CHG-VIS-010 (bushes)', () => {
+  it('renders bush elements when hole has bushes', () => {
+    // PRESET_HOLES[0] (The Welcome) has bushes
+    const holeWithBushes = PRESET_HOLES[0];
+    expect((holeWithBushes.bushes ?? []).length).toBeGreaterThan(0);
+    render(<HoleView hole={holeWithBushes} />);
+    const bushes = document.querySelectorAll('[data-testid="bush"]');
+    expect(bushes.length).toBeGreaterThan(0);
+    expect(bushes.length).toBe((holeWithBushes.bushes ?? []).length);
+  });
+});

@@ -17,6 +17,11 @@ export interface TreeCluster {
   radius: number;
 }
 
+export interface Bush {
+  position: Point;
+  radius: number;  // 4–8px
+}
+
 export interface Bunker {
   boundary: Polygon;
 }
@@ -36,6 +41,7 @@ export interface HoleDefinition {
   yardsLength: number;
   bunkers?: Bunker[];
   trees?: TreeCluster[];
+  bushes?: Bush[];
 }
 
 export interface GameState {
