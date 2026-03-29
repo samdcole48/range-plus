@@ -51,6 +51,15 @@ describe('createGameState', () => {
     expect(distance).toBeGreaterThan(0);
   });
 
+  it('placeShot on green records activePinPosition as final shotHistory entry', () => {
+    const state = createGameState(testHole);
+    // greenSpot is on the green (30-70, 30-70) but not at the pin (50, 50)
+    const greenSpot: Point = { x: 65, y: 65 };
+    const next = placeShot(state, greenSpot);
+    const lastShot = next.shotHistory[next.shotHistory.length - 1];
+    expect(lastShot).toEqual(state.activePinPosition);
+  });
+
   it('creates initial state with ball on tee', () => {
     const state = createGameState(testHole);
     expect(state.ballPosition).toEqual(testHole.teePosition);
