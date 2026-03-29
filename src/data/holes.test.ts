@@ -260,6 +260,22 @@ it('CHG-REF-002: no hole has flowerBeds', () => {
   });
 });
 
+it('CHG-REF-003: at least 80% of trees are within 80px of fairway bounding box X edges', () => {
+  PRESET_HOLES.forEach(hole => {
+    const fairwayXs = hole.fairwayBoundary.points.map(p => p.x);
+    const minX = Math.min(...fairwayXs);
+    const maxX = Math.max(...fairwayXs);
+
+    const trees = hole.trees ?? [];
+    const nearFairway = trees.filter(tree =>
+      tree.position.x <= minX + 80 || tree.position.x >= maxX - 80
+    );
+
+    const ratio = nearFairway.length / trees.length;
+    expect(ratio, `${hole.name} tree proximity ratio`).toBeGreaterThanOrEqual(0.8);
+  });
+});
+
 describe('getRandomHole', () => {
   it('returns a hole from the presets', () => {
     const hole = getRandomHole();
