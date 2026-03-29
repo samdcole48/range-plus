@@ -11,6 +11,16 @@ function tapToPlace(svg: Element, clientX: number, clientY: number) {
 }
 
 describe('HoleView', () => {
+  it('renders the pin at one of the hole pinPositions coordinates', () => {
+    render(<HoleView hole={hole} />);
+    const pin = document.querySelector('[data-testid="pin"]');
+    expect(pin).toBeInTheDocument();
+    const cx = Number(pin?.getAttribute('cx'));
+    const cy = Number(pin?.getAttribute('cy'));
+    const matchesAPin = hole.pinPositions.some(p => p.x === cx && p.y === cy);
+    expect(matchesAPin).toBe(true);
+  });
+
   it('renders the SVG course canvas', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg');
