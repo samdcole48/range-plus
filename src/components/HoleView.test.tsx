@@ -161,6 +161,20 @@ describe('HoleView', () => {
     expect(highlight).toBeInTheDocument();
   });
 
+  it('landing zone highlight is always a polygon (never a circle)', () => {
+    render(<HoleView hole={hole} />);
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+
+    // Land on green close to pin — previously showed a circle, now always a polygon
+    tapToPlace(svg, 200, 60);
+
+    const highlight = document.querySelector('[data-testid="green-landing-zone"]');
+    // Per REMOVE-1PUTT-05: always a polygon element, not a circle
+    expect(highlight?.tagName.toLowerCase()).toBe('polygon');
+  });
+
   it('does not show shot tracer before hole is complete', () => {
     render(<HoleView hole={hole} />);
     const svg = document.querySelector('svg')!;

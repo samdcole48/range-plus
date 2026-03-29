@@ -413,25 +413,13 @@ export function HoleView({ hole }: HoleViewProps) {
         {gameState.isComplete && gameState.shotHistory.length > 1 && (
           <g>
             {/* Green landing zone highlight */}
-            {gameState.landedInOnePuttZone ? (
-              <circle
-                data-testid="green-landing-zone"
-                cx={hole.pinPosition.x}
-                cy={hole.pinPosition.y}
-                r={onePuttRadiusPx}
-                fill="rgba(233, 69, 96, 0.3)"
-                stroke="#e94560"
-                strokeWidth="1.5"
-              />
-            ) : (
-              <polygon
-                data-testid="green-landing-zone"
-                points={polygonToSvgPoints(hole.greenBoundary.points)}
-                fill="rgba(241, 196, 15, 0.25)"
-                stroke="rgba(241, 196, 15, 0.6)"
-                strokeWidth="1.5"
-              />
-            )}
+            <polygon
+              data-testid="green-landing-zone"
+              points={polygonToSvgPoints(hole.greenBoundary.points)}
+              fill="rgba(241, 196, 15, 0.25)"
+              stroke="rgba(241, 196, 15, 0.6)"
+              strokeWidth="1.5"
+            />
 
             {/* Tracer lines */}
             {gameState.shotHistory.slice(0, -1).map((from, i) => {
