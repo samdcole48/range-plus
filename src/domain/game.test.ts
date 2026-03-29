@@ -46,7 +46,12 @@ describe('createGameState', () => {
     expect(state.isComplete).toBe(false);
     expect(state.hole).toBe(testHole);
     expect(state.shotHistory).toEqual([testHole.teePosition]);
-    expect(state.landedInOnePuttZone).toBe(false);
+  });
+
+  it('does not include landedInOnePuttZone on initial state', () => {
+    const state = createGameState(testHole);
+    // Per REMOVE-1PUTT-04: field should not exist on GameState
+    expect('landedInOnePuttZone' in state).toBe(false);
   });
 
   it('initializes puttCount to 0', () => {

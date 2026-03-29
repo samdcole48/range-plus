@@ -49,7 +49,6 @@ export function createGameState(hole: HoleDefinition): GameState {
     strokeCount: 0,
     isComplete: false,
     shotHistory: [{ ...hole.teePosition }],
-    landedInOnePuttZone: false,
     puttCount: 0,
   };
 }
@@ -67,7 +66,6 @@ export function placeShot(state: GameState, target: Point): GameState {
       strokeCount: state.strokeCount + 1 + putts,
       isComplete: true,
       shotHistory: [...state.shotHistory, { ...target }, { ...state.hole.pinPosition }],
-      landedInOnePuttZone: false,
       puttCount: putts,
     };
   }
