@@ -4,6 +4,7 @@ import { getRandomHole } from './holeSelection';
 import { isPointInPolygon } from '../domain/game';
 import type { Point } from '../domain/types';
 import { THE_STARTER } from './courses/the-starter';
+import { ALL_COURSES, ALL_HOLES } from './courses';
 
 function getBoundingBox(points: Point[]): { minX: number; maxX: number; minY: number; maxY: number } {
   return {
@@ -312,6 +313,17 @@ describe('getRandomHole', () => {
       const next = getRandomHole(current);
       expect(next).not.toBe(current);
     }
+  });
+});
+
+describe('CHG-COURSE-007 — courses barrel', () => {
+  it('ALL_COURSES contains both courses and ALL_HOLES combines all holes', () => {
+    expect(ALL_COURSES).toHaveLength(2);
+    expect(ALL_COURSES[0].id).toBe('the-starter');
+    expect(ALL_COURSES[1].id).toBe('black-jacks-crossing');
+    expect(ALL_HOLES.length).toBe(
+      ALL_COURSES.reduce((sum, c) => sum + c.holes.length, 0)
+    );
   });
 });
 
