@@ -460,3 +460,71 @@ describe('Decorative rendering — CHG-VIS-010 (bushes)', () => {
     expect(bushes.length).toBe((holeWithBushes.bushes ?? []).length);
   });
 });
+
+// ─── Task 24 — CHG-COURSE-024: Desert rough background ────────────────────────
+
+import { BLACK_JACKS_CROSSING } from '../data/courses/black-jacks-crossing';
+
+const desertHole = BLACK_JACKS_CROSSING.holes[0]; // The Outpost
+
+describe('Desert rendering — CHG-COURSE-024 (sandy rough)', () => {
+  it('renders desert-rough background element for desert-theme hole', () => {
+    render(<HoleView hole={desertHole} />);
+    const desertRough = document.querySelector('[data-testid="desert-rough"]');
+    expect(desertRough).toBeInTheDocument();
+  });
+
+  it('does NOT render desert-rough for classic-theme hole', () => {
+    render(<HoleView hole={hole} />);
+    const desertRough = document.querySelector('[data-testid="desert-rough"]');
+    expect(desertRough).not.toBeInTheDocument();
+  });
+});
+
+// ─── Task 25 — CHG-COURSE-025: Rocks rendered as SVG circles ─────────────────
+
+describe('Desert rendering — CHG-COURSE-025 (rocks)', () => {
+  it('renders rock circle elements for each rock on a desert hole', () => {
+    render(<HoleView hole={desertHole} />);
+    const rocks = document.querySelectorAll('[data-testid="rock"]');
+    expect(rocks.length).toBe((desertHole.rocks ?? []).length);
+    expect(rocks.length).toBeGreaterThan(0);
+  });
+
+  it('renders no rock elements for a classic hole', () => {
+    render(<HoleView hole={hole} />);
+    const rocks = document.querySelectorAll('[data-testid="rock"]');
+    expect(rocks.length).toBe(0);
+  });
+});
+
+// ─── Task 26 — CHG-COURSE-026: Boulders rendered as SVG polygons ─────────────
+
+describe('Desert rendering — CHG-COURSE-026 (boulders)', () => {
+  it('renders boulder polygon elements for each boulder on a desert hole', () => {
+    render(<HoleView hole={desertHole} />);
+    const boulders = document.querySelectorAll('[data-testid="boulder"]');
+    expect(boulders.length).toBe((desertHole.boulders ?? []).length);
+    expect(boulders.length).toBeGreaterThan(0);
+  });
+
+  it('renders no boulder elements for a classic hole', () => {
+    render(<HoleView hole={hole} />);
+    const boulders = document.querySelectorAll('[data-testid="boulder"]');
+    expect(boulders.length).toBe(0);
+  });
+});
+
+// ─── Task 27 — CHG-COURSE-027: Classic holes still render green rough ─────────
+
+describe('Desert rendering — CHG-COURSE-027 (classic regression)', () => {
+  it('classic hole renders the standard green rough background', () => {
+    render(<HoleView hole={hole} />);
+    // Classic rough is a plain rect without the desert-rough testid
+    const svg = document.querySelector('svg');
+    expect(svg).toBeInTheDocument();
+    // The classic rough rect should exist (background layer)
+    const rects = svg?.querySelectorAll('rect');
+    expect(rects && rects.length).toBeGreaterThan(0);
+  });
+});
