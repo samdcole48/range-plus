@@ -30,13 +30,13 @@ describe('PRESET_HOLES', () => {
     expect(PRESET_HOLES.length).toBeGreaterThanOrEqual(6);
   });
 
-  it('has exactly 18 holes', () => {
-    expect(PRESET_HOLES.length).toBe(18);
+  it('has exactly 36 holes', () => {
+    expect(PRESET_HOLES.length).toBe(36);
   });
 
-  it('totals par 72', () => {
+  it('totals par 144', () => {
     const total = PRESET_HOLES.reduce((sum, h) => sum + h.par, 0);
-    expect(total).toBe(72);
+    expect(total).toBe(144);
   });
 
   it('includes a mix of par 3, 4, and 5', () => {
@@ -46,19 +46,19 @@ describe('PRESET_HOLES', () => {
     expect(pars.has(5)).toBe(true);
   });
 
-  it('has 4 par-3 holes', () => {
+  it('has 8 par-3 holes', () => {
     const par3s = PRESET_HOLES.filter((h) => h.par === 3);
-    expect(par3s.length).toBe(4);
+    expect(par3s.length).toBe(8);
   });
 
-  it('has 10 par-4 holes', () => {
+  it('has 20 par-4 holes', () => {
     const par4s = PRESET_HOLES.filter((h) => h.par === 4);
-    expect(par4s.length).toBe(10);
+    expect(par4s.length).toBe(20);
   });
 
-  it('has 4 par-5 holes', () => {
+  it('has 8 par-5 holes', () => {
     const par5s = PRESET_HOLES.filter((h) => h.par === 5);
-    expect(par5s.length).toBe(4);
+    expect(par5s.length).toBe(8);
   });
 
   it('each hole has a unique id', () => {
@@ -66,10 +66,12 @@ describe('PRESET_HOLES', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('total course yardage is between 6,000 and 6,400 yards', () => {
-    const total = PRESET_HOLES.reduce((sum, h) => sum + h.yardsLength, 0);
-    expect(total).toBeGreaterThanOrEqual(6000);
-    expect(total).toBeLessThanOrEqual(6400);
+  it('each course yardage is between 6,000 and 6,400 yards', () => {
+    for (const course of ALL_COURSES) {
+      const total = course.holes.reduce((sum, h) => sum + h.yardsLength, 0);
+      expect(total, `${course.name} yardage`).toBeGreaterThanOrEqual(6000);
+      expect(total, `${course.name} yardage`).toBeLessThanOrEqual(6400);
+    }
   });
 
   it('each hole has realistic yardage for its par', () => {
@@ -199,8 +201,9 @@ describe('Green design — CHG-GREEN-011 (pins not at centroid)', () => {
 // ─── Visual Enhancement Tests (CHG-VIS-001 through CHG-VIS-008) ─────────────
 
 describe('Decorative visuals — CHG-VIS-001 (dense trees)', () => {
-  it('every hole has at least 25 trees', () => {
-    for (const hole of PRESET_HOLES) {
+  it('every classic hole has at least 25 trees', () => {
+    const classicHoles = PRESET_HOLES.filter(h => h.courseTheme === 'classic');
+    for (const hole of classicHoles) {
       expect(
         (hole.trees ?? []).length,
         `${hole.name} must have ≥25 trees`
@@ -210,8 +213,9 @@ describe('Decorative visuals — CHG-VIS-001 (dense trees)', () => {
 });
 
 describe('Decorative visuals — CHG-VIS-003 (bushes present)', () => {
-  it('every hole has a bushes array with at least 3 entries', () => {
-    for (const hole of PRESET_HOLES) {
+  it('every classic hole has a bushes array with at least 3 entries', () => {
+    const classicHoles = PRESET_HOLES.filter(h => h.courseTheme === 'classic');
+    for (const hole of classicHoles) {
       expect(hole.bushes, `${hole.name} must have bushes array`).toBeDefined();
       expect(
         (hole.bushes ?? []).length,
@@ -222,8 +226,9 @@ describe('Decorative visuals — CHG-VIS-003 (bushes present)', () => {
 });
 
 describe('Decorative visuals — CHG-VIS-005 (bush validity)', () => {
-  it('each bush has valid position (0-400, 0-600) and positive radius', () => {
-    for (const hole of PRESET_HOLES) {
+  it('each classic bush has valid position (0-400, 0-600) and positive radius', () => {
+    const classicHoles = PRESET_HOLES.filter(h => h.courseTheme === 'classic');
+    for (const hole of classicHoles) {
       for (const bush of (hole.bushes ?? [])) {
         expect(bush.position.x, `${hole.name} bush.x`).toBeGreaterThanOrEqual(0);
         expect(bush.position.x, `${hole.name} bush.x`).toBeLessThanOrEqual(400);
@@ -236,8 +241,9 @@ describe('Decorative visuals — CHG-VIS-005 (bush validity)', () => {
 });
 
 describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
-  it('all tree radii are between 6 and 18px inclusive', () => {
-    for (const hole of PRESET_HOLES) {
+  it('all classic tree radii are between 6 and 18px inclusive', () => {
+    const classicHoles = PRESET_HOLES.filter(h => h.courseTheme === 'classic');
+    for (const hole of classicHoles) {
       for (const tree of (hole.trees ?? [])) {
         expect(tree.radius, `${hole.name} tree.radius`).toBeGreaterThanOrEqual(6);
         expect(tree.radius, `${hole.name} tree.radius`).toBeLessThanOrEqual(18);
@@ -249,8 +255,9 @@ describe('Decorative visuals — CHG-VIS-008 (tree radius range)', () => {
 // ─── Refine Hole Visuals Tests (CHG-REF-001 through CHG-REF-003) ─────────────
 
 describe('Refined visuals — CHG-REF-001 (no rocks)', () => {
-  it('CHG-REF-001: no hole has a rocks array', () => {
-    for (const hole of PRESET_HOLES) {
+  it('CHG-REF-001: no classic hole has a rocks array', () => {
+    const classicHoles = PRESET_HOLES.filter(h => h.courseTheme === 'classic');
+    for (const hole of classicHoles) {
       expect((hole as unknown as Record<string, unknown>).rocks, `${hole.name} must have no rocks`).toBeUndefined();
     }
   });
@@ -264,6 +271,9 @@ it('CHG-REF-002: no hole has flowerBeds', () => {
 
 it('CHG-YRD-001: at least 80% of trees are within 50 yards of fairway edges', () => {
   PRESET_HOLES.forEach(hole => {
+    const trees = hole.trees ?? [];
+    if (trees.length === 0) return;  // desert holes have no trees — skip
+
     const pixelDist = Math.hypot(
       hole.teePosition.x - hole.pinPosition.x,
       hole.teePosition.y - hole.pinPosition.y
@@ -275,7 +285,6 @@ it('CHG-YRD-001: at least 80% of trees are within 50 yards of fairway edges', ()
     const minX = Math.min(...fairwayXs);
     const maxX = Math.max(...fairwayXs);
 
-    const trees = hole.trees ?? [];
     const passing = trees.filter(t =>
       t.position.x >= minX - thresholdPx &&
       t.position.x <= maxX + thresholdPx
@@ -287,11 +296,13 @@ it('CHG-YRD-001: at least 80% of trees are within 50 yards of fairway edges', ()
 
 it('CHG-REF-003: at least 80% of trees are within 80px of fairway bounding box X edges', () => {
   PRESET_HOLES.forEach(hole => {
+    const trees = hole.trees ?? [];
+    if (trees.length === 0) return;  // desert holes have no trees — skip
+
     const fairwayXs = hole.fairwayBoundary.points.map(p => p.x);
     const minX = Math.min(...fairwayXs);
     const maxX = Math.max(...fairwayXs);
 
-    const trees = hole.trees ?? [];
     const nearFairway = trees.filter(tree =>
       tree.position.x <= minX + 80 || tree.position.x >= maxX - 80
     );
@@ -344,8 +355,8 @@ describe('CHG-COURSE-009 — getRandomHole with combined pool', () => {
 });
 
 describe('CHG-COURSE-005 — classic course theme', () => {
-  it('every hole has courseTheme of classic', () => {
-    for (const hole of PRESET_HOLES) {
+  it('every The Starter hole has courseTheme of classic', () => {
+    for (const hole of THE_STARTER.holes) {
       expect(hole.courseTheme, `${hole.name} must have courseTheme 'classic'`).toBe('classic');
     }
   });

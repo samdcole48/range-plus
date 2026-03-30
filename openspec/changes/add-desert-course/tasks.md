@@ -2,14 +2,14 @@
 
 > **Spec:** [SPEC.md](./SPEC.md)
 > **Branch:** `feature/add-desert-course`
-> **Status:** 0 of 27 tasks complete
+> **Status:** 23 of 27 tasks complete
 
 ## Progress Summary
 
 | Status | Count |
 |--------|-------|
-| ✅ Done | 0 |
-| 🔲 Pending | 27 |
+| ✅ Done | 23 |
+| 🔲 Pending | 4 |
 | **Total** | **27** |
 
 ---
@@ -31,23 +31,23 @@
 
 ## Phase 3 — Desert Course Data
 
-- [ ] **Task 10** — Create BJC course file with 18 holes → `CHG-COURSE-010` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 11** — Verify BJC par totals 72 → `CHG-COURSE-011` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 12** — Verify BJC par distribution (4/10/4) → `CHG-COURSE-012` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 13** — Verify all BJC holes have `courseTheme: 'desert'` → `CHG-COURSE-013` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 14** — Add rocks to all BJC holes (≥10 per hole) → `CHG-COURSE-014` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 15** — Add boulders to all BJC holes (≥2 per hole) → `CHG-COURSE-015` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 16** — Validate BJC geometry (greens ⊂ fairways, pins ⊂ greens) → `CHG-COURSE-016` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 17** — Validate BJC yardage per par → `CHG-COURSE-017` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 18** — Validate BJC total yardage in range → `CHG-COURSE-018` → `courses/black-jacks-crossing.ts`
-- [ ] **Task 19** — Verify all hole IDs unique across courses → `CHG-COURSE-019` → `holes.test.ts`
-- [ ] **Task 20** — Validate BJC pin positions (3–4 per hole, inside green) → `CHG-COURSE-020` → `courses/black-jacks-crossing.ts`
+- [x] **Task 10** — Create BJC course file with 18 holes → `CHG-COURSE-010` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 11** — Verify BJC par totals 72 → `CHG-COURSE-011` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 12** — Verify BJC par distribution (4/10/4) → `CHG-COURSE-012` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 13** — Verify all BJC holes have `courseTheme: 'desert'` → `CHG-COURSE-013` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 14** — Add rocks to all BJC holes (≥10 per hole) → `CHG-COURSE-014` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 15** — Add boulders to all BJC holes (≥2 per hole) → `CHG-COURSE-015` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 16** — Validate BJC geometry (greens ⊂ fairways, pins ⊂ greens) → `CHG-COURSE-016` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 17** — Validate BJC yardage per par → `CHG-COURSE-017` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 18** — Validate BJC total yardage in range → `CHG-COURSE-018` → `courses/black-jacks-crossing.ts` ✓
+- [x] **Task 19** — Verify all hole IDs unique across courses → `CHG-COURSE-019` → `holes.test.ts` ✓
+- [x] **Task 20** — Validate BJC pin positions (3–4 per hole, inside green) → `CHG-COURSE-020` → `courses/black-jacks-crossing.ts` ✓
 
 ## Phase 4 — Test Adaptation
 
-- [ ] **Task 21** — Update PRESET_HOLES count to 36 → `CHG-COURSE-021` → `holes.test.ts`
-- [ ] **Task 22** — Update combined par total to 144 → `CHG-COURSE-022` → `holes.test.ts`
-- [ ] **Task 23** — Scope "no rocks" test to classic-theme holes only → `CHG-COURSE-023` → `holes.test.ts`
+- [x] **Task 21** — Update PRESET_HOLES count to 36 → `CHG-COURSE-021` → `holes.test.ts` ✓
+- [x] **Task 22** — Update combined par total to 144 → `CHG-COURSE-022` → `holes.test.ts` ✓
+- [x] **Task 23** — Scope "no rocks" test to classic-theme holes only → `CHG-COURSE-023` → `holes.test.ts` ✓
 
 ## Phase 4 — Desert Rendering
 
