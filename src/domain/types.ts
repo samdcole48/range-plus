@@ -56,6 +56,13 @@ export interface HoleDefinition {
   courseTheme?: 'classic' | 'desert';
 }
 
+export interface CourseDefinition {
+  id: string;
+  name: string;
+  theme: 'classic' | 'desert';
+  holes: HoleDefinition[];
+}
+
 export interface GameState {
   hole: HoleDefinition;
   ballPosition: Point;

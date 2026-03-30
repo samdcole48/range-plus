@@ -19,7 +19,7 @@
 - [x] **Task 1** — Add `Rock` interface to types → `CHG-COURSE-001` → `types.ts` ✓
 - [x] **Task 2** — Add `Boulder` interface to types → `CHG-COURSE-002` → `types.ts` ✓
 - [x] **Task 3** — Add `courseTheme` to `HoleDefinition`; add optional `rocks`, `boulders` → `CHG-COURSE-003` → `types.ts` ✓
-- [ ] **Task 4** — Add `CourseDefinition` interface → `CHG-COURSE-004` → `types.ts`
+- [x] **Task 4** — Add `CourseDefinition` interface → `CHG-COURSE-004` → `types.ts` ✓
 
 ## Phase 2 — Data Restructuring
 

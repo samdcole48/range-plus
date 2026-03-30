@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { Rock, Boulder, HoleDefinition } from './types';
+import type { Rock, Boulder, HoleDefinition, CourseDefinition } from './types';
 
 describe('CHG-COURSE-001 — Rock type', () => {
   it('Rock can be constructed with position and radius', () => {
@@ -30,5 +30,20 @@ describe('CHG-COURSE-003 — HoleDefinition desert fields', () => {
     expect(partial.courseTheme).toBe('desert');
     expect(partial.rocks).toHaveLength(1);
     expect(partial.boulders).toHaveLength(1);
+  });
+});
+
+describe('CHG-COURSE-004 — CourseDefinition type', () => {
+  it('CourseDefinition can be constructed with id, name, theme and holes', () => {
+    const course: CourseDefinition = {
+      id: 'test-course',
+      name: 'Test Course',
+      theme: 'classic',
+      holes: [],
+    };
+    expect(course.id).toBe('test-course');
+    expect(course.name).toBe('Test Course');
+    expect(course.theme).toBe('classic');
+    expect(course.holes).toHaveLength(0);
   });
 });
