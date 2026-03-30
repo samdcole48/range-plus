@@ -27,7 +27,7 @@
 - [x] **Task 6** — Create `src/data/courses/the-starter.ts` with `THE_STARTER` course → `CHG-COURSE-006` → `courses/the-starter.ts` ✓
 - [x] **Task 7** — Create `src/data/courses/index.ts` barrel → `CHG-COURSE-007` → `courses/index.ts` ✓
 - [x] **Task 8** — Update `holes.ts` to re-export `ALL_HOLES` as `PRESET_HOLES` → `CHG-COURSE-008` → `holes.ts` ✓
-- [ ] **Task 9** — Verify `getRandomHole` works with combined array → `CHG-COURSE-009` → `holeSelection.ts`
+- [x] **Task 9** — Verify `getRandomHole` works with combined array → `CHG-COURSE-009` → `holeSelection.ts` ✓
 
 ## Phase 3 — Desert Course Data
 

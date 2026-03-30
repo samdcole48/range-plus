@@ -333,6 +333,16 @@ describe('CHG-COURSE-008 — PRESET_HOLES backward compatibility', () => {
   });
 });
 
+describe('CHG-COURSE-009 — getRandomHole with combined pool', () => {
+  it('getRandomHole returns holes from PRESET_HOLES which spans all courses', () => {
+    // Run 50 draws and verify every result is in PRESET_HOLES (ALL_HOLES)
+    for (let i = 0; i < 50; i++) {
+      const hole = getRandomHole();
+      expect(PRESET_HOLES).toContain(hole);
+    }
+  });
+});
+
 describe('CHG-COURSE-005 — classic course theme', () => {
   it('every hole has courseTheme of classic', () => {
     for (const hole of PRESET_HOLES) {
