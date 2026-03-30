@@ -31,6 +31,10 @@ export interface Rock {
   radius: number;  // 3–10px for small/medium desert rocks
 }
 
+export interface Boulder {
+  boundary: Polygon;  // large irregular rock/cliff formation
+}
+
 export interface HoleDefinition {
   id: string;
   name: string;
