@@ -23,7 +23,7 @@
 
 ## Phase 2 — Data Restructuring
 
-- [ ] **Task 5** — Tag all existing holes with `courseTheme: 'classic'` → `CHG-COURSE-005` → `holes.ts`
+- [x] **Task 5** — Tag all existing holes with `courseTheme: 'classic'` → `CHG-COURSE-005` → `holes.ts` ✓
 - [ ] **Task 6** — Create `src/data/courses/the-starter.ts` with `THE_STARTER` course → `CHG-COURSE-006` → `courses/the-starter.ts`
 - [ ] **Task 7** — Create `src/data/courses/index.ts` barrel → `CHG-COURSE-007` → `courses/index.ts`
 - [ ] **Task 8** — Update `holes.ts` to re-export `ALL_HOLES` as `PRESET_HOLES` → `CHG-COURSE-008` → `holes.ts`

@@ -313,3 +313,11 @@ describe('getRandomHole', () => {
     }
   });
 });
+
+describe('CHG-COURSE-005 — classic course theme', () => {
+  it('every hole has courseTheme of classic', () => {
+    for (const hole of PRESET_HOLES) {
+      expect(hole.courseTheme, `${hole.name} must have courseTheme 'classic'`).toBe('classic');
+    }
+  });
+});

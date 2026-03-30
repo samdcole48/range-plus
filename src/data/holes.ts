@@ -17,6 +17,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Welcome',
     par: 4,
     yardsLength: 355,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 200, y: 60 },
     pinPositions: [
@@ -119,6 +120,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Island Green',
     par: 3,
     yardsLength: 145,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 500 },
     pinPosition: { x: 200, y: 134 },
     pinPositions: [
@@ -216,6 +218,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Azalea',
     par: 5,
     yardsLength: 490,
+    courseTheme: 'classic' as const,
     teePosition: { x: 280, y: 560 },
     pinPosition: { x: 130, y: 70 },
     pinPositions: [
@@ -330,6 +333,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Cape',
     par: 4,
     yardsLength: 370,
+    courseTheme: 'classic' as const,
     teePosition: { x: 140, y: 560 },
     pinPosition: { x: 260, y: 65 },
     pinPositions: [
@@ -436,6 +440,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Postage Stamp',
     par: 3,
     yardsLength: 125,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 480 },
     pinPosition: { x: 200, y: 143 },
     pinPositions: [
@@ -540,6 +545,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Fork',
     par: 4,
     yardsLength: 335,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 183, y: 70 },
     pinPositions: [
@@ -659,6 +665,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Peninsula',
     par: 5,
     yardsLength: 485,
+    courseTheme: 'classic' as const,
     teePosition: { x: 120, y: 560 },
     pinPosition: { x: 268, y: 100 },
     pinPositions: [
@@ -765,6 +772,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Bend',
     par: 4,
     yardsLength: 360,
+    courseTheme: 'classic' as const,
     teePosition: { x: 120, y: 560 },
     pinPosition: { x: 268, y: 86 },
     pinPositions: [
@@ -877,6 +885,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Drive',
     par: 4,
     yardsLength: 315,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 530 },
     pinPosition: { x: 200, y: 110 },
     pinPositions: [
@@ -985,6 +994,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Long Iron',
     par: 3,
     yardsLength: 170,
+    courseTheme: 'classic' as const,
     teePosition: { x: 220, y: 520 },
     pinPosition: { x: 226, y: 113 },
     pinPositions: [
@@ -1088,6 +1098,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Creek Valley',
     par: 5,
     yardsLength: 480,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 186, y: 65 },
     pinPositions: [
@@ -1207,6 +1218,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Closer',
     par: 4,
     yardsLength: 385,
+    courseTheme: 'classic' as const,
     teePosition: { x: 220, y: 560 },
     pinPosition: { x: 178, y: 87 },
     pinPositions: [
@@ -1319,6 +1331,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Ridge',
     par: 4,
     yardsLength: 365,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 203, y: 79 },
     pinPositions: [
@@ -1414,6 +1427,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Cypress Point',
     par: 3,
     yardsLength: 160,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 500 },
     pinPosition: { x: 208, y: 143 },
     pinPositions: [
@@ -1512,6 +1526,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: "Eagle's Reach",
     par: 5,
     yardsLength: 505,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 565 },
     pinPosition: { x: 200, y: 48 },
     pinPositions: [
@@ -1617,6 +1632,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Narrows',
     par: 4,
     yardsLength: 350,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 560 },
     pinPosition: { x: 205, y: 88 },
     pinPositions: [
@@ -1708,6 +1724,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'Amen Corner',
     par: 4,
     yardsLength: 375,
+    courseTheme: 'classic' as const,
     teePosition: { x: 280, y: 560 },
     pinPosition: { x: 150, y: 77 },
     pinPositions: [
@@ -1811,6 +1828,7 @@ export const PRESET_HOLES: HoleDefinition[] = [
     name: 'The Finish Line',
     par: 4,
     yardsLength: 395,
+    courseTheme: 'classic' as const,
     teePosition: { x: 200, y: 565 },
     pinPosition: { x: 195, y: 72 },
     pinPositions: [
