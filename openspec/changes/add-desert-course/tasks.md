@@ -2,14 +2,14 @@
 
 > **Spec:** [SPEC.md](./SPEC.md)
 > **Branch:** `feature/add-desert-course`
-> **Status:** 23 of 27 tasks complete
+> **Status:** 27 of 27 tasks complete ✅
 
 ## Progress Summary
 
 | Status | Count |
 |--------|-------|
-| ✅ Done | 23 |
-| 🔲 Pending | 4 |
+| ✅ Done | 27 |
+| 🔲 Pending | 0 |
 | **Total** | **27** |
 
 ---
@@ -51,7 +51,7 @@
 
 ## Phase 4 — Desert Rendering
 
-- [ ] **Task 24** — Add desert rough gradient to HoleView → `CHG-COURSE-024` → `HoleView.tsx`
-- [ ] **Task 25** — Render rocks as SVG circles → `CHG-COURSE-025` → `HoleView.tsx`, `HoleView.test.tsx`
-- [ ] **Task 26** — Render boulders as SVG polygons → `CHG-COURSE-026` → `HoleView.tsx`, `HoleView.test.tsx`
-- [ ] **Task 27** — Verify classic holes still render green rough → `CHG-COURSE-027` → `HoleView.test.tsx`
+- [x] **Task 24** — Add desert rough gradient to HoleView → `CHG-COURSE-024` → `HoleView.tsx`
+- [x] **Task 25** — Render rocks as SVG circles → `CHG-COURSE-025` → `HoleView.tsx`, `HoleView.test.tsx`
+- [x] **Task 26** — Render boulders as SVG polygons → `CHG-COURSE-026` → `HoleView.tsx`, `HoleView.test.tsx`
+- [x] **Task 27** — Verify classic holes still render green rough → `CHG-COURSE-027` → `HoleView.test.tsx`
