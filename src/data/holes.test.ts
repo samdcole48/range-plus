@@ -327,6 +327,12 @@ describe('CHG-COURSE-007 — courses barrel', () => {
   });
 });
 
+describe('CHG-COURSE-008 — PRESET_HOLES backward compatibility', () => {
+  it('PRESET_HOLES equals ALL_HOLES (combined courses)', () => {
+    expect(PRESET_HOLES).toBe(ALL_HOLES);
+  });
+});
+
 describe('CHG-COURSE-005 — classic course theme', () => {
   it('every hole has courseTheme of classic', () => {
     for (const hole of PRESET_HOLES) {
