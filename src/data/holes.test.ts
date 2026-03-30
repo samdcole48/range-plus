@@ -3,6 +3,7 @@ import { PRESET_HOLES } from './holes';
 import { getRandomHole } from './holeSelection';
 import { isPointInPolygon } from '../domain/game';
 import type { Point } from '../domain/types';
+import { THE_STARTER } from './courses/the-starter';
 
 function getBoundingBox(points: Point[]): { minX: number; maxX: number; minY: number; maxY: number } {
   return {
@@ -319,5 +320,14 @@ describe('CHG-COURSE-005 — classic course theme', () => {
     for (const hole of PRESET_HOLES) {
       expect(hole.courseTheme, `${hole.name} must have courseTheme 'classic'`).toBe('classic');
     }
+  });
+});
+
+describe('CHG-COURSE-006 — The Starter course', () => {
+  it('THE_STARTER is a CourseDefinition with name, classic theme, and 18 holes', () => {
+    expect(THE_STARTER.id).toBe('the-starter');
+    expect(THE_STARTER.name).toBe('The Starter');
+    expect(THE_STARTER.theme).toBe('classic');
+    expect(THE_STARTER.holes).toHaveLength(18);
   });
 });
