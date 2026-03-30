@@ -325,6 +325,12 @@ describe('getRandomHole', () => {
       expect(next).not.toBe(current);
     }
   });
+
+  it('falls back to the pool when all candidates are excluded (single-item pool)', () => {
+    const singleHole = PRESET_HOLES[0];
+    const result = getRandomHole(singleHole, [singleHole]);
+    expect(result).toBe(singleHole);
+  });
 });
 
 describe('CHG-COURSE-007 — courses barrel', () => {

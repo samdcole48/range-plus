@@ -1,4 +1,5 @@
 import type { GameState, HoleDefinition, Point, Polygon } from './types';
+import { WATER_PENALTY_STROKES, DEFAULT_PUTT_COUNT } from './constants';
 
 
 export function calculateDistanceYards(
@@ -62,14 +63,13 @@ export function placeShot(state: GameState, target: Point): GameState {
   const onGreen = isPointInPolygon(target, state.hole.greenBoundary);
 
   if (onGreen) {
-    const putts = 2;
     return {
       ...state,
       ballPosition: { ...state.activePinPosition },
-      strokeCount: state.strokeCount + 1 + putts,
+      strokeCount: state.strokeCount + 1 + DEFAULT_PUTT_COUNT,
       isComplete: true,
       shotHistory: [...state.shotHistory, { ...target }, { ...state.activePinPosition }],
-      puttCount: putts,
+      puttCount: DEFAULT_PUTT_COUNT,
     };
   }
 
@@ -79,8 +79,9 @@ export function placeShot(state: GameState, target: Point): GameState {
       return {
         ...state,
         ballPosition: { ...hazard.dropZone },
-        strokeCount: state.strokeCount + 2,
+        strokeCount: state.strokeCount + WATER_PENALTY_STROKES,
         shotHistory: [...state.shotHistory, { ...target }, { ...hazard.dropZone }],
+        puttCount: 0,
       };
     }
   }
@@ -90,5 +91,6 @@ export function placeShot(state: GameState, target: Point): GameState {
     ballPosition: { ...target },
     strokeCount: state.strokeCount + 1,
     shotHistory: [...state.shotHistory, { ...target }],
+    puttCount: 0,
   };
 }
