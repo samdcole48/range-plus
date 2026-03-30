@@ -70,6 +70,12 @@
 - **WHEN** its structure is validated
 - **THEN** it has: `id`, `name`, `par`, `teePosition`, `pinPosition`, `pinPositions`, `greenBoundary`, `fairwayBoundary`, `waterHazards`, `yardsLength`
 
+#### Scenario: BASE-DATA-009b — Holes observe standardized orientation
+- **GIVEN** each hole in `PRESET_HOLES`
+- **WHEN** the `teePosition.y` and `pinPosition.y` values are compared
+- **THEN** `teePosition.y` is greater than `pinPosition.y` (tee at bottom, green at top of the 400×600 viewBox)
+- **NOTE:** Tee y SHOULD be in the range 530–575; pin y SHOULD be in the range 50–130. Diagonal holes (e.g., tee bottom-left, green top-right) are permitted when the y-axis rule is satisfied.
+
 #### Scenario: BASE-DATA-010 — Par values are 3, 4, or 5 only
 - **GIVEN** each hole in `PRESET_HOLES`
 - **WHEN** the `par` value is checked

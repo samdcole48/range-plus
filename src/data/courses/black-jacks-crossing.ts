@@ -625,63 +625,63 @@ const BLACK_JACKS_CROSSING_HOLES: HoleDefinition[] = [
     par: 4,
     yardsLength: 365,
     courseTheme: 'desert' as const,
-    teePosition: { x: 200, y: 50 },
-    pinPosition: { x: 200, y: 503 },
-    pinPositions: [{ x: 200, y: 503 }, { x: 220, y: 490 }, { x: 182, y: 486 }],
+    teePosition: { x: 200, y: 550 },
+    pinPosition: { x: 200, y: 97 },
+    pinPositions: [{ x: 200, y: 97 }, { x: 220, y: 110 }, { x: 182, y: 114 }],
     greenBoundary: {
           points: [
-            { x: 200, y: 470 },
-          { x: 218, y: 475 },
-          { x: 229, y: 487 },
-          { x: 229, y: 503 },
-          { x: 218, y: 515 },
-          { x: 200, y: 520 },
-          { x: 182, y: 515 },
-          { x: 171, y: 503 },
-          { x: 171, y: 487 },
-          { x: 182, y: 475 }
+            { x: 200, y: 130 },
+          { x: 218, y: 125 },
+          { x: 229, y: 113 },
+          { x: 229, y: 97 },
+          { x: 218, y: 85 },
+          { x: 200, y: 80 },
+          { x: 182, y: 85 },
+          { x: 171, y: 97 },
+          { x: 171, y: 113 },
+          { x: 182, y: 125 }
           ]
         },
     fairwayBoundary: {
           points: [
-            { x: 148, y: 28 },
-          { x: 252, y: 28 },
-          { x: 255, y: 528 },
-          { x: 145, y: 528 }
+            { x: 148, y: 572 },
+          { x: 252, y: 572 },
+          { x: 255, y: 72 },
+          { x: 145, y: 72 }
           ]
         },
     waterHazards: [],
     bunkers: [
-      { boundary: { points: [{ x: 168, y: 496 }, { x: 178, y: 499 }, { x: 182, y: 505 }, { x: 178, y: 511 }, { x: 168, y: 514 }, { x: 158, y: 511 }, { x: 154, y: 505 }, { x: 158, y: 499 }] } },
-      { boundary: { points: [{ x: 230, y: 493 }, { x: 239, y: 496 }, { x: 243, y: 502 }, { x: 239, y: 508 }, { x: 230, y: 511 }, { x: 221, y: 508 }, { x: 217, y: 502 }, { x: 221, y: 496 }] } },
-      { boundary: { points: [{ x: 155, y: 350 }, { x: 168, y: 353 }, { x: 173, y: 360 }, { x: 168, y: 367 }, { x: 155, y: 370 }, { x: 142, y: 367 }, { x: 137, y: 360 }, { x: 142, y: 353 }] } },
-      { boundary: { points: [{ x: 245, y: 360 }, { x: 256, y: 363 }, { x: 261, y: 370 }, { x: 256, y: 377 }, { x: 245, y: 380 }, { x: 234, y: 377 }, { x: 229, y: 370 }, { x: 234, y: 363 }] } }
+      { boundary: { points: [{ x: 168, y: 104 }, { x: 178, y: 101 }, { x: 182, y: 95 }, { x: 178, y: 89 }, { x: 168, y: 86 }, { x: 158, y: 89 }, { x: 154, y: 95 }, { x: 158, y: 101 }] } },
+      { boundary: { points: [{ x: 230, y: 107 }, { x: 239, y: 104 }, { x: 243, y: 98 }, { x: 239, y: 92 }, { x: 230, y: 89 }, { x: 221, y: 92 }, { x: 217, y: 98 }, { x: 221, y: 104 }] } },
+      { boundary: { points: [{ x: 155, y: 250 }, { x: 168, y: 247 }, { x: 173, y: 240 }, { x: 168, y: 233 }, { x: 155, y: 230 }, { x: 142, y: 233 }, { x: 137, y: 240 }, { x: 142, y: 247 }] } },
+      { boundary: { points: [{ x: 245, y: 240 }, { x: 256, y: 237 }, { x: 261, y: 230 }, { x: 256, y: 223 }, { x: 245, y: 220 }, { x: 234, y: 223 }, { x: 229, y: 230 }, { x: 234, y: 237 }] } }
     ],
     trees: [],
     bushes: [],
     rocks: [
-      { position: { x: 48, y: 160 }, radius: 5 },
-      { position: { x: 35, y: 240 }, radius: 7 },
-      { position: { x: 70, y: 320 }, radius: 4 },
-      { position: { x: 50, y: 400 }, radius: 6 },
-      { position: { x: 90, y: 460 }, radius: 5 },
-      { position: { x: 30, y: 510 }, radius: 8 },
-      { position: { x: 100, y: 530 }, radius: 4 },
-      { position: { x: 40, y: 480 }, radius: 6 },
-      { position: { x: 320, y: 160 }, radius: 6 },
-      { position: { x: 350, y: 240 }, radius: 5 },
-      { position: { x: 365, y: 330 }, radius: 7 },
-      { position: { x: 340, y: 410 }, radius: 4 },
-      { position: { x: 355, y: 480 }, radius: 6 },
-      { position: { x: 375, y: 240 }, radius: 4 },
-      { position: { x: 348, y: 550 }, radius: 5 },
-      { position: { x: 375, y: 480 }, radius: 7 },
-      { position: { x: 60, y: 530 }, radius: 5 }
+      { position: { x: 48, y: 440 }, radius: 5 },
+      { position: { x: 35, y: 360 }, radius: 7 },
+      { position: { x: 70, y: 280 }, radius: 4 },
+      { position: { x: 50, y: 200 }, radius: 6 },
+      { position: { x: 90, y: 140 }, radius: 5 },
+      { position: { x: 30, y: 90 }, radius: 8 },
+      { position: { x: 100, y: 70 }, radius: 4 },
+      { position: { x: 40, y: 120 }, radius: 6 },
+      { position: { x: 320, y: 440 }, radius: 6 },
+      { position: { x: 350, y: 360 }, radius: 5 },
+      { position: { x: 365, y: 270 }, radius: 7 },
+      { position: { x: 340, y: 190 }, radius: 4 },
+      { position: { x: 355, y: 120 }, radius: 6 },
+      { position: { x: 375, y: 360 }, radius: 4 },
+      { position: { x: 348, y: 50 }, radius: 5 },
+      { position: { x: 375, y: 120 }, radius: 7 },
+      { position: { x: 60, y: 70 }, radius: 5 }
     ],
     boulders: [
-      { boundary: { points: [{ x: 88, y: 28 }, { x: 123, y: 43 }, { x: 138, y: 63 }, { x: 123, y: 83 }, { x: 88, y: 93 }, { x: 53, y: 83 }, { x: 38, y: 63 }, { x: 53, y: 43 }] } },
-      { boundary: { points: [{ x: 60, y: 100 }, { x: 75, y: 107 }, { x: 82, y: 120 }, { x: 75, y: 137 }, { x: 60, y: 144 }, { x: 45, y: 137 }, { x: 38, y: 120 }, { x: 45, y: 107 }] } },
-      { boundary: { points: [{ x: 330, y: 268 }, { x: 346, y: 275 }, { x: 354, y: 290 }, { x: 346, y: 308 }, { x: 330, y: 315 }, { x: 314, y: 308 }, { x: 306, y: 290 }, { x: 314, y: 275 }] } }
+      { boundary: { points: [{ x: 88, y: 572 }, { x: 123, y: 557 }, { x: 138, y: 537 }, { x: 123, y: 517 }, { x: 88, y: 507 }, { x: 53, y: 517 }, { x: 38, y: 537 }, { x: 53, y: 557 }] } },
+      { boundary: { points: [{ x: 60, y: 500 }, { x: 75, y: 493 }, { x: 82, y: 480 }, { x: 75, y: 463 }, { x: 60, y: 456 }, { x: 45, y: 463 }, { x: 38, y: 480 }, { x: 45, y: 493 }] } },
+      { boundary: { points: [{ x: 330, y: 332 }, { x: 346, y: 325 }, { x: 354, y: 310 }, { x: 346, y: 292 }, { x: 330, y: 285 }, { x: 314, y: 292 }, { x: 306, y: 310 }, { x: 314, y: 325 }] } }
     ],
   },
   // ─── The Corridor — Par 4, 365y ────────────────────────────────
@@ -1021,65 +1021,65 @@ const BLACK_JACKS_CROSSING_HOLES: HoleDefinition[] = [
     par: 5,
     yardsLength: 480,
     courseTheme: 'desert' as const,
-    teePosition: { x: 80, y: 50 },
-    pinPosition: { x: 310, y: 505 },
-    pinPositions: [{ x: 310, y: 505 }, { x: 335, y: 518 }, { x: 285, y: 522 }, { x: 310, y: 528 }],
+    teePosition: { x: 80, y: 550 },
+    pinPosition: { x: 310, y: 95 },
+    pinPositions: [{ x: 310, y: 95 }, { x: 335, y: 82 }, { x: 285, y: 78 }, { x: 310, y: 72 }],
     greenBoundary: {
           points: [
-            { x: 310, y: 487 },
-          { x: 331, y: 492 },
-          { x: 343, y: 506 },
-          { x: 343, y: 524 },
-          { x: 331, y: 538 },
-          { x: 310, y: 543 },
-          { x: 289, y: 538 },
-          { x: 277, y: 524 },
-          { x: 277, y: 506 },
-          { x: 289, y: 492 }
+            { x: 310, y: 113 },
+          { x: 331, y: 108 },
+          { x: 343, y: 94 },
+          { x: 343, y: 76 },
+          { x: 331, y: 62 },
+          { x: 310, y: 57 },
+          { x: 289, y: 62 },
+          { x: 277, y: 76 },
+          { x: 277, y: 94 },
+          { x: 289, y: 108 }
           ]
         },
     fairwayBoundary: {
           points: [
-            { x: 25, y: 30 },
-          { x: 155, y: 30 },
-          { x: 385, y: 588 },
-          { x: 255, y: 588 }
+            { x: 25, y: 570 },
+          { x: 155, y: 570 },
+          { x: 385, y: 12 },
+          { x: 255, y: 12 }
           ]
         },
     waterHazards: [],
     bunkers: [
-      { boundary: { points: [{ x: 290, y: 496 }, { x: 300, y: 499 }, { x: 304, y: 505 }, { x: 300, y: 511 }, { x: 290, y: 514 }, { x: 280, y: 511 }, { x: 276, y: 505 }, { x: 280, y: 499 }] } },
-      { boundary: { points: [{ x: 332, y: 499 }, { x: 343, y: 502 }, { x: 347, y: 508 }, { x: 343, y: 514 }, { x: 332, y: 517 }, { x: 321, y: 514 }, { x: 317, y: 508 }, { x: 321, y: 502 }] } },
-      { boundary: { points: [{ x: 192, y: 301 }, { x: 222, y: 305 }, { x: 234, y: 315 }, { x: 222, y: 325 }, { x: 192, y: 329 }, { x: 162, y: 325 }, { x: 150, y: 315 }, { x: 162, y: 305 }] } }
+      { boundary: { points: [{ x: 290, y: 104 }, { x: 300, y: 101 }, { x: 304, y: 95 }, { x: 300, y: 89 }, { x: 290, y: 86 }, { x: 280, y: 89 }, { x: 276, y: 95 }, { x: 280, y: 101 }] } },
+      { boundary: { points: [{ x: 332, y: 101 }, { x: 343, y: 98 }, { x: 347, y: 92 }, { x: 343, y: 86 }, { x: 332, y: 83 }, { x: 321, y: 86 }, { x: 317, y: 92 }, { x: 321, y: 98 }] } },
+      { boundary: { points: [{ x: 192, y: 299 }, { x: 222, y: 295 }, { x: 234, y: 285 }, { x: 222, y: 275 }, { x: 192, y: 271 }, { x: 162, y: 275 }, { x: 150, y: 285 }, { x: 162, y: 295 }] } }
     ],
     trees: [],
     bushes: [],
     rocks: [
-      { position: { x: 40, y: 110 }, radius: 5 },
-      { position: { x: 55, y: 180 }, radius: 7 },
-      { position: { x: 35, y: 260 }, radius: 4 },
-      { position: { x: 65, y: 165 }, radius: 6 },
-      { position: { x: 45, y: 380 }, radius: 5 },
-      { position: { x: 80, y: 445 }, radius: 8 },
-      { position: { x: 50, y: 510 }, radius: 4 },
-      { position: { x: 90, y: 540 }, radius: 6 },
-      { position: { x: 225, y: 150 }, radius: 6 },
-      { position: { x: 195, y: 220 }, radius: 5 },
-      { position: { x: 205, y: 290 }, radius: 7 },
-      { position: { x: 215, y: 360 }, radius: 4 },
-      { position: { x: 235, y: 480 }, radius: 6 },
-      { position: { x: 275, y: 490 }, radius: 5 },
-      { position: { x: 330, y: 560 }, radius: 7 },
-      { position: { x: 360, y: 540 }, radius: 4 },
-      { position: { x: 355, y: 580 }, radius: 5 },
-      { position: { x: 380, y: 510 }, radius: 8 }
+      { position: { x: 40, y: 490 }, radius: 5 },
+      { position: { x: 55, y: 420 }, radius: 7 },
+      { position: { x: 35, y: 340 }, radius: 4 },
+      { position: { x: 65, y: 435 }, radius: 6 },
+      { position: { x: 45, y: 220 }, radius: 5 },
+      { position: { x: 80, y: 155 }, radius: 8 },
+      { position: { x: 50, y: 90 }, radius: 4 },
+      { position: { x: 90, y: 60 }, radius: 6 },
+      { position: { x: 225, y: 450 }, radius: 6 },
+      { position: { x: 195, y: 380 }, radius: 5 },
+      { position: { x: 205, y: 310 }, radius: 7 },
+      { position: { x: 215, y: 240 }, radius: 4 },
+      { position: { x: 235, y: 120 }, radius: 6 },
+      { position: { x: 275, y: 110 }, radius: 5 },
+      { position: { x: 330, y: 40 }, radius: 7 },
+      { position: { x: 360, y: 60 }, radius: 4 },
+      { position: { x: 355, y: 20 }, radius: 5 },
+      { position: { x: 380, y: 90 }, radius: 8 }
     ],
     boulders: [
-      { boundary: { points: [{ x: 125, y: 167 }, { x: 145, y: 177 }, { x: 155, y: 195 }, { x: 145, y: 219 }, { x: 125, y: 227 }, { x: 105, y: 219 }, { x: 95, y: 195 }, { x: 105, y: 177 }] } },
-      { boundary: { points: [{ x: 155, y: 203 }, { x: 171, y: 210 }, { x: 179, y: 225 }, { x: 171, y: 243 }, { x: 155, y: 250 }, { x: 139, y: 243 }, { x: 131, y: 225 }, { x: 139, y: 210 }] } },
-      { boundary: { points: [{ x: 238, y: 382 }, { x: 258, y: 392 }, { x: 268, y: 410 }, { x: 258, y: 434 }, { x: 238, y: 442 }, { x: 218, y: 434 }, { x: 208, y: 410 }, { x: 218, y: 392 }] } },
-      { boundary: { points: [{ x: 265, y: 418 }, { x: 281, y: 425 }, { x: 289, y: 440 }, { x: 281, y: 458 }, { x: 265, y: 465 }, { x: 249, y: 458 }, { x: 241, y: 440 }, { x: 249, y: 425 }] } },
-      { boundary: { points: [{ x: 365, y: 490 }, { x: 387, y: 500 }, { x: 397, y: 520 }, { x: 387, y: 546 }, { x: 365, y: 555 }, { x: 343, y: 546 }, { x: 333, y: 520 }, { x: 343, y: 500 }] } }
+      { boundary: { points: [{ x: 125, y: 433 }, { x: 145, y: 423 }, { x: 155, y: 405 }, { x: 145, y: 381 }, { x: 125, y: 373 }, { x: 105, y: 381 }, { x: 95, y: 405 }, { x: 105, y: 423 }] } },
+      { boundary: { points: [{ x: 155, y: 397 }, { x: 171, y: 390 }, { x: 179, y: 375 }, { x: 171, y: 357 }, { x: 155, y: 350 }, { x: 139, y: 357 }, { x: 131, y: 375 }, { x: 139, y: 390 }] } },
+      { boundary: { points: [{ x: 238, y: 218 }, { x: 258, y: 208 }, { x: 268, y: 190 }, { x: 258, y: 166 }, { x: 238, y: 158 }, { x: 218, y: 166 }, { x: 208, y: 190 }, { x: 218, y: 208 }] } },
+      { boundary: { points: [{ x: 265, y: 182 }, { x: 281, y: 175 }, { x: 289, y: 160 }, { x: 281, y: 142 }, { x: 265, y: 135 }, { x: 249, y: 142 }, { x: 241, y: 160 }, { x: 249, y: 175 }] } },
+      { boundary: { points: [{ x: 365, y: 110 }, { x: 387, y: 100 }, { x: 397, y: 80 }, { x: 387, y: 54 }, { x: 365, y: 45 }, { x: 343, y: 54 }, { x: 333, y: 80 }, { x: 343, y: 100 }] } }
     ],
   },
   // ─── The Crossing — Par 3, 155y ────────────────────────────────
@@ -1157,65 +1157,65 @@ const BLACK_JACKS_CROSSING_HOLES: HoleDefinition[] = [
     par: 5,
     yardsLength: 450,
     courseTheme: 'desert' as const,
-    teePosition: { x: 200, y: 50 },
-    pinPosition: { x: 185, y: 498 },
-    pinPositions: [{ x: 185, y: 498 }, { x: 210, y: 512 }, { x: 162, y: 516 }, { x: 185, y: 522 }],
+    teePosition: { x: 200, y: 550 },
+    pinPosition: { x: 185, y: 102 },
+    pinPositions: [{ x: 185, y: 102 }, { x: 210, y: 88 }, { x: 162, y: 84 }, { x: 185, y: 78 }],
     greenBoundary: {
           points: [
-            { x: 185, y: 480 },
-          { x: 206, y: 485 },
-          { x: 218, y: 499 },
-          { x: 218, y: 517 },
-          { x: 206, y: 531 },
-          { x: 185, y: 536 },
-          { x: 164, y: 531 },
-          { x: 152, y: 517 },
-          { x: 152, y: 499 },
-          { x: 164, y: 485 }
+            { x: 185, y: 120 },
+          { x: 206, y: 115 },
+          { x: 218, y: 101 },
+          { x: 218, y: 83 },
+          { x: 206, y: 69 },
+          { x: 185, y: 64 },
+          { x: 164, y: 69 },
+          { x: 152, y: 83 },
+          { x: 152, y: 101 },
+          { x: 164, y: 115 }
           ]
         },
     fairwayBoundary: {
           points: [
-            { x: 138, y: 28 },
-          { x: 262, y: 28 },
-          { x: 248, y: 588 },
-          { x: 122, y: 588 }
+            { x: 138, y: 572 },
+          { x: 262, y: 572 },
+          { x: 248, y: 12 },
+          { x: 122, y: 12 }
           ]
         },
     waterHazards: [
-      { boundary: { points: [{ x: 115, y: 478 }, { x: 165, y: 478 }, { x: 165, y: 530 }, { x: 115, y: 530 }] }, dropZone: { x: 190, y: 550 } }
+      { boundary: { points: [{ x: 115, y: 122 }, { x: 165, y: 122 }, { x: 165, y: 70 }, { x: 115, y: 70 }] }, dropZone: { x: 190, y: 160 } }
     ],
     bunkers: [
-      { boundary: { points: [{ x: 245, y: 498 }, { x: 256, y: 501 }, { x: 260, y: 508 }, { x: 256, y: 515 }, { x: 245, y: 518 }, { x: 234, y: 515 }, { x: 230, y: 508 }, { x: 234, y: 501 }] } },
-      { boundary: { points: [{ x: 262, y: 513 }, { x: 272, y: 516 }, { x: 276, y: 522 }, { x: 272, y: 528 }, { x: 262, y: 531 }, { x: 252, y: 528 }, { x: 248, y: 522 }, { x: 252, y: 516 }] } }
+      { boundary: { points: [{ x: 245, y: 102 }, { x: 256, y: 99 }, { x: 260, y: 92 }, { x: 256, y: 85 }, { x: 245, y: 82 }, { x: 234, y: 85 }, { x: 230, y: 92 }, { x: 234, y: 99 }] } },
+      { boundary: { points: [{ x: 262, y: 87 }, { x: 272, y: 84 }, { x: 276, y: 78 }, { x: 272, y: 72 }, { x: 262, y: 69 }, { x: 252, y: 72 }, { x: 248, y: 78 }, { x: 252, y: 84 }] } }
     ],
     trees: [],
     bushes: [],
     rocks: [
-      { position: { x: 45, y: 160 }, radius: 5 },
-      { position: { x: 35, y: 240 }, radius: 7 },
-      { position: { x: 70, y: 330 }, radius: 4 },
-      { position: { x: 50, y: 420 }, radius: 6 },
-      { position: { x: 80, y: 490 }, radius: 5 },
-      { position: { x: 30, y: 540 }, radius: 8 },
-      { position: { x: 95, y: 555 }, radius: 4 },
-      { position: { x: 40, y: 480 }, radius: 6 },
-      { position: { x: 330, y: 160 }, radius: 6 },
-      { position: { x: 350, y: 240 }, radius: 5 },
-      { position: { x: 365, y: 340 }, radius: 7 },
-      { position: { x: 340, y: 420 }, radius: 4 },
-      { position: { x: 360, y: 490 }, radius: 6 },
-      { position: { x: 375, y: 330 }, radius: 4 },
-      { position: { x: 355, y: 545 }, radius: 5 },
-      { position: { x: 330, y: 560 }, radius: 7 },
-      { position: { x: 55, y: 560 }, radius: 5 }
+      { position: { x: 45, y: 440 }, radius: 5 },
+      { position: { x: 35, y: 360 }, radius: 7 },
+      { position: { x: 70, y: 270 }, radius: 4 },
+      { position: { x: 50, y: 180 }, radius: 6 },
+      { position: { x: 80, y: 110 }, radius: 5 },
+      { position: { x: 30, y: 60 }, radius: 8 },
+      { position: { x: 95, y: 45 }, radius: 4 },
+      { position: { x: 40, y: 120 }, radius: 6 },
+      { position: { x: 330, y: 440 }, radius: 6 },
+      { position: { x: 350, y: 360 }, radius: 5 },
+      { position: { x: 365, y: 260 }, radius: 7 },
+      { position: { x: 340, y: 180 }, radius: 4 },
+      { position: { x: 360, y: 110 }, radius: 6 },
+      { position: { x: 375, y: 270 }, radius: 4 },
+      { position: { x: 355, y: 55 }, radius: 5 },
+      { position: { x: 330, y: 40 }, radius: 7 },
+      { position: { x: 55, y: 40 }, radius: 5 }
     ],
     boulders: [
-      { boundary: { points: [{ x: 60, y: 170 }, { x: 82, y: 180 }, { x: 92, y: 200 }, { x: 82, y: 226 }, { x: 60, y: 235 }, { x: 38, y: 226 }, { x: 28, y: 200 }, { x: 38, y: 180 }] } },
-      { boundary: { points: [{ x: 45, y: 324 }, { x: 65, y: 332 }, { x: 73, y: 350 }, { x: 65, y: 372 }, { x: 45, y: 380 }, { x: 25, y: 372 }, { x: 17, y: 350 }, { x: 25, y: 332 }] } },
-      { boundary: { points: [{ x: 340, y: 150 }, { x: 362, y: 160 }, { x: 372, y: 180 }, { x: 362, y: 206 }, { x: 340, y: 215 }, { x: 318, y: 206 }, { x: 308, y: 180 }, { x: 318, y: 160 }] } },
-      { boundary: { points: [{ x: 355, y: 304 }, { x: 375, y: 312 }, { x: 383, y: 330 }, { x: 375, y: 352 }, { x: 355, y: 360 }, { x: 335, y: 352 }, { x: 327, y: 330 }, { x: 335, y: 312 }] } },
-      { boundary: { points: [{ x: 85, y: 450 }, { x: 100, y: 457 }, { x: 107, y: 470 }, { x: 100, y: 487 }, { x: 85, y: 494 }, { x: 70, y: 487 }, { x: 63, y: 470 }, { x: 70, y: 457 }] } }
+      { boundary: { points: [{ x: 60, y: 430 }, { x: 82, y: 420 }, { x: 92, y: 400 }, { x: 82, y: 374 }, { x: 60, y: 365 }, { x: 38, y: 374 }, { x: 28, y: 400 }, { x: 38, y: 420 }] } },
+      { boundary: { points: [{ x: 45, y: 276 }, { x: 65, y: 268 }, { x: 73, y: 250 }, { x: 65, y: 228 }, { x: 45, y: 220 }, { x: 25, y: 228 }, { x: 17, y: 250 }, { x: 25, y: 268 }] } },
+      { boundary: { points: [{ x: 340, y: 450 }, { x: 362, y: 440 }, { x: 372, y: 420 }, { x: 362, y: 394 }, { x: 340, y: 385 }, { x: 318, y: 394 }, { x: 308, y: 420 }, { x: 318, y: 440 }] } },
+      { boundary: { points: [{ x: 355, y: 296 }, { x: 375, y: 288 }, { x: 383, y: 270 }, { x: 375, y: 248 }, { x: 355, y: 240 }, { x: 335, y: 248 }, { x: 327, y: 270 }, { x: 335, y: 288 }] } },
+      { boundary: { points: [{ x: 85, y: 150 }, { x: 100, y: 143 }, { x: 107, y: 130 }, { x: 100, y: 113 }, { x: 85, y: 106 }, { x: 70, y: 113 }, { x: 63, y: 130 }, { x: 70, y: 143 }] } }
     ],
   },
 ];

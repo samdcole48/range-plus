@@ -193,7 +193,7 @@ The real course is set in the Chihuahuan Desert above the Rio Grande, featuring 
 - **Boulders:** 1 large mesa edge polygon on the left (the mesa the tee sits on). 2 medium boulders right of fairway.
 - **Green:** Below the mesa, medium-sized, slightly sunken feel.
 - **Rocks:** Moderate (15 rocks), concentrated around the mesa edge.
-- **SVG guidance:** Tee at top (unusual — elevated start). Fairway descends downward. Green at bottom. Mesa polygon at top-left. Conveys the "playing down from a mesa" feel.
+- **SVG guidance:** Tee at bottom (elevated mesa edge — tee sits on the mesa plateau). Fairway climbs upward. Green at top, set into the rocky terrain. Mesa polygon near the tee (bottom). Conveys the "teeing off from the mesa edge" feel.
 
 ### Hole 11 — "The Corridor" — Par 4, 365 yds
 **Real course ref:** Plays along higher ground/ridgeline with sweeping views and challenging wind. Canyon walls define the corridor.
@@ -247,7 +247,7 @@ The real course is set in the Chihuahuan Desert above the Rio Grande, featuring 
 - **Boulders:** 3 large cliff/canyon wall formations — one defining each canyon section. Creates a dramatic terraced feel.
 - **Green:** Large, set against a mountain backdrop cliff polygon.
 - **Rocks:** Heavy (25+ rocks) distributed across all three canyon sections.
-- **SVG guidance:** Tee at top-left (elevated). Fairway descends in three tiers separated by boulder formations. Green at bottom-right backed by cliff.
+- **SVG guidance:** Tee at bottom-left. Fairway climbs diagonally up to the right in three terraced sections separated by boulder formations. Green at top-right backed by cliff.
 
 ### Hole 17 — "The Crossing" — Par 3, 155 yds ⭐ SIGNATURE HOLE
 **Real course ref:** The course's namesake hole. Breathtaking tee shot over a deep desert canyon to a peninsula-style green in a natural amphitheater. The most photographed and memorable hole.
@@ -265,7 +265,7 @@ The real course is set in the Chihuahuan Desert above the Rio Grande, featuring 
 - **Boulders:** 2 large cliff/mesa formations framing the hole on both sides (framing the "sunset view"). 1 medium boulder near the water hazard.
 - **Green:** Large (reachable in 2 for big hitters). Set in a natural basin.
 - **Rocks:** Moderate (15 rocks), mostly along the cliff formations.
-- **SVG guidance:** Tee at top (elevated). Fairway descends and bends left. Water hazard front-left of green. Green at bottom-center. Cliff formations frame both sides. Conveys the "grand finale" feel.
+- **SVG guidance:** Tee at bottom (elevated start — player looks upfield at the panorama). Fairway climbs and bends gently right. Water hazard front-right of green. Green at top-center. Cliff formations frame both sides. Conveys the "grand finale" feel.
 
 ---
 

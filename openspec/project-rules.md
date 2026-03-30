@@ -61,6 +61,7 @@ This project has no external integrations. It is a self-contained client-side ap
 - All hole geometry uses a 400×600 SVG viewBox coordinate space
 - Real-world yards are scaled based on tee-to-pin distance per hole
 - Polygon coordinates (fairway, green, bunkers, water) MUST form valid closed polygons
+- **Hole orientation is standardized: the tee box MUST be positioned at the bottom of the viewBox (high y value, ~530–575) and the green/pin MUST be positioned at the top (low y value, ~50–130).** This creates a consistent "bottom-to-top" play direction across all courses and holes. No exceptions — reversed orientations are prohibited.
 
 ### Section 2.2: Game State Immutability
 - Game state transitions MUST use pure functions returning new state objects
