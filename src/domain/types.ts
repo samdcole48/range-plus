@@ -26,6 +26,15 @@ export interface Bunker {
   boundary: Polygon;
 }
 
+export interface Rock {
+  position: Point;
+  radius: number;  // 3–10px for small/medium desert rocks
+}
+
+export interface Boulder {
+  boundary: Polygon;  // large irregular rock/cliff formation
+}
+
 export interface HoleDefinition {
   id: string;
   name: string;
@@ -42,6 +51,16 @@ export interface HoleDefinition {
   bunkers?: Bunker[];
   trees?: TreeCluster[];
   bushes?: Bush[];
+  rocks?: Rock[];
+  boulders?: Boulder[];
+  courseTheme?: 'classic' | 'desert';
+}
+
+export interface CourseDefinition {
+  id: string;
+  name: string;
+  theme: 'classic' | 'desert';
+  holes: HoleDefinition[];
 }
 
 export interface GameState {

@@ -115,11 +115,30 @@ export function HoleView({ hole }: HoleViewProps) {
         onClick={handleClick}
       >
         <defs>
-          {/* Rough background gradient */}
+          {/* Rough background gradient — classic green */}
           <radialGradient id="roughGrad" cx="50%" cy="50%" r="70%">
             <stop offset="0%" stopColor="#3a6b24" />
             <stop offset="100%" stopColor="#2a5218" />
           </radialGradient>
+
+          {/* Desert rough gradient — sandy tan */}
+          <radialGradient id="desertRoughGrad" cx="50%" cy="50%" r="70%">
+            <stop offset="0%" stopColor="#c2a060" />
+            <stop offset="100%" stopColor="#a08040" />
+          </radialGradient>
+
+          {/* Rock gradient — weathered desert stone */}
+          <radialGradient id="rockGrad" cx="35%" cy="30%" r="65%">
+            <stop offset="0%" stopColor="#a07850" />
+            <stop offset="100%" stopColor="#6b4f30" />
+          </radialGradient>
+
+          {/* Boulder gradient — large cliff/mesa formation */}
+          <linearGradient id="boulderGrad" x1="0" y1="0" x2="0.5" y2="1">
+            <stop offset="0%" stopColor="#8B5a2a" />
+            <stop offset="60%" stopColor="#6b3c1a" />
+            <stop offset="100%" stopColor="#4a2a10" />
+          </linearGradient>
 
           {/* Fairway gradient — lighter striped look */}
           <linearGradient id="fairwayGrad" x1="0" y1="0" x2="1" y2="0">
@@ -191,19 +210,41 @@ export function HoleView({ hole }: HoleViewProps) {
           </radialGradient>
         </defs>
 
-        {/* === LAYER 1: Rough background === */}
-        <rect width="400" height="600" fill="url(#roughGrad)" />
-
-        {/* Rough texture — subtle darker patches */}
-        {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
-          <circle
-            key={`rough-${i}`}
-            cx={seededRandom(i * 7 + 1) * 400}
-            cy={seededRandom(i * 7 + 2) * 600}
-            r={30 + seededRandom(i * 7 + 3) * 40}
-            fill="rgba(30,60,15,0.15)"
-          />
-        ))}
+        {/* === LAYER 1: Rough background — theme-conditional === */}
+        {hole.courseTheme === 'desert' ? (
+          <>
+            <rect
+              data-testid="desert-rough"
+              width="400"
+              height="600"
+              fill="url(#desertRoughGrad)"
+            />
+            {/* Desert texture — sandy variation patches */}
+            {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
+              <circle
+                key={`desert-patch-${i}`}
+                cx={seededRandom(i * 7 + 1) * 400}
+                cy={seededRandom(i * 7 + 2) * 600}
+                r={30 + seededRandom(i * 7 + 3) * 40}
+                fill="rgba(90,60,10,0.12)"
+              />
+            ))}
+          </>
+        ) : (
+          <>
+            <rect width="400" height="600" fill="url(#roughGrad)" />
+            {/* Classic rough texture — darker green patches */}
+            {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
+              <circle
+                key={`rough-${i}`}
+                cx={seededRandom(i * 7 + 1) * 400}
+                cy={seededRandom(i * 7 + 2) * 600}
+                r={30 + seededRandom(i * 7 + 3) * 40}
+                fill="rgba(30,60,15,0.15)"
+              />
+            ))}
+          </>
+        )}
 
         {/* === LAYER 2: Fairway with stripe pattern === */}
         <polygon
@@ -306,6 +347,34 @@ export function HoleView({ hole }: HoleViewProps) {
             </g>
           );
         })}
+
+        {/* === LAYER 6b: Desert rocks (scattered stones in rough) === */}
+        {(hole.rocks ?? []).map((rock, i) => (
+          <circle
+            key={`rock-${i}`}
+            data-testid="rock"
+            cx={rock.position.x}
+            cy={rock.position.y}
+            r={rock.radius}
+            fill="url(#rockGrad)"
+            stroke="#5a3a1a"
+            strokeWidth="0.5"
+            opacity={0.9}
+          />
+        ))}
+
+        {/* === LAYER 6c: Desert boulders (large cliff/mesa formations) === */}
+        {(hole.boulders ?? []).map((boulder, i) => (
+          <polygon
+            key={`boulder-${i}`}
+            data-testid="boulder"
+            points={polygonToSvgPoints(boulder.boundary.points)}
+            fill="url(#boulderGrad)"
+            stroke="#3a1a08"
+            strokeWidth="1.5"
+            opacity={0.95}
+          />
+        ))}
 
         {/* === LAYER 7: Tee box === */}
         <g>
