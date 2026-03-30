@@ -26,6 +26,11 @@ export interface Bunker {
   boundary: Polygon;
 }
 
+export interface Rock {
+  position: Point;
+  radius: number;  // 3–10px for small/medium desert rocks
+}
+
 export interface HoleDefinition {
   id: string;
   name: string;
