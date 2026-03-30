@@ -51,6 +51,9 @@ export interface HoleDefinition {
   bunkers?: Bunker[];
   trees?: TreeCluster[];
   bushes?: Bush[];
+  rocks?: Rock[];
+  boulders?: Boulder[];
+  courseTheme?: 'classic' | 'desert';
 }
 
 export interface GameState {
