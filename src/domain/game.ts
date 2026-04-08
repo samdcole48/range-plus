@@ -2,6 +2,14 @@ import type { GameState, HoleDefinition, Point, Polygon } from './types';
 import { WATER_PENALTY_STROKES, DEFAULT_PUTT_COUNT } from './constants';
 
 
+/**
+ * Calculates the distance in yards between two points using the hole's nominal scale.
+ *
+ * IMPORTANT: Scale is derived from the nominal pin position (hole.pinPosition, index 0),
+ * NOT from the active pin position. This is intentional — all distance calculations
+ * use a consistent scale regardless of which pin variant is active.
+ * See: openspec/project-rules.md §2.1 (Coordinate System Invariants)
+ */
 export function calculateDistanceYards(
   from: Point,
   to: Point,
@@ -93,4 +101,14 @@ export function placeShot(state: GameState, target: Point): GameState {
     shotHistory: [...state.shotHistory, { ...target }],
     puttCount: 0,
   };
+}
+
+export function getScoreCssClass(strokes: number, par: number): string {
+  if (strokes === 1) return 'hole-in-one';
+  const diff = strokes - par;
+  if (diff <= -2) return 'eagle';
+  if (diff === -1) return 'birdie';
+  if (diff === 0) return 'par';
+  if (diff === 1) return 'bogey';
+  return 'double-bogey-or-worse';
 }

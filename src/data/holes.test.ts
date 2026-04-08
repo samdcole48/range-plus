@@ -34,20 +34,33 @@ function interiorAngle(A: Point, B: Point, C: Point): number {
   return Math.atan2(Math.abs(cross), dot) * 180 / Math.PI;
 }
 
-/** Classifies a hole's fairway routing type based on lateral offset and midpoint deviation. */
-function classifyRouting(hole: typeof PRESET_HOLES[0]): 'straight' | 'slight-curve' | 'dogleg' | 's-curve' {
+/** Returns the absolute horizontal distance between tee and pin positions. */
+function computeLateralOffset(hole: typeof PRESET_HOLES[0]): number {
+  return Math.abs(hole.teePosition.x - hole.pinPosition.x);
+}
+
+/** Returns the absolute deviation of the fairway midpoints from the tee–pin centre line. */
+function computeTopBottomDeviation(hole: typeof PRESET_HOLES[0]): number {
   const pts = hole.fairwayBoundary.points;
   const teeX = hole.teePosition.x;
   const pinX = hole.pinPosition.x;
-  const lateralOffset = Math.abs(teeX - pinX);
   const { minY, maxY } = getBoundingBox(pts);
   const height = maxY - minY;
-
   const midPts = pts.filter(p => p.y > minY + height * 0.3 && p.y < minY + height * 0.7);
   const midXs = midPts.map(p => p.x);
-  const midCenter = midXs.length > 0 ? (Math.min(...midXs) + Math.max(...midXs)) / 2 : (teeX + pinX) / 2;
-  const absMidDev = Math.abs(midCenter - (teeX + pinX) / 2);
+  const midCenter = midXs.length > 0
+    ? (Math.min(...midXs) + Math.max(...midXs)) / 2
+    : (teeX + pinX) / 2;
+  return Math.abs(midCenter - (teeX + pinX) / 2);
+}
 
+/** Returns true when the fairway curves in opposite directions at top and bottom. */
+function detectSCurve(hole: typeof PRESET_HOLES[0]): boolean {
+  const pts = hole.fairwayBoundary.points;
+  const teeX = hole.teePosition.x;
+  const pinX = hole.pinPosition.x;
+  const { minY, maxY } = getBoundingBox(pts);
+  const height = maxY - minY;
   const topPts = pts.filter(p => p.y < minY + height * 0.4);
   const bottomPts = pts.filter(p => p.y > minY + height * 0.6);
   const topXs = topPts.map(p => p.x);
@@ -56,9 +69,14 @@ function classifyRouting(hole: typeof PRESET_HOLES[0]): 'straight' | 'slight-cur
   const bottomCenter = bottomXs.length > 0 ? (Math.min(...bottomXs) + Math.max(...bottomXs)) / 2 : teeX;
   const topDev = topCenter - (pinX + (teeX - pinX) * 0.2);
   const bottomDev = bottomCenter - (pinX + (teeX - pinX) * 0.8);
-  const isSCurve = Math.sign(topDev) !== Math.sign(bottomDev) && Math.abs(topDev) > 15 && Math.abs(bottomDev) > 15;
+  return Math.sign(topDev) !== Math.sign(bottomDev) && Math.abs(topDev) > 15 && Math.abs(bottomDev) > 15;
+}
 
-  if (isSCurve) return 's-curve';
+/** Classifies a hole's fairway routing type based on lateral offset and midpoint deviation. */
+function classifyRouting(hole: typeof PRESET_HOLES[0]): 'straight' | 'slight-curve' | 'dogleg' | 's-curve' {
+  if (detectSCurve(hole)) return 's-curve';
+  const lateralOffset = computeLateralOffset(hole);
+  const absMidDev = computeTopBottomDeviation(hole);
   if (lateralOffset >= 60 || absMidDev >= 40) return 'dogleg';
   if (absMidDev >= 20 || lateralOffset >= 30) return 'slight-curve';
   return 'straight';

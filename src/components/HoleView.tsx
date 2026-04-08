@@ -1,12 +1,19 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import type { HoleDefinition, Point, Polygon, WaterHazard, TreeCluster, Bush, Rock, Boulder, Bunker } from '../domain/types';
-import { createGameState, placeShot, calculateDistanceYards, getScoreLabel } from '../domain/game';
+import { createGameState, calculateDistanceYards, getScoreLabel, getScoreCssClass } from '../domain/game';
+import { useHoleInteraction } from './useHoleInteraction';
 import {
   SVG_VIEWPORT_WIDTH,
   SVG_VIEWPORT_HEIGHT,
   TREE_CANOPY_HIGHLIGHT_SCALE,
   WATER_RIPPLE_Y_OFFSET,
 } from '../domain/constants';
+
+// ─── Confirm button layout constants ─────────────────────────────────────────
+const CONFIRM_BTN_X = 270;
+const CONFIRM_BTN_Y = 536;
+const CONFIRM_BTN_WIDTH = 120;
+const CONFIRM_BTN_HEIGHT = 56;
 
 interface HoleViewProps {
   hole: HoleDefinition;
@@ -16,21 +23,8 @@ function polygonToSvgPoints(points: Point[]): string {
   return points.map((p) => `${p.x},${p.y}`).join(' ');
 }
 
-function getScoreCssClass(strokes: number, par: number): string {
-  if (strokes === 1) return 'birdie';
-  const diff = strokes - par;
-  if (diff <= -2) return 'eagle';
-  if (diff === -1) return 'birdie';
-  if (diff === 0) return 'par';
-  if (diff === 1) return 'bogey';
-  return 'over';
-}
-
 /** Deterministic pseudo-random based on seed for consistent tree rendering */
-function seededRandom(seed: number): number {
-  const x = Math.sin(seed * 9301 + 49297) * 233280;
-  return x - Math.floor(x);
-}
+import { seededRandom } from '../domain/utils';
 
 // ─── SVG Defs ────────────────────────────────────────────────────────────────
 
@@ -111,12 +105,12 @@ function RoughLayer({ theme }: { theme?: HoleDefinition['courseTheme'] }) {
   if (theme === 'desert') {
     return (
       <>
-        <rect data-testid="desert-rough" width="400" height="600" fill="url(#desertRoughGrad)" />
+        <rect data-testid="desert-rough" width={SVG_VIEWPORT_WIDTH} height={SVG_VIEWPORT_HEIGHT} fill="url(#desertRoughGrad)" />
         {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
           <circle
             key={`desert-patch-${i}`}
-            cx={seededRandom(i * 7 + 1) * 400}
-            cy={seededRandom(i * 7 + 2) * 600}
+            cx={seededRandom(i * 7 + 1) * SVG_VIEWPORT_WIDTH}
+            cy={seededRandom(i * 7 + 2) * SVG_VIEWPORT_HEIGHT}
             r={30 + seededRandom(i * 7 + 3) * 40}
             fill="rgba(90,60,10,0.12)"
           />
@@ -126,12 +120,12 @@ function RoughLayer({ theme }: { theme?: HoleDefinition['courseTheme'] }) {
   }
   return (
     <>
-      <rect width="400" height="600" fill="url(#roughGrad)" />
+      <rect width={SVG_VIEWPORT_WIDTH} height={SVG_VIEWPORT_HEIGHT} fill="url(#roughGrad)" />
       {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
         <circle
           key={`rough-${i}`}
-          cx={seededRandom(i * 7 + 1) * 400}
-          cy={seededRandom(i * 7 + 2) * 600}
+          cx={seededRandom(i * 7 + 1) * SVG_VIEWPORT_WIDTH}
+          cy={seededRandom(i * 7 + 2) * SVG_VIEWPORT_HEIGHT}
           r={30 + seededRandom(i * 7 + 3) * 40}
           fill="rgba(30,60,15,0.15)"
         />
@@ -325,8 +319,8 @@ function ConfirmButtonLayer({
   if (!previewPoint || isComplete) return null;
   return (
     <g data-testid="confirm-button" onClick={onConfirm} style={{ cursor: 'pointer' }}>
-      <rect x={270} y={536} width={120} height={56} rx={10} fill="rgba(20,20,20,0.85)" />
-      <text x={330} y={569} fill="white" fontSize="18" fontWeight="700" textAnchor="middle">Confirm</text>
+      <rect x={CONFIRM_BTN_X} y={CONFIRM_BTN_Y} width={CONFIRM_BTN_WIDTH} height={CONFIRM_BTN_HEIGHT} rx={10} fill="rgba(20,20,20,0.85)" />
+      <text x={CONFIRM_BTN_X + CONFIRM_BTN_WIDTH / 2} y={CONFIRM_BTN_Y + CONFIRM_BTN_HEIGHT * 0.6} fill="white" fontSize="18" fontWeight="700" textAnchor="middle">Confirm</text>
     </g>
   );
 }
@@ -391,40 +385,21 @@ export function HoleView({ hole }: HoleViewProps) {
   const [gameState, setGameState] = useState(() => createGameState(hole));
   const [previewPoint, setPreviewPoint] = useState<Point | null>(null);
 
+  const { handleClick, handleConfirmShot } = useHoleInteraction(
+    gameState, setGameState, setPreviewPoint,
+  );
+
   const distanceToPin = calculateDistanceYards(gameState.ballPosition, gameState.activePinPosition, hole);
   const previewDistanceYards = previewPoint
     ? calculateDistanceYards(gameState.ballPosition, previewPoint, hole)
     : null;
-
-  const svgCoordsFromEvent = useCallback((e: React.MouseEvent<SVGSVGElement>): Point | null => {
-    const svg = e.currentTarget;
-    if (!svg) return null;
-    const rect = svg.getBoundingClientRect();
-    return {
-      x: Math.round((e.clientX - rect.left) * SVG_VIEWPORT_WIDTH / rect.width),
-      y: Math.round((e.clientY - rect.top) * SVG_VIEWPORT_HEIGHT / rect.height),
-    };
-  }, []);
-
-  const handleClick = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
-    if (gameState.isComplete) return;
-    const target = svgCoordsFromEvent(e);
-    if (target) setPreviewPoint(target);
-  }, [gameState.isComplete, svgCoordsFromEvent]);
-
-  const handleConfirmShot = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!previewPoint) return;
-    setGameState((prev) => placeShot(prev, previewPoint));
-    setPreviewPoint(null);
-  }, [previewPoint]);
 
   return (
     <div className="course-wrap">
       <div className="hud">
         <GameHUD isComplete={gameState.isComplete} strokeCount={gameState.strokeCount} par={hole.par} puttCount={gameState.puttCount} distanceToPin={distanceToPin} />
       </div>
-      <svg viewBox="0 0 400 600" className="course-svg" onClick={handleClick}>
+      <svg viewBox={`0 0 ${SVG_VIEWPORT_WIDTH} ${SVG_VIEWPORT_HEIGHT}`} className="course-svg" onClick={handleClick}>
         <CourseDefs />
         <RoughLayer theme={hole.courseTheme} />
         <FairwayLayer fairwayBoundary={hole.fairwayBoundary} />
@@ -436,7 +411,7 @@ export function HoleView({ hole }: HoleViewProps) {
         <ShotPreviewLayer previewPoint={previewPoint} previewDistanceYards={previewDistanceYards} ballPosition={gameState.ballPosition} isComplete={gameState.isComplete} />
         <ShotTracerLayer isComplete={gameState.isComplete} shotHistory={gameState.shotHistory} greenBoundary={hole.greenBoundary} />
         <BallLayer ballPosition={gameState.ballPosition} />
-        <ConfirmButtonLayer previewPoint={previewPoint} isComplete={gameState.isComplete} onConfirm={handleConfirmShot} />
+        <ConfirmButtonLayer previewPoint={previewPoint} isComplete={gameState.isComplete} onConfirm={(e) => handleConfirmShot(e, previewPoint)} />
         <HoleInfoLabel name={hole.name} par={hole.par} yardsLength={hole.yardsLength} />
       </svg>
     </div>

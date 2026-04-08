@@ -5,8 +5,10 @@ import {
   placeShot,
   isPointInPolygon,
   getScoreLabel,
+  getScoreCssClass,
 } from './game';
 import type { HoleDefinition, Point } from './types';
+import { PRESET_HOLES } from '../data/holes';
 
 const testHole: HoleDefinition = {
   id: 'test-par4',
@@ -36,6 +38,16 @@ describe('calculateDistanceYards', () => {
     const halfway: Point = { x: 50, y: 250 };
     const distance = calculateDistanceYards(halfway, testHole.pinPosition, testHole);
     expect(distance).toBe(200);
+  });
+
+  it('returns 0 when teePosition equals pinPosition (zero-length hole guard)', () => {
+    const zeroLengthHole = {
+      ...testHole,
+      teePosition: { x: 50, y: 50 },
+      pinPosition: { x: 50, y: 50 },
+    };
+    const distance = calculateDistanceYards({ x: 100, y: 100 }, { x: 50, y: 50 }, zeroLengthHole);
+    expect(distance).toBe(0);
   });
 });
 
@@ -304,5 +316,42 @@ describe('getScoreLabel', () => {
 
   it('returns "+N" for more than 3 over', () => {
     expect(getScoreLabel(8, 4)).toBe('+4');
+  });
+});
+
+describe('getScoreCssClass', () => {
+  it('getScoreCssClass returns hole-in-one for strokes===1', () => {
+    expect(getScoreCssClass(1, 3)).toBe('hole-in-one');
+  });
+
+  it('returns eagle for 2+ under par', () => {
+    expect(getScoreCssClass(2, 4)).toBe('eagle');
+  });
+
+  it('returns birdie for 1 under par', () => {
+    expect(getScoreCssClass(3, 4)).toBe('birdie');
+  });
+
+  it('returns par for even', () => {
+    expect(getScoreCssClass(4, 4)).toBe('par');
+  });
+
+  it('returns bogey for 1 over par', () => {
+    expect(getScoreCssClass(5, 4)).toBe('bogey');
+  });
+
+  it('returns double-bogey-or-worse for 2+ over par', () => {
+    expect(getScoreCssClass(6, 4)).toBe('double-bogey-or-worse');
+  });
+});
+
+describe('calculateDistanceYards nominal pin scale', () => {
+  it('calculateDistanceYards uses nominal pin position scale consistently', () => {
+    const hole = PRESET_HOLES[0]; // use first hole
+    const result1 = calculateDistanceYards(hole.teePosition, hole.pinPosition, hole);
+    // Call twice — should be same result (pure function, nominal scale)
+    const result2 = calculateDistanceYards(hole.teePosition, hole.pinPosition, hole);
+    expect(result1).toBe(result2);
+    expect(result1).toBe(hole.yardsLength);
   });
 });

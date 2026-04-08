@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { HoleView } from './HoleView';
+import { useHoleInteraction } from './useHoleInteraction';
 import { PRESET_HOLES } from '../data/holes';
 import { calculateDistanceYards } from '../domain/game';
 
@@ -568,5 +569,47 @@ describe('Desert rendering — CHG-COURSE-027 (classic regression)', () => {
     // The classic rough rect should exist (background layer)
     const rects = svg?.querySelectorAll('rect');
     expect(rects && rects.length).toBeGreaterThan(0);
+  });
+});
+
+// ─── Coverage: getScoreCssClass bogey / over branches ────────────────────────
+
+describe('Score CSS class — bogey and over branches (R-5 coverage)', () => {
+  function setupSvg() {
+    const svg = document.querySelector('svg')!;
+    svg.getBoundingClientRect = () =>
+      ({ left: 0, top: 0, width: 400, height: 600 }) as DOMRect;
+    return svg;
+  }
+
+  it('applies bogey CSS class when hole completed with par+1 strokes', () => {
+    // par-4 hole: 3 fairway shots + 2 auto-putts = 5 strokes = bogey
+    render(<HoleView hole={hole} />);
+    const svg = setupSvg();
+    tapToPlace(svg, 200, 420);  // fairway shot 1
+    tapToPlace(svg, 200, 300);  // fairway shot 2
+    tapToPlace(svg, 200, 70);   // green shot 3 → 3+2=5 = bogey on par-4
+    const scoreLabel = screen.getByTestId('score-label');
+    expect(scoreLabel.className).toContain('bogey');
+  });
+
+  it('applies double-bogey-or-worse CSS class when hole completed with par+2 strokes', () => {
+    // par-4 hole: 4 fairway shots + 2 auto-putts = 6 strokes = double bogey
+    render(<HoleView hole={hole} />);
+    const svg = setupSvg();
+    tapToPlace(svg, 200, 450);  // fairway shot 1
+    tapToPlace(svg, 200, 380);  // fairway shot 2
+    tapToPlace(svg, 200, 300);  // fairway shot 3
+    tapToPlace(svg, 200, 70);   // green shot 4 → 4+2=6 = over on par-4
+    const scoreLabel = screen.getByTestId('score-label');
+    expect(scoreLabel.className).toContain('double-bogey-or-worse');
+  });
+});
+
+// ─── R-3: useHoleInteraction hook importability ──────────────────────────────
+
+describe('useHoleInteraction', () => {
+  it('useHoleInteraction hook exists and is importable', () => {
+    expect(useHoleInteraction).toBeDefined();
   });
 });
