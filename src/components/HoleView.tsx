@@ -16,10 +16,7 @@ function polygonToSvgPoints(points: Point[]): string {
 }
 
 /** Deterministic pseudo-random based on seed for consistent tree rendering */
-function seededRandom(seed: number): number {
-  const x = Math.sin(seed * 9301 + 49297) * 233280;
-  return x - Math.floor(x);
-}
+import { seededRandom } from '../domain/utils';
 
 // ─── SVG Defs ────────────────────────────────────────────────────────────────
 
