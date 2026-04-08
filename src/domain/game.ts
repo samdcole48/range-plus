@@ -2,6 +2,14 @@ import type { GameState, HoleDefinition, Point, Polygon } from './types';
 import { WATER_PENALTY_STROKES, DEFAULT_PUTT_COUNT } from './constants';
 
 
+/**
+ * Calculates the distance in yards between two points using the hole's nominal scale.
+ *
+ * IMPORTANT: Scale is derived from the nominal pin position (hole.pinPosition, index 0),
+ * NOT from the active pin position. This is intentional — all distance calculations
+ * use a consistent scale regardless of which pin variant is active.
+ * See: openspec/project-rules.md §2.1 (Coordinate System Invariants)
+ */
 export function calculateDistanceYards(
   from: Point,
   to: Point,

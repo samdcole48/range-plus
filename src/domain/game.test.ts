@@ -8,6 +8,7 @@ import {
   getScoreCssClass,
 } from './game';
 import type { HoleDefinition, Point } from './types';
+import { PRESET_HOLES } from '../data/holes';
 
 const testHole: HoleDefinition = {
   id: 'test-par4',
@@ -341,5 +342,16 @@ describe('getScoreCssClass', () => {
 
   it('returns double-bogey-or-worse for 2+ over par', () => {
     expect(getScoreCssClass(6, 4)).toBe('double-bogey-or-worse');
+  });
+});
+
+describe('calculateDistanceYards nominal pin scale', () => {
+  it('calculateDistanceYards uses nominal pin position scale consistently', () => {
+    const hole = PRESET_HOLES[0]; // use first hole
+    const result1 = calculateDistanceYards(hole.teePosition, hole.pinPosition, hole);
+    // Call twice — should be same result (pure function, nominal scale)
+    const result2 = calculateDistanceYards(hole.teePosition, hole.pinPosition, hole);
+    expect(result1).toBe(result2);
+    expect(result1).toBe(hole.yardsLength);
   });
 });
