@@ -1,6 +1,6 @@
 # Remove Black Jack's Crossing Course
 
-> **Status:** DRAFT
+> **Status:** DONE
 > **Author:** Copilot (with human direction)
 > **Created:** 2026-04-08
 > **Constitutional Authority:** ENG-5.1 (Change Proposal), ENG-1.2 (Cite law behind decisions), ENG-2.3 (Scope discipline)
