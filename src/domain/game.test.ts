@@ -37,6 +37,16 @@ describe('calculateDistanceYards', () => {
     const distance = calculateDistanceYards(halfway, testHole.pinPosition, testHole);
     expect(distance).toBe(200);
   });
+
+  it('returns 0 when teePosition equals pinPosition (zero-length hole guard)', () => {
+    const zeroLengthHole = {
+      ...testHole,
+      teePosition: { x: 50, y: 50 },
+      pinPosition: { x: 50, y: 50 },
+    };
+    const distance = calculateDistanceYards({ x: 100, y: 100 }, { x: 50, y: 50 }, zeroLengthHole);
+    expect(distance).toBe(0);
+  });
 });
 
 describe('createGameState', () => {
