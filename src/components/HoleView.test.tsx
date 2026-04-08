@@ -592,7 +592,7 @@ describe('Score CSS class — bogey and over branches (R-5 coverage)', () => {
     expect(scoreLabel.className).toContain('bogey');
   });
 
-  it('applies over CSS class when hole completed with par+2 strokes', () => {
+  it('applies double-bogey-or-worse CSS class when hole completed with par+2 strokes', () => {
     // par-4 hole: 4 fairway shots + 2 auto-putts = 6 strokes = double bogey
     render(<HoleView hole={hole} />);
     const svg = setupSvg();
@@ -601,6 +601,6 @@ describe('Score CSS class — bogey and over branches (R-5 coverage)', () => {
     tapToPlace(svg, 200, 300);  // fairway shot 3
     tapToPlace(svg, 200, 70);   // green shot 4 → 4+2=6 = over on par-4
     const scoreLabel = screen.getByTestId('score-label');
-    expect(scoreLabel.className).toContain('over');
+    expect(scoreLabel.className).toContain('double-bogey-or-worse');
   });
 });

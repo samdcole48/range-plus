@@ -94,3 +94,13 @@ export function placeShot(state: GameState, target: Point): GameState {
     puttCount: 0,
   };
 }
+
+export function getScoreCssClass(strokes: number, par: number): string {
+  if (strokes === 1) return 'hole-in-one';
+  const diff = strokes - par;
+  if (diff <= -2) return 'eagle';
+  if (diff === -1) return 'birdie';
+  if (diff === 0) return 'par';
+  if (diff === 1) return 'bogey';
+  return 'double-bogey-or-worse';
+}

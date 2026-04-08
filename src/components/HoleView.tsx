@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { HoleDefinition, Point, Polygon, WaterHazard, TreeCluster, Bush, Rock, Boulder, Bunker } from '../domain/types';
-import { createGameState, placeShot, calculateDistanceYards, getScoreLabel } from '../domain/game';
+import { createGameState, placeShot, calculateDistanceYards, getScoreLabel, getScoreCssClass } from '../domain/game';
 import {
   SVG_VIEWPORT_WIDTH,
   SVG_VIEWPORT_HEIGHT,
@@ -14,16 +14,6 @@ interface HoleViewProps {
 
 function polygonToSvgPoints(points: Point[]): string {
   return points.map((p) => `${p.x},${p.y}`).join(' ');
-}
-
-function getScoreCssClass(strokes: number, par: number): string {
-  if (strokes === 1) return 'birdie';
-  const diff = strokes - par;
-  if (diff <= -2) return 'eagle';
-  if (diff === -1) return 'birdie';
-  if (diff === 0) return 'par';
-  if (diff === 1) return 'bogey';
-  return 'over';
 }
 
 /** Deterministic pseudo-random based on seed for consistent tree rendering */

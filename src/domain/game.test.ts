@@ -5,6 +5,7 @@ import {
   placeShot,
   isPointInPolygon,
   getScoreLabel,
+  getScoreCssClass,
 } from './game';
 import type { HoleDefinition, Point } from './types';
 
@@ -314,5 +315,31 @@ describe('getScoreLabel', () => {
 
   it('returns "+N" for more than 3 over', () => {
     expect(getScoreLabel(8, 4)).toBe('+4');
+  });
+});
+
+describe('getScoreCssClass', () => {
+  it('getScoreCssClass returns hole-in-one for strokes===1', () => {
+    expect(getScoreCssClass(1, 3)).toBe('hole-in-one');
+  });
+
+  it('returns eagle for 2+ under par', () => {
+    expect(getScoreCssClass(2, 4)).toBe('eagle');
+  });
+
+  it('returns birdie for 1 under par', () => {
+    expect(getScoreCssClass(3, 4)).toBe('birdie');
+  });
+
+  it('returns par for even', () => {
+    expect(getScoreCssClass(4, 4)).toBe('par');
+  });
+
+  it('returns bogey for 1 over par', () => {
+    expect(getScoreCssClass(5, 4)).toBe('bogey');
+  });
+
+  it('returns double-bogey-or-worse for 2+ over par', () => {
+    expect(getScoreCssClass(6, 4)).toBe('double-bogey-or-worse');
   });
 });
