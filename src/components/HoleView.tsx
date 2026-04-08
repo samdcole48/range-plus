@@ -3,9 +3,17 @@ import type { HoleDefinition, Point, Polygon, WaterHazard, TreeCluster, Bush, Ro
 import { createGameState, calculateDistanceYards, getScoreLabel, getScoreCssClass } from '../domain/game';
 import { useHoleInteraction } from './useHoleInteraction';
 import {
+  SVG_VIEWPORT_WIDTH,
+  SVG_VIEWPORT_HEIGHT,
   TREE_CANOPY_HIGHLIGHT_SCALE,
   WATER_RIPPLE_Y_OFFSET,
 } from '../domain/constants';
+
+// ─── Confirm button layout constants ─────────────────────────────────────────
+const CONFIRM_BTN_X = 270;
+const CONFIRM_BTN_Y = 536;
+const CONFIRM_BTN_WIDTH = 120;
+const CONFIRM_BTN_HEIGHT = 56;
 
 interface HoleViewProps {
   hole: HoleDefinition;
@@ -97,12 +105,12 @@ function RoughLayer({ theme }: { theme?: HoleDefinition['courseTheme'] }) {
   if (theme === 'desert') {
     return (
       <>
-        <rect data-testid="desert-rough" width="400" height="600" fill="url(#desertRoughGrad)" />
+        <rect data-testid="desert-rough" width={SVG_VIEWPORT_WIDTH} height={SVG_VIEWPORT_HEIGHT} fill="url(#desertRoughGrad)" />
         {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
           <circle
             key={`desert-patch-${i}`}
-            cx={seededRandom(i * 7 + 1) * 400}
-            cy={seededRandom(i * 7 + 2) * 600}
+            cx={seededRandom(i * 7 + 1) * SVG_VIEWPORT_WIDTH}
+            cy={seededRandom(i * 7 + 2) * SVG_VIEWPORT_HEIGHT}
             r={30 + seededRandom(i * 7 + 3) * 40}
             fill="rgba(90,60,10,0.12)"
           />
@@ -112,12 +120,12 @@ function RoughLayer({ theme }: { theme?: HoleDefinition['courseTheme'] }) {
   }
   return (
     <>
-      <rect width="400" height="600" fill="url(#roughGrad)" />
+      <rect width={SVG_VIEWPORT_WIDTH} height={SVG_VIEWPORT_HEIGHT} fill="url(#roughGrad)" />
       {[0, 1, 2, 3, 4, 5, 6, 7].map(i => (
         <circle
           key={`rough-${i}`}
-          cx={seededRandom(i * 7 + 1) * 400}
-          cy={seededRandom(i * 7 + 2) * 600}
+          cx={seededRandom(i * 7 + 1) * SVG_VIEWPORT_WIDTH}
+          cy={seededRandom(i * 7 + 2) * SVG_VIEWPORT_HEIGHT}
           r={30 + seededRandom(i * 7 + 3) * 40}
           fill="rgba(30,60,15,0.15)"
         />
@@ -311,8 +319,8 @@ function ConfirmButtonLayer({
   if (!previewPoint || isComplete) return null;
   return (
     <g data-testid="confirm-button" onClick={onConfirm} style={{ cursor: 'pointer' }}>
-      <rect x={270} y={536} width={120} height={56} rx={10} fill="rgba(20,20,20,0.85)" />
-      <text x={330} y={569} fill="white" fontSize="18" fontWeight="700" textAnchor="middle">Confirm</text>
+      <rect x={CONFIRM_BTN_X} y={CONFIRM_BTN_Y} width={CONFIRM_BTN_WIDTH} height={CONFIRM_BTN_HEIGHT} rx={10} fill="rgba(20,20,20,0.85)" />
+      <text x={CONFIRM_BTN_X + CONFIRM_BTN_WIDTH / 2} y={CONFIRM_BTN_Y + CONFIRM_BTN_HEIGHT * 0.6} fill="white" fontSize="18" fontWeight="700" textAnchor="middle">Confirm</text>
     </g>
   );
 }
@@ -391,7 +399,7 @@ export function HoleView({ hole }: HoleViewProps) {
       <div className="hud">
         <GameHUD isComplete={gameState.isComplete} strokeCount={gameState.strokeCount} par={hole.par} puttCount={gameState.puttCount} distanceToPin={distanceToPin} />
       </div>
-      <svg viewBox="0 0 400 600" className="course-svg" onClick={handleClick}>
+      <svg viewBox={`0 0 ${SVG_VIEWPORT_WIDTH} ${SVG_VIEWPORT_HEIGHT}`} className="course-svg" onClick={handleClick}>
         <CourseDefs />
         <RoughLayer theme={hole.courseTheme} />
         <FairwayLayer fairwayBoundary={hole.fairwayBoundary} />
