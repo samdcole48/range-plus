@@ -1,3 +1,4 @@
+import { describe, it, expect } from 'vitest';
 import { WATER_PENALTY_STROKES, DEFAULT_PUTT_COUNT } from './constants';
 
 describe('domain constants', () => {
