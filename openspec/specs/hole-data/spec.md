@@ -32,7 +32,7 @@
 
 ### Requirement: Course is a Par-72 with correct distribution
 
-> Current course: 18 holes (4× Par-3, 10× Par-4, 4× Par-5) = Par 72
+> Current course: The Starter — 18 holes (4× Par-3, 10× Par-4, 4× Par-5) = Par 72
 
 #### Scenario: BASE-DATA-004 — Course has 18 holes
 - **GIVEN** the `PRESET_HOLES` array

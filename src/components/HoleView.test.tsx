@@ -463,9 +463,51 @@ describe('Decorative rendering — CHG-VIS-010 (bushes)', () => {
 
 // ─── Task 24 — CHG-COURSE-024: Desert rough background ────────────────────────
 
-import { BLACK_JACKS_CROSSING } from '../data/courses/black-jacks-crossing';
-
-const desertHole = BLACK_JACKS_CROSSING.holes[0]; // The Outpost
+// Minimal mock desert-theme hole for testing desert rendering without BJC dependency
+const desertHole = {
+  id: 'mock-desert-1',
+  name: 'Mock Desert Hole',
+  par: 4 as const,
+  yardsLength: 350,
+  courseTheme: 'desert' as const,
+  teePosition: { x: 200, y: 560 },
+  pinPosition: { x: 200, y: 80 },
+  pinPositions: [{ x: 200, y: 80 }, { x: 185, y: 70 }, { x: 215, y: 70 }],
+  greenBoundary: {
+    points: [
+      { x: 220, y: 62 }, { x: 217, y: 73 }, { x: 208, y: 90 },
+      { x: 200, y: 93 }, { x: 188, y: 90 }, { x: 178, y: 73 },
+      { x: 175, y: 62 }, { x: 178, y: 52 }, { x: 188, y: 44 },
+      { x: 200, y: 41 }, { x: 213, y: 44 }, { x: 217, y: 52 },
+    ],
+  },
+  fairwayBoundary: {
+    points: [
+      { x: 170, y: 30 }, { x: 230, y: 30 },
+      { x: 235, y: 100 }, { x: 240, y: 200 },
+      { x: 240, y: 400 }, { x: 230, y: 540 },
+      { x: 225, y: 575 }, { x: 175, y: 575 },
+      { x: 170, y: 540 }, { x: 160, y: 400 },
+      { x: 160, y: 200 }, { x: 165, y: 100 },
+    ],
+  },
+  waterHazards: [],
+  rocks: [
+    { position: { x: 150, y: 200 }, radius: 6 },
+    { position: { x: 260, y: 300 }, radius: 5 },
+    { position: { x: 140, y: 400 }, radius: 7 },
+  ],
+  boulders: [
+    { boundary: { points: [
+      { x: 80, y: 150 }, { x: 95, y: 140 }, { x: 105, y: 150 },
+      { x: 100, y: 165 }, { x: 85, y: 168 },
+    ] } },
+    { boundary: { points: [
+      { x: 310, y: 250 }, { x: 325, y: 242 }, { x: 335, y: 252 },
+      { x: 330, y: 265 }, { x: 315, y: 268 },
+    ] } },
+  ],
+};
 
 describe('Desert rendering — CHG-COURSE-024 (sandy rough)', () => {
   it('renders desert-rough background element for desert-theme hole', () => {
