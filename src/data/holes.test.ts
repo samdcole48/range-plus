@@ -30,13 +30,13 @@ describe('PRESET_HOLES', () => {
     expect(PRESET_HOLES.length).toBeGreaterThanOrEqual(6);
   });
 
-  it('has exactly 36 holes', () => {
-    expect(PRESET_HOLES.length).toBe(36);
+  it('has exactly 18 holes', () => {
+    expect(PRESET_HOLES.length).toBe(18);
   });
 
-  it('totals par 144', () => {
+  it('totals par 72', () => {
     const total = PRESET_HOLES.reduce((sum, h) => sum + h.par, 0);
-    expect(total).toBe(144);
+    expect(total).toBe(72);
   });
 
   it('includes a mix of par 3, 4, and 5', () => {
@@ -46,19 +46,19 @@ describe('PRESET_HOLES', () => {
     expect(pars.has(5)).toBe(true);
   });
 
-  it('has 8 par-3 holes', () => {
+  it('has 4 par-3 holes', () => {
     const par3s = PRESET_HOLES.filter((h) => h.par === 3);
-    expect(par3s.length).toBe(8);
+    expect(par3s.length).toBe(4);
   });
 
-  it('has 20 par-4 holes', () => {
+  it('has 10 par-4 holes', () => {
     const par4s = PRESET_HOLES.filter((h) => h.par === 4);
-    expect(par4s.length).toBe(20);
+    expect(par4s.length).toBe(10);
   });
 
-  it('has 8 par-5 holes', () => {
+  it('has 4 par-5 holes', () => {
     const par5s = PRESET_HOLES.filter((h) => h.par === 5);
-    expect(par5s.length).toBe(8);
+    expect(par5s.length).toBe(4);
   });
 
   it('each hole has a unique id', () => {
@@ -334,10 +334,9 @@ describe('getRandomHole', () => {
 });
 
 describe('CHG-COURSE-007 — courses barrel', () => {
-  it('ALL_COURSES contains both courses and ALL_HOLES combines all holes', () => {
-    expect(ALL_COURSES).toHaveLength(2);
+  it('ALL_COURSES contains 1 course and ALL_HOLES combines all holes', () => {
+    expect(ALL_COURSES).toHaveLength(1);
     expect(ALL_COURSES[0].id).toBe('the-starter');
-    expect(ALL_COURSES[1].id).toBe('black-jacks-crossing');
     expect(ALL_HOLES.length).toBe(
       ALL_COURSES.reduce((sum, c) => sum + c.holes.length, 0)
     );

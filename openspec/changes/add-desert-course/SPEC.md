@@ -1,6 +1,7 @@
 # CHG: Add Desert Course — "Black Jack's Crossing"
 
-> **Status:** DRAFT
+> **Status:** SUPERSEDED
+> **Superseded by:** `remove-bjc-course` (2026-04-08) — BJC was removed due to poor hole design (4-vertex rectangular fairways, no routing variety). A new desert course will be designed from scratch after fairway design rules are established via `redesign-fairways`.
 > **Author:** AI-assisted
 > **Created:** 2026-03-30
 > **Constitutional Authority:** ENG-4.1 (Atomic TDD), ENG-2.3 (Scope control), ENG-3.5 (Immutability)
