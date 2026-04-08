@@ -1,9 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import type { HoleDefinition, Point, Polygon, WaterHazard, TreeCluster, Bush, Rock, Boulder, Bunker } from '../domain/types';
-import { createGameState, placeShot, calculateDistanceYards, getScoreLabel, getScoreCssClass } from '../domain/game';
+import { createGameState, calculateDistanceYards, getScoreLabel, getScoreCssClass } from '../domain/game';
+import { useHoleInteraction } from './useHoleInteraction';
 import {
-  SVG_VIEWPORT_WIDTH,
-  SVG_VIEWPORT_HEIGHT,
   TREE_CANOPY_HIGHLIGHT_SCALE,
   WATER_RIPPLE_Y_OFFSET,
 } from '../domain/constants';
@@ -381,33 +380,14 @@ export function HoleView({ hole }: HoleViewProps) {
   const [gameState, setGameState] = useState(() => createGameState(hole));
   const [previewPoint, setPreviewPoint] = useState<Point | null>(null);
 
+  const { handleClick, handleConfirmShot } = useHoleInteraction(
+    gameState, setGameState, setPreviewPoint,
+  );
+
   const distanceToPin = calculateDistanceYards(gameState.ballPosition, gameState.activePinPosition, hole);
   const previewDistanceYards = previewPoint
     ? calculateDistanceYards(gameState.ballPosition, previewPoint, hole)
     : null;
-
-  const svgCoordsFromEvent = useCallback((e: React.MouseEvent<SVGSVGElement>): Point | null => {
-    const svg = e.currentTarget;
-    if (!svg) return null;
-    const rect = svg.getBoundingClientRect();
-    return {
-      x: Math.round((e.clientX - rect.left) * SVG_VIEWPORT_WIDTH / rect.width),
-      y: Math.round((e.clientY - rect.top) * SVG_VIEWPORT_HEIGHT / rect.height),
-    };
-  }, []);
-
-  const handleClick = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
-    if (gameState.isComplete) return;
-    const target = svgCoordsFromEvent(e);
-    if (target) setPreviewPoint(target);
-  }, [gameState.isComplete, svgCoordsFromEvent]);
-
-  const handleConfirmShot = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!previewPoint) return;
-    setGameState((prev) => placeShot(prev, previewPoint));
-    setPreviewPoint(null);
-  }, [previewPoint]);
 
   return (
     <div className="course-wrap">
@@ -426,7 +406,7 @@ export function HoleView({ hole }: HoleViewProps) {
         <ShotPreviewLayer previewPoint={previewPoint} previewDistanceYards={previewDistanceYards} ballPosition={gameState.ballPosition} isComplete={gameState.isComplete} />
         <ShotTracerLayer isComplete={gameState.isComplete} shotHistory={gameState.shotHistory} greenBoundary={hole.greenBoundary} />
         <BallLayer ballPosition={gameState.ballPosition} />
-        <ConfirmButtonLayer previewPoint={previewPoint} isComplete={gameState.isComplete} onConfirm={handleConfirmShot} />
+        <ConfirmButtonLayer previewPoint={previewPoint} isComplete={gameState.isComplete} onConfirm={(e) => handleConfirmShot(e, previewPoint)} />
         <HoleInfoLabel name={hole.name} par={hole.par} yardsLength={hole.yardsLength} />
       </svg>
     </div>

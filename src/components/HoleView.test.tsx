@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { HoleView } from './HoleView';
+import { useHoleInteraction } from './useHoleInteraction';
 import { PRESET_HOLES } from '../data/holes';
 import { calculateDistanceYards } from '../domain/game';
 
@@ -602,5 +603,13 @@ describe('Score CSS class — bogey and over branches (R-5 coverage)', () => {
     tapToPlace(svg, 200, 70);   // green shot 4 → 4+2=6 = over on par-4
     const scoreLabel = screen.getByTestId('score-label');
     expect(scoreLabel.className).toContain('double-bogey-or-worse');
+  });
+});
+
+// ─── R-3: useHoleInteraction hook importability ──────────────────────────────
+
+describe('useHoleInteraction', () => {
+  it('useHoleInteraction hook exists and is importable', () => {
+    expect(useHoleInteraction).toBeDefined();
   });
 });
