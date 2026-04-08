@@ -1,10 +1,14 @@
-# Hole Design Guide
+# Course Design Philosophy
 
-A comprehensive guide for designing new holes in Range+. Follow these principles and criteria to ensure every new hole meets the project's quality standards.
+The strategic principles and creative intent behind Range+ hole design. This document covers the **why** — design philosophy, real-world inspiration, and strategic thinking.
+
+> **For technical rules** (vertex counts, routing minimums, green sizes, checklists): see `openspec/specs/course-design-guide.md`.
+
+---
 
 ## Research Foundation
 
-The 12 holes in Range+ are informed by studying the world's top 50 golf courses, including:
+The holes in Range+ are informed by studying the world's top 50 golf courses, including:
 
 - **Augusta National** — strategic risk/reward, creek crossings, dramatic elevation
 - **St Andrews (Old Course)** — shared greens, hidden bunkers, angular doglegs
@@ -44,10 +48,16 @@ The fairway polygon must extend past and surround the green on the sides and beh
 
 Across the full set of holes, vary:
 - **Length** (short par 3 to long par 5)
-- **Direction** (straight, dogleg left, dogleg right)
-- **Required shot shape** (draw, fade, straight)
+- **Direction** (straight, dogleg left, dogleg right, S-curve)
+- **Required shot shape** (draw, fade, straight, layup)
 - **Hazard types** (water, bunkers, trees, combinations)
 - **Green difficulty** (open front, guarded, elevated feel)
+
+### 7. Routing Shapes Feel Real
+
+Real fairways never have hard rectangular corners. Even a sharp dogleg uses a sweeping arc. Straight holes still have subtle organic width variation. S-curves mirror the natural flow of a river or valley. Always ask: does this routing feel like it was cut through actual terrain?
+
+---
 
 ## Iconic Hole Archetypes
 
@@ -55,49 +65,40 @@ Each hole in Range+ is inspired by a famous real-world design concept:
 
 | Archetype | Real-World Inspiration | Range+ Hole |
 |-----------|----------------------|-------------|
-| Island Green | TPC Sawgrass 17th | Hole 2 |
-| Creek-crossing risk/reward | Augusta National 13th (Azalea) | Hole 3 |
-| Cape / diagonal water carry | National Golf Links of America | Hole 4 |
-| Postage Stamp / bunker ring | Royal Troon 8th | Hole 5 |
-| Split fairway | Strategic design principle | Hole 6 |
-| Peninsula green | Pebble Beach 7th | Hole 7 |
-| Sharp dogleg | St Andrews 17th (Road Hole) | Hole 8 |
-| Driveable par 4 | Risk/reward design principle | Hole 9 |
+| Island Green | TPC Sawgrass 17th | Island Green (hole 2) |
+| Creek-crossing risk/reward | Augusta National 13th (Azalea) | Azalea (hole 3) |
+| Cape / diagonal water carry | National Golf Links of America | The Cape (hole 4) |
+| Postage Stamp / bunker ring | Royal Troon 8th | Postage Stamp (hole 5) |
+| Split fairway / S-curve | Strategic design principle | The Fork (hole 6) |
+| Peninsula green | Pebble Beach 7th | Peninsula (hole 7) |
+| Sharp dogleg | St Andrews 17th (Road Hole) | The Bend (hole 8) |
+| Driveable par 4 | Risk/reward design principle | The Drive (hole 9) |
+| S-curve river valley | Natural terrain routing | Creek Valley (hole 11) |
+| Reachable par 5 corner | Risk/reward, reachable in two | Eagle's Reach (hole 15) |
+| Penultimate drama | Classic Amen Corner concept | Amen Corner (hole 17) |
 
-Holes 1, 10, 11, and 12 fill out the routing with complementary designs that ensure variety in par, direction, and hazard exposure.
+---
 
-## Acceptance Criteria for New Holes
+## Technical Acceptance Criteria
 
-Every new hole **MUST** satisfy all of the following:
+> The specific rules, vertex minimums, routing distribution requirements, green size tables, and quality checklists live in:
+> **`openspec/specs/course-design-guide.md`**
+>
+> That document is the authoritative technical reference for new course authors and AI agents. What follows are the philosophical principles behind those rules.
 
-1. **Has a `name`** that describes its character (e.g., "Island Green", "The Cape", "Split Decision")
-2. **Has a `par`** of 3, 4, or 5
-3. **Has `greenBoundary`** with **10–12 points** forming an organic shape (kidney, elongated, irregular — **NOT** hexagon or circle)
-4. **Has `fairwayBoundary`** with **18–24 points** that wraps **AROUND** the green (extends above/behind it on both sides)
-5. **Has strategically placed bunkers** (2–5 per hole, ~6 points each) guarding specific approach angles
-6. **Has trees** (12–18 per hole) lining fairway edges and rough areas to define the visual corridor
-7. **Fits within the 400×600 SVG viewport** — no coordinates outside this range
-8. **Tee position near the bottom** (y between 460–570) and **pin near the top** (y between 40–170)
-9. **Water hazards** (if any) have **7–10 point organic boundaries** and valid `dropZone` positions on dry land
-10. **Does NOT break existing tests** — `PRESET_HOLES[0]` (Hole 1) has specific coordinates that tests depend on. Never modify it.
-11. **`yardsLength` is realistic** for the par:
-    - Par 3: 120–220 yards
-    - Par 4: 300–460 yards
-    - Par 5: 480–580 yards
+### Why Organic Shapes?
 
-## Quality Checklist
+Real fairway edges are mowed grass — they curve naturally. Even straight holes have subtle width variation and soft side curves that add visual texture. Hard rectangular fairway corners don't exist in nature. Every polygon in Range+ should feel like it was shaped by terrain, not drawn with a ruler.
 
-Use this checklist before submitting a new hole:
+### Why Routing Diversity?
 
-- [ ] Green shape is organic (not hexagonal or circular)
-- [ ] Fairway wraps around green (extends past it on sides and behind)
-- [ ] Bunkers guard specific approach angles (not randomly placed)
-- [ ] Trees define the visual corridor (not scattered randomly)
-- [ ] Water creates a strategic choice (not just decoration)
-- [ ] Hole has a distinct character/theme different from existing holes
-- [ ] All polygons have enough points for smooth curves
-- [ ] Drop zones are on land (not in water or off-canvas)
-- [ ] Par distribution stays balanced when adding new holes
+A course where every hole plays straight up a narrow corridor is exhausting and repetitive. Players should have to think differently on every hole — sometimes aiming at a corner, sometimes laying up, sometimes deciding how much of a carry to take on. Routing variety creates those different decision points.
+
+### Why Width Variation?
+
+Fairways that narrow at strategic points (before a bend, near a hazard) force decisions. A wide landing zone rewards a well-struck drive and sets up the second shot. A pinch point after the landing zone means even a good drive can leave an awkward stance or blocked sight line.
+
+---
 
 ## Coordinate Tips
 
@@ -126,10 +127,12 @@ For island-green holes, the fairway should be just the tee area — the green si
 
 ### Trees
 
-- Radius of **10–16** works well for visual balance
+- Radius of **6–18px** works well for visual balance
 - **Vary sizes** for a natural look (don't make all trees the same radius)
+- Mix large (14–18px) anchor trees with smaller (6–10px) fill trees
 - Place trees to **define corridor edges**, not randomly in the rough
 - Clusters of 2–3 trees at strategic points create "gates" the player must navigate
+- Minimum 25 trees per hole
 
 ### Bunkers
 
@@ -138,22 +141,22 @@ For island-green holes, the fairway should be just the tee area — the green si
 - Place them to guard the **obvious** line — force players to think about angle of approach
 - Greenside bunkers should protect the "easy" side, leaving a harder angle as the safe play
 
-## Current Par Distribution
+## Current Par Distribution — The Starter
 
-The 12 existing holes have the following distribution:
+The 18 holes of The Starter have the following distribution:
 
 | Par | Count | Holes |
 |-----|-------|-------|
-| 3 | 3 | Holes 2, 5, 10 |
-| 4 | 6 | Holes 1, 4, 6, 8, 9, 12 |
-| 5 | 3 | Holes 3, 7, 11 |
-| **Total** | **12** | **Par 48** |
+| 3 | 4 | Island Green, Postage Stamp, The Long Iron, Cypress Point |
+| 4 | 10 | The Welcome, The Cape, The Fork, The Bend, The Drive, The Closer, The Ridge, The Narrows, Amen Corner, The Finish Line |
+| 5 | 4 | Azalea, Peninsula, Creek Valley, Eagle's Reach |
+| **Total** | **18** | **Par 72** |
 
-When adding new holes, maintain a balanced distribution. A full 18-hole course should aim for approximately par 70–72 (typically 4 par 3s, 10 par 4s, 4 par 5s).
+When designing a new course, maintain this distribution: **4 par-3s, 10 par-4s, 4 par-5s = Par 72**.
 
 ## Example: Anatomy of a Well-Designed Hole
 
-Consider Hole 4 ("The Cape") — a par 4 cape hole inspired by the National Golf Links:
+Consider **The Cape (hole 4)** — a par-4 cape hole inspired by the National Golf Links:
 
 - **Strategic question**: How much of the diagonal water carry do you take on?
 - **Bold line**: Cut across the water for a short approach to the pin

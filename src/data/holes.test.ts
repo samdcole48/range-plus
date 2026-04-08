@@ -25,6 +25,45 @@ function dist(a: Point, b: Point): number {
   return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
 }
 
+/** Returns the angle in degrees at vertex B, formed by vectors B→A and B→C. */
+function interiorAngle(A: Point, B: Point, C: Point): number {
+  const ax = A.x - B.x, ay = A.y - B.y;
+  const cx = C.x - B.x, cy = C.y - B.y;
+  const dot = ax * cx + ay * cy;
+  const cross = ax * cy - ay * cx;
+  return Math.atan2(Math.abs(cross), dot) * 180 / Math.PI;
+}
+
+/** Classifies a hole's fairway routing type based on lateral offset and midpoint deviation. */
+function classifyRouting(hole: typeof PRESET_HOLES[0]): 'straight' | 'slight-curve' | 'dogleg' | 's-curve' {
+  const pts = hole.fairwayBoundary.points;
+  const teeX = hole.teePosition.x;
+  const pinX = hole.pinPosition.x;
+  const lateralOffset = Math.abs(teeX - pinX);
+  const { minY, maxY } = getBoundingBox(pts);
+  const height = maxY - minY;
+
+  const midPts = pts.filter(p => p.y > minY + height * 0.3 && p.y < minY + height * 0.7);
+  const midXs = midPts.map(p => p.x);
+  const midCenter = midXs.length > 0 ? (Math.min(...midXs) + Math.max(...midXs)) / 2 : (teeX + pinX) / 2;
+  const absMidDev = Math.abs(midCenter - (teeX + pinX) / 2);
+
+  const topPts = pts.filter(p => p.y < minY + height * 0.4);
+  const bottomPts = pts.filter(p => p.y > minY + height * 0.6);
+  const topXs = topPts.map(p => p.x);
+  const bottomXs = bottomPts.map(p => p.x);
+  const topCenter = topXs.length > 0 ? (Math.min(...topXs) + Math.max(...topXs)) / 2 : pinX;
+  const bottomCenter = bottomXs.length > 0 ? (Math.min(...bottomXs) + Math.max(...bottomXs)) / 2 : teeX;
+  const topDev = topCenter - (pinX + (teeX - pinX) * 0.2);
+  const bottomDev = bottomCenter - (pinX + (teeX - pinX) * 0.8);
+  const isSCurve = Math.sign(topDev) !== Math.sign(bottomDev) && Math.abs(topDev) > 15 && Math.abs(bottomDev) > 15;
+
+  if (isSCurve) return 's-curve';
+  if (lateralOffset >= 60 || absMidDev >= 40) return 'dogleg';
+  if (absMidDev >= 20 || lateralOffset >= 30) return 'slight-curve';
+  return 'straight';
+}
+
 describe('PRESET_HOLES', () => {
   it('has at least 6 holes', () => {
     expect(PRESET_HOLES.length).toBeGreaterThanOrEqual(6);
@@ -167,6 +206,93 @@ describe('Green design — CHG-GREEN-009 (green inside fairway)', () => {
         expect(inside, `Green vertex (${pt.x},${pt.y}) on "${hole.name}" must be inside fairway`).toBe(true);
       }
     }
+  });
+});
+
+// ─── Fairway Shape Tests (CHG-FWY-001 through CHG-FWY-007) ──────────────────
+
+describe('Fairway shape — CHG-FWY-001 (par-3 vertex count)', () => {
+  it('every par-3 fairway has at least 12 vertices', () => {
+    const par3Holes = PRESET_HOLES.filter(h => h.par === 3);
+    for (const hole of par3Holes) {
+      expect(
+        hole.fairwayBoundary.points.length,
+        `${hole.name} (par-3) fairway must have ≥12 vertices`
+      ).toBeGreaterThanOrEqual(12);
+    }
+  });
+});
+
+describe('Fairway shape — CHG-FWY-002 (par-4 vertex count)', () => {
+  it('every par-4 fairway has at least 16 vertices', () => {
+    const par4Holes = PRESET_HOLES.filter(h => h.par === 4);
+    for (const hole of par4Holes) {
+      expect(
+        hole.fairwayBoundary.points.length,
+        `${hole.name} (par-4) fairway must have ≥16 vertices`
+      ).toBeGreaterThanOrEqual(16);
+    }
+  });
+});
+
+describe('Fairway shape — CHG-FWY-003 (par-5 vertex count)', () => {
+  it('every par-5 fairway has at least 20 vertices', () => {
+    const par5Holes = PRESET_HOLES.filter(h => h.par === 5);
+    for (const hole of par5Holes) {
+      expect(
+        hole.fairwayBoundary.points.length,
+        `${hole.name} (par-5) fairway must have ≥20 vertices`
+      ).toBeGreaterThanOrEqual(20);
+    }
+  });
+});
+
+describe('Fairway shape — CHG-FWY-004 (no hard corners)', () => {
+  it('no fairway interior angle is below 90°', () => {
+    for (const hole of PRESET_HOLES) {
+      const pts = hole.fairwayBoundary.points;
+      const n = pts.length;
+      for (let i = 0; i < n; i++) {
+        const A = pts[(i - 1 + n) % n];
+        const B = pts[i];
+        const C = pts[(i + 1) % n];
+        const angle = interiorAngle(A, B, C);
+        expect(
+          angle,
+          `${hole.name} fairway vertex ${i} has angle ${Math.round(angle)}° (must be ≥90°)`
+        ).toBeGreaterThanOrEqual(90);
+      }
+    }
+  });
+});
+
+describe('Fairway routing — CHG-FWY-005 (max straight holes)', () => {
+  it('course has at most 6 straight holes', () => {
+    const straightHoles = PRESET_HOLES.filter(h => classifyRouting(h) === 'straight');
+    expect(
+      straightHoles.length,
+      `Too many straight holes (${straightHoles.length}): ${straightHoles.map(h => h.name).join(', ')}`
+    ).toBeLessThanOrEqual(6);
+  });
+});
+
+describe('Fairway routing — CHG-FWY-006 (min dogleg holes)', () => {
+  it('course has at least 5 dogleg holes', () => {
+    const doglegHoles = PRESET_HOLES.filter(h => classifyRouting(h) === 'dogleg');
+    expect(
+      doglegHoles.length,
+      `Not enough doglegs (${doglegHoles.length}): ${doglegHoles.map(h => h.name).join(', ')}`
+    ).toBeGreaterThanOrEqual(5);
+  });
+});
+
+describe('Fairway routing — CHG-FWY-007 (min S-curve holes)', () => {
+  it('course has at least 2 S-curve or double-dogleg holes', () => {
+    const sCurveHoles = PRESET_HOLES.filter(h => classifyRouting(h) === 's-curve');
+    expect(
+      sCurveHoles.length,
+      `Not enough S-curves (${sCurveHoles.length}): need ≥2`
+    ).toBeGreaterThanOrEqual(2);
   });
 });
 
